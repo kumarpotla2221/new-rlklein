@@ -113,6 +113,16 @@ export function Footer() {
           </div>
         </div>
 
+        <div className="site-footer__certifications" aria-label="Business certifications">
+          <span className="site-footer__certifications-label">Certified business enterprise</span>
+          <div className="site-footer__certification-logos">
+            <img src="/sbe.png" alt="Small Business Enterprise certification" />
+            <img src="/mbe.png" alt="Minority Business Enterprise certification" />
+            <img src="/lsbe.png" alt="Local Small Business Enterprise certification" />
+            <img src="/nmsdc.png" alt="NMSDC certification" />
+          </div>
+        </div>
+
         {/* Bottom */}
         <div className="site-footer__bottom">
           <p className="site-footer__copy">
@@ -121,6 +131,7 @@ export function Footer() {
           <nav className="site-footer__legal" aria-label="Legal navigation">
             <Link to="/privacy-policy" className="site-footer__legal-link">Privacy Policy</Link>
             <Link to="/terms" className="site-footer__legal-link">Terms of Use</Link>
+            <Link to="/consent-agreement" className="site-footer__legal-link">Consent Agreement</Link>
             <Link to="/about/safety-compliance" className="site-footer__legal-link">Safety &amp; Compliance</Link>
             <Link to="/admin" className="site-footer__legal-link">Admin Portal</Link>
             <a href="mailto:info@rlklein.com" className="site-footer__legal-link">Accessibility</a>

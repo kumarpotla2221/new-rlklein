@@ -65,7 +65,7 @@ export function AdminApplicationsPage() {
 
       {/* Search and Tabs */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16, marginBottom: 20, flexWrap: 'wrap' }}>
-        <div style={{ position: 'relative', width: 300 }}>
+        <div className="admin-application-search" style={{ position: 'relative', width: 300 }}>
           <Search size={16} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--color-gray-400)' }} />
           <input
             type="text"

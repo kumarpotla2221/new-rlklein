@@ -30,10 +30,6 @@ const APPROACH_STEPS = [
 ];
 
 export function CapabilitiesPage() {
-  const handleDownloadCapability = () => {
-    alert('R.L. Klein & Associates Capability Statement downloaded (PDF format).');
-  };
-
   return (
     <div className="capabilities-page">
       <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Facilities', href: '/facilities/capabilities' }, { label: 'Capabilities' }]} />
@@ -50,10 +46,10 @@ export function CapabilitiesPage() {
               <Link to="/facilities/staffing-request" className="btn btn--accent btn--md">
                 Request Staffing
               </Link>
-              <button onClick={handleDownloadCapability} className="btn btn--outline-white btn--md">
+              <a href="/capability-statement.pdf" download="RL-Klein-Capability-Statement.pdf" className="btn btn--outline-white btn--md">
                 <Download size={15} />
                 <span>Download Capability Statement</span>
-              </button>
+              </a>
             </div>
           </div>
         </div>

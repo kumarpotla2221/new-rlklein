@@ -118,7 +118,7 @@ export function JobDetailsPage() {
       {/* Main Body */}
       <section className="section bg-white">
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 48, alignItems: 'flex-start' }}>
+          <div className="job-details-layout" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 48, alignItems: 'flex-start' }}>
             {/* Left Content Column */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 40 }}>
               {/* Position Overview */}

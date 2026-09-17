@@ -108,7 +108,7 @@ export function AdminDashboardPage() {
       </div>
 
       {/* Dual Table Section: Recent Jobs & Recent Applications */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '28px' }}>
+      <div className="admin-dashboard-panels" style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '28px' }}>
         {/* Recent Jobs */}
         <div className="admin-card">
           <div className="admin-card__header">

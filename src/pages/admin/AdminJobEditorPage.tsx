@@ -111,6 +111,7 @@ export function AdminJobEditorPage() {
     setErrorMessage(null);
 
     const parseLines = (text: string) => text.split('\n').map((l) => l.trim()).filter(Boolean);
+    const status = overrideStatus || form.status;
 
     const payload = {
       title: form.title,
@@ -134,8 +135,8 @@ export function AdminJobEditorPage() {
       qualifications: parseLines(form.qualificationsText),
       preferredQualifications: parseLines(form.preferredQualificationsText),
       requiredCredentials: parseLines(form.requiredCredentialsText),
-      status: overrideStatus || form.status,
-      featured: form.featured,
+      status,
+      featured: status === 'published' ? true : form.featured,
     };
 
     try {

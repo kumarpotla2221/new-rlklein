@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { 
@@ -8,12 +9,15 @@ import {
   LogOut, 
   ExternalLink,
   ChevronRight,
-  FileText
+  FileText,
+  Menu,
+  X
 } from 'lucide-react';
 
 export function AdminLayout() {
   const { admin, logout } = useAuth();
   const navigate = useNavigate();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
@@ -23,7 +27,7 @@ export function AdminLayout() {
   return (
     <div className="admin-shell">
       {/* Sidebar */}
-      <aside className="admin-sidebar" aria-label="Admin Navigation">
+      <aside className={`admin-sidebar ${sidebarOpen ? 'admin-sidebar--open' : ''}`} aria-label="Admin Navigation">
         <div className="admin-sidebar__header">
           <Link to="/" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: '#fff' }}>
             <img className="admin-brand-logo" src="/rlklein-logo.png" alt="R.L. Klein Inc. & Associates" />
@@ -32,7 +36,7 @@ export function AdminLayout() {
           <div className="admin-sidebar__tag">Recruitment &amp; Staffing Admin</div>
         </div>
 
-        <nav className="admin-sidebar__nav">
+        <nav className="admin-sidebar__nav" onClick={() => setSidebarOpen(false)}>
           <NavLink 
             to="/admin/dashboard" 
             end
@@ -120,10 +124,19 @@ export function AdminLayout() {
       {/* Main content */}
       <div className="admin-main">
         <header className="admin-topbar">
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div className="admin-topbar__title" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <button
+              type="button"
+              className="admin-menu-toggle"
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              aria-label={sidebarOpen ? 'Close admin navigation' : 'Open admin navigation'}
+              aria-expanded={sidebarOpen}
+            >
+              {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
             <span style={{ fontSize: '14px', color: 'var(--color-gray-500)' }}>R.L. Klein Administrative Portal</span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <div className="admin-topbar__account" style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
             <span style={{ fontSize: '13px', color: 'var(--color-gray-600)' }}>{admin?.email}</span>
             <span className="status-badge status-badge--published status-badge--sm">Active Admin</span>
           </div>

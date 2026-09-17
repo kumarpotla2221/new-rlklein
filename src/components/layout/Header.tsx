@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
+import { Menu, X, ChevronDown, ArrowRight, Phone, UserRound, BriefcaseBusiness } from 'lucide-react';
 
 interface NavItem {
   label: string;
@@ -165,11 +165,20 @@ export function Header() {
             ))}
           </nav>
 
-          {/* CTA Buttons */}
+          {/* Reference-style utility actions */}
           <div className="site-header__ctas">
-            <Link to="/facilities/staffing-request" className="header-staffing-cta" aria-label="Request staffing">
-              <span>Request Staffing</span>
-              <ArrowRight size={18} strokeWidth={2.25} />
+            <Link to="/apply" className="header-quick-apply">Quick Apply</Link>
+            <Link to="/hot-jobs" className="header-action-link">
+              <BriefcaseBusiness size={20} />
+              <span>Hot Jobs</span>
+            </Link>
+            <a href="tel:5624275577" className="header-action-link header-phone-link">
+              <Phone size={20} />
+              <span>562-427-5577</span>
+            </a>
+            <Link to="/admin" className="header-action-link header-login-link">
+              <UserRound size={20} />
+              <span>Log In</span>
             </Link>
           </div>
 
@@ -181,7 +190,7 @@ export function Header() {
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
           >
-            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+            {mobileOpen ? <X size={25} /> : <Menu size={25} />}
           </button>
         </div>
       </header>

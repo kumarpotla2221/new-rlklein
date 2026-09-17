@@ -229,7 +229,7 @@ export function ApplyPage() {
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="admin-card" style={{ padding: '40px' }} noValidate>
+            <form onSubmit={handleSubmit} className="admin-card public-application-form" style={{ padding: '40px' }} noValidate>
               {errors.form && (
                 <div style={{ backgroundColor: 'var(--color-error-light)', color: 'var(--color-error)', padding: '12px 16px', borderRadius: 4, marginBottom: 24, fontSize: '14px' }}>
                   {errors.form}
@@ -377,7 +377,7 @@ export function ApplyPage() {
                     />
                   </div>
                   <div className="form-group">
-                    <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 8 }}>
+                    <div className="license-fields" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 8 }}>
                       <div>
                         <label htmlFor="licenseNumber" className="form-label">License Number</label>
                         <input

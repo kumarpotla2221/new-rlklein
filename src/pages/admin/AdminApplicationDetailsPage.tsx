@@ -148,7 +148,7 @@ export function AdminApplicationDetailsPage() {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', gap: 24, alignItems: 'flex-start' }}>
+      <div className="admin-application-layout" style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', gap: 24, alignItems: 'flex-start' }}>
         {/* Left Column: Details */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
           {/* Position Applied For */}

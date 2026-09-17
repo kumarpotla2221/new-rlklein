@@ -13,7 +13,12 @@ const JOBS_STORAGE_KEY = 'rlk_jobs_store';
 function loadJobs(): Job[] {
   try {
     const stored = localStorage.getItem(JOBS_STORAGE_KEY);
-    return stored ? JSON.parse(stored) as Job[] : [...MOCK_JOBS];
+    if (!stored) return [...MOCK_JOBS];
+
+    const jobs = JSON.parse(stored) as Job[];
+    return jobs.map(job =>
+      job.status === 'published' ? { ...job, featured: true } : job
+    );
   } catch {
     return [...MOCK_JOBS];
   }
@@ -135,7 +140,11 @@ export const jobService = {
     await delay();
     const idx = jobsStore.findIndex(j => j.id === id);
     if (idx === -1) return null;
-    jobsStore[idx] = { ...jobsStore[idx], ...updates };
+    jobsStore[idx] = {
+      ...jobsStore[idx],
+      ...updates,
+      ...(updates.status === 'published' ? { featured: true } : {}),
+    };
     persistJobs();
     return jobsStore[idx];
   },

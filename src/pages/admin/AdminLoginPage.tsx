@@ -37,8 +37,8 @@ export function AdminLoginPage() {
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'var(--color-navy)', color: '#fff' }}>
-      <header style={{ padding: '24px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <header className="admin-login-header" style={{ padding: '24px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+        <div className="container admin-login-header__inner" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Link to="/" style={{ color: '#fff', textDecoration: 'none' }}>
             <img className="admin-login-logo" src="/rlklein-logo.png" alt="R.L. Klein Inc. & Associates" />
           </Link>

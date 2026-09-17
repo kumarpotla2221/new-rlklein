@@ -5,6 +5,7 @@ import { Award, ShieldCheck, CheckCircle2, ArrowRight } from 'lucide-react';
 const VERIFIED_CERTIFICATIONS = [
   {
     code: 'MBE',
+    image: '/mbe.png',
     title: 'Minority Business Enterprise',
     organization: 'National Minority Supplier Development Council (NMSDC) / Regional Affiliate',
     status: 'Verified / Active',
@@ -12,6 +13,7 @@ const VERIFIED_CERTIFICATIONS = [
   },
   {
     code: 'SBE',
+    image: '/sbe.png',
     title: 'Small Business Enterprise',
     organization: 'State of California Department of General Services (DGS)',
     status: 'Verified / Active',
@@ -19,6 +21,7 @@ const VERIFIED_CERTIFICATIONS = [
   },
   {
     code: 'LSBE',
+    image: '/lsbe.png',
     title: 'Local Small Business Enterprise',
     organization: 'County & Municipal Procurement Authorities',
     status: 'Verified / Active',
@@ -26,6 +29,7 @@ const VERIFIED_CERTIFICATIONS = [
   },
   {
     code: 'NMSDC',
+    image: '/nmsdc.png',
     title: 'NMSDC Corporate Member Recognition',
     organization: 'National Supplier Diversity Network',
     status: 'Active Institutional Standing',
@@ -63,6 +67,9 @@ export function AwardsRecognitionPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 28 }}>
             {VERIFIED_CERTIFICATIONS.map((cert) => (
               <div key={cert.code} className="admin-card" style={{ padding: 32, display: 'flex', flexDirection: 'column' }}>
+                <div className="certification-logo-wrap">
+                  <img src={cert.image} alt={`${cert.title} certification`} className="certification-logo" />
+                </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
                   <span style={{ fontFamily: 'var(--font-heading)', fontSize: 24, fontWeight: 'bold', color: 'var(--color-navy)' }}>
                     {cert.code}

@@ -4,12 +4,15 @@ import { AdminLayout } from './layouts/AdminLayout';
 import { PublicLayout } from './layouts/PublicLayout';
 import { ProtectedRoute } from './components/ui/ProtectedRoute';
 import { HomePage } from './pages/public/HomePage';
+import { HomePageRefresh } from './pages/public/HomePageRefresh';
 import { HotJobsPage } from './pages/public/HotJobsPage';
 import { JobDetailsPage } from './pages/public/JobDetailsPage';
 import { ApplyPage } from './pages/public/ApplyPage';
+import { ConsentAgreementPage } from './pages/public/ConsentAgreementPage';
 import { WhoWeArePage } from './pages/about/WhoWeArePage';
 import { TeamPage } from './pages/about/TeamPage';
 import { AwardsRecognitionPage } from './pages/about/AwardsRecognitionPage';
+import { SafetyCompliancePage } from './pages/about/SafetyCompliancePage';
 import { CDCRMainPage } from './pages/cdcr/CDCRMainPage';
 import { CDCRFacilitiesPage } from './pages/cdcr/CDCRFacilitiesPage';
 import { CDCROpportunitiesPage } from './pages/cdcr/CDCROpportunitiesPage';
@@ -42,12 +45,13 @@ function App() {
       <AuthProvider>
         <Routes>
           <Route element={<PublicLayout />}>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<HomePageRefresh />} />
             <Route path="/jobs" element={<HotJobsPage hotOnly={false} />} />
             <Route path="/hot-jobs" element={<HotJobsPage />} />
             <Route path="/jobs/:jobId" element={<JobDetailsPage />} />
             <Route path="/apply" element={<ApplyPage />} />
             <Route path="/apply/:jobId" element={<ApplyPage />} />
+            <Route path="/consent-agreement" element={<ConsentAgreementPage />} />
             <Route path="/about/who-we-are" element={<WhoWeArePage />} />
             <Route path="/about/team" element={<TeamPage />} />
             <Route path="/about/awards-recognition" element={<AwardsRecognitionPage />} />
@@ -72,7 +76,9 @@ function App() {
             <Route path="/contact" element={<Navigate to="/facilities/staffing-request" replace />} />
             <Route path="/privacy-policy" element={<Navigate to="/about/who-we-are" replace />} />
             <Route path="/terms" element={<Navigate to="/about/who-we-are" replace />} />
-            <Route path="/about/safety-compliance" element={<Navigate to="/cdcr-healthcare/compliance-credentialing" replace />} />
+            <Route path="/about/safety-compliance" element={<SafetyCompliancePage />} />
+            <Route path="/joint-commision" element={<SafetyCompliancePage />} />
+            <Route path="/joint-commission" element={<SafetyCompliancePage />} />
           </Route>
           <Route path="/admin/login" element={<AdminLoginPage />} />
           <Route path="/admin" element={<Navigate to="/admin/login" replace />} />

@@ -89,7 +89,7 @@ export function StaffingRequestPage() {
       <div className="staffing-request-page">
         <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Staffing Request Submitted' }]} />
         <div className="container section">
-          <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center', backgroundColor: '#fff', padding: '60px 40px', borderRadius: 12, border: '1px solid var(--color-gray-200)', boxShadow: 'var(--shadow-md)' }}>
+          <div className="staffing-request-success" style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center', backgroundColor: '#fff', padding: '60px 40px', borderRadius: 12, border: '1px solid var(--color-gray-200)', boxShadow: 'var(--shadow-md)' }}>
             <CheckCircle2 size={64} style={{ color: 'var(--color-success)', margin: '0 auto 20px' }} />
             <span className="eyebrow" style={{ color: 'var(--color-success)' }}>Requirement Received</span>
             <h1 style={{ fontSize: '32px', color: 'var(--color-navy)', marginTop: 8, marginBottom: 16 }}>
@@ -133,7 +133,7 @@ export function StaffingRequestPage() {
 
       <section className="section bg-off-white">
         <div className="container" style={{ maxWidth: 860 }}>
-          <form onSubmit={handleSubmit} className="admin-card" style={{ padding: 40 }} noValidate>
+          <form onSubmit={handleSubmit} className="admin-card staffing-request-form" style={{ padding: 40 }} noValidate>
             {/* 1. CONTACT & ORGANIZATION */}
             <div style={{ marginBottom: 32 }}>
               <h3 style={{ fontSize: '20px', color: 'var(--color-navy)', paddingBottom: 8, borderBottom: '1px solid var(--color-gray-200)', marginBottom: 20 }}>
