@@ -5,7 +5,7 @@ import { Award, ShieldCheck, CheckCircle2, ArrowRight } from 'lucide-react';
 const VERIFIED_CERTIFICATIONS = [
   {
     code: 'MBE',
-    image: '/mbe.png',
+    image: `${import.meta.env.BASE_URL}mbe.png`,
     title: 'Minority Business Enterprise',
     organization: 'National Minority Supplier Development Council (NMSDC) / Regional Affiliate',
     status: 'Verified / Active',
@@ -13,7 +13,7 @@ const VERIFIED_CERTIFICATIONS = [
   },
   {
     code: 'SBE',
-    image: '/sbe.png',
+    image: `${import.meta.env.BASE_URL}sbe.png`,
     title: 'Small Business Enterprise',
     organization: 'State of California Department of General Services (DGS)',
     status: 'Verified / Active',
@@ -21,7 +21,7 @@ const VERIFIED_CERTIFICATIONS = [
   },
   {
     code: 'LSBE',
-    image: '/lsbe.png',
+    image: `${import.meta.env.BASE_URL}lsbe.png`,
     title: 'Local Small Business Enterprise',
     organization: 'County & Municipal Procurement Authorities',
     status: 'Verified / Active',
@@ -29,7 +29,7 @@ const VERIFIED_CERTIFICATIONS = [
   },
   {
     code: 'NMSDC',
-    image: '/nmsdc.png',
+    image: `${import.meta.env.BASE_URL}nmsdc.png`,
     title: 'NMSDC Corporate Member Recognition',
     organization: 'National Supplier Diversity Network',
     status: 'Active Institutional Standing',

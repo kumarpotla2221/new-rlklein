@@ -291,6 +291,6 @@ export function Header() {
 
 function RLKLogo() {
   return (
-    <img className="rlk-logo" src="/rlklein-logo.png" alt="R.L. Klein Inc. & Associates" />
+    <img className="rlk-logo" src={`${import.meta.env.BASE_URL}rlklein-logo.png`} alt="R.L. Klein Inc. & Associates" />
   );
 }

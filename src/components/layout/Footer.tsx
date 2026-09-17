@@ -55,7 +55,7 @@ export function Footer() {
         <div className="site-footer__top">
           <div className="site-footer__brand">
             <div className="site-footer__logo">
-              <img src="/rlklein-logo.png" alt="R.L. Klein Inc. & Associates" />
+              <img src={`${import.meta.env.BASE_URL}rlklein-logo.png`} alt="R.L. Klein Inc. & Associates" />
             </div>
             <p className="site-footer__tagline">
               Healthcare staffing and workforce solutions for government and correctional healthcare environments. Dependable. Compliance-focused. People-centered.
@@ -116,10 +116,10 @@ export function Footer() {
         <div className="site-footer__certifications" aria-label="Business certifications">
           <span className="site-footer__certifications-label">Certified business enterprise</span>
           <div className="site-footer__certification-logos">
-            <img src="/sbe.png" alt="Small Business Enterprise certification" />
-            <img src="/mbe.png" alt="Minority Business Enterprise certification" />
-            <img src="/lsbe.png" alt="Local Small Business Enterprise certification" />
-            <img src="/nmsdc.png" alt="NMSDC certification" />
+            <img src={`${import.meta.env.BASE_URL}sbe.png`} alt="Small Business Enterprise certification" />
+            <img src={`${import.meta.env.BASE_URL}mbe.png`} alt="Minority Business Enterprise certification" />
+            <img src={`${import.meta.env.BASE_URL}lsbe.png`} alt="Local Small Business Enterprise certification" />
+            <img src={`${import.meta.env.BASE_URL}nmsdc.png`} alt="NMSDC certification" />
           </div>
         </div>
 
