@@ -41,7 +41,7 @@ import './App.css';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/new-rlklein">
       <AuthProvider>
         <Routes>
           <Route element={<PublicLayout />}>
