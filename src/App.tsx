@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { AdminLayout } from './layouts/AdminLayout';
 import { PublicLayout } from './layouts/PublicLayout';
@@ -41,7 +41,6 @@ import './App.css';
 
 function App() {
   return (
-    <BrowserRouter basename="/new-rlklein">
       <AuthProvider>
         <Routes>
           <Route element={<PublicLayout />}>
@@ -93,7 +92,6 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AuthProvider>
-    </BrowserRouter>
   );
 }
 
