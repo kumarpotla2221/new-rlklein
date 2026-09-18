@@ -126,7 +126,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="site-footer__bottom">
           <p className="site-footer__copy">
-            &copy; {year} R.L. Klein &amp; Associates. All rights reserved. Founded 1984 &middot; Incorporated 1997.
+            &copy; {year} R.L. Klein &amp; Associates. All rights reserved. 
           </p>
           <nav className="site-footer__legal" aria-label="Legal navigation">
             <Link to="/privacy-policy" className="site-footer__legal-link">Privacy Policy</Link>
