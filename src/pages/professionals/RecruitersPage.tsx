@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/ui/Typography';
-import { Mail, Phone, User, X, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Mail, Phone, MessageCircle, X, ArrowRight } from 'lucide-react';
 
 interface RecruiterProfile {
   id: string;
@@ -82,59 +82,40 @@ export function RecruitersPage() {
 
       <section className="section bg-white">
         <div className="container">
-          <div className="section-heading">
-            <span className="eyebrow">Direct Contact</span>
-            <h2>Dedicated Clinical Coordinators</h2>
-            <p className="section-heading__subtitle">
-              Our coordinators guide you through licensing, credentialing, shift options, and assignment continuity.
+          <div className="recruiters-intro">
+            <p>
+              Meet the R.L. Klein healthcare recruitment team who manage candidate relationships to deliver quality placements and dependable support.
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 32 }}>
+          <div className="recruiters-grid">
             {RECRUITERS.map((r) => (
-              <div key={r.id} className="admin-card" style={{ display: 'flex', flexDirection: 'column' }}>
-                <div style={{ height: 220, overflow: 'hidden', backgroundColor: 'var(--color-navy)' }}>
+              <article key={r.id} className="recruiter-showcase-card">
+                <button
+                  type="button"
+                  className="recruiter-showcase-card__portrait"
+                  onClick={() => setSelectedRecruiter(r)}
+                  aria-label={`View ${r.name} profile`}
+                >
                   <img
                     src={r.imageUrl}
                     alt={r.name}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
+                </button>
+                <h3>{r.name}</h3>
+                <p>{r.designation}</p>
+                <div className="recruiter-showcase-card__actions" aria-label={`Contact ${r.name}`}>
+                  <a href={`tel:${r.phone}`} aria-label={`Call ${r.name}`} title="Call recruiter">
+                    <Phone size={18} aria-hidden="true" />
+                  </a>
+                  <a href={`mailto:${r.email}`} aria-label={`Email ${r.name}`} title="Email recruiter">
+                    <Mail size={18} aria-hidden="true" />
+                  </a>
+                  <a href="https://www.linkedin.com" target="_blank" rel="noreferrer" aria-label={`View ${r.name} on LinkedIn`} title="LinkedIn">
+                    <MessageCircle size={17} aria-hidden="true" />
+                  </a>
                 </div>
-                <div style={{ padding: 24, display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                  <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-violet)', fontWeight: 600 }}>
-                    {r.designation}
-                  </span>
-                  <h3 style={{ fontSize: '18px', color: 'var(--color-navy)', marginTop: 4, marginBottom: 8 }}>
-                    {r.name}
-                  </h3>
-                  <p style={{ fontSize: '14px', color: 'var(--color-gray-600)', lineHeight: 1.5, marginBottom: 16, flexGrow: 1 }}>
-                    {r.bio}
-                  </p>
-
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 16 }}>
-                    {r.specialties.map((s) => (
-                      <span key={s} style={{ fontSize: '11px', padding: '2px 8px', borderRadius: 4, backgroundColor: 'var(--color-off-white)', color: 'var(--color-gray-700)', border: '1px solid var(--color-gray-200)' }}>
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 16, borderTop: '1px solid var(--color-gray-100)' }}>
-                    <a href={`tel:${r.phone}`} style={{ fontSize: '13px', color: 'var(--color-gray-700)', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                      <Phone size={14} />
-                      <span>{r.phone}</span>
-                    </a>
-                    <button
-                      type="button"
-                      onClick={() => setSelectedRecruiter(r)}
-                      className="btn btn--ghost btn--sm"
-                      style={{ fontSize: '12px', color: 'var(--color-violet)', fontWeight: 600 }}
-                    >
-                      View Profile &rarr;
-                    </button>
-                  </div>
-                </div>
-              </div>
+              </article>
             ))}
           </div>
 

@@ -34,7 +34,7 @@ export function CapabilitiesPage() {
     <div className="capabilities-page">
       <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Facilities', href: '/facilities/capabilities' }, { label: 'Capabilities' }]} />
 
-      <header className="page-hero">
+      <header className="page-hero capabilities-hero">
         <div className="container">
           <div className="page-hero__content">
             <span className="eyebrow" style={{ color: '#A0B8E8' }}>Institutional Capabilities</span>

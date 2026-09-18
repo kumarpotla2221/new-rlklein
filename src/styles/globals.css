@@ -16,8 +16,8 @@
   /* -----------------------------------
      TYPE SCALE — DESKTOP
   ----------------------------------- */
-  --text-h1: clamp(38px, 5vw, 60px);
-  --text-h2: clamp(30px, 3.5vw, 46px);
+   --text-h1: clamp(18px, 3vw, 40px);
+   --text-h2: clamp(30px, 3vw, 30px);
   --text-h3: clamp(22px, 2.5vw, 34px);
   --text-h4: clamp(18px, 2vw, 24px);
   --text-h5: 18px;
@@ -209,8 +209,11 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: var(--ls-tight);
 }
 
-h1 { font-size: var(--text-h1); }
-h2 { font-size: var(--text-h2); }
+h1 {
+   font-size: var(--text-h1) !important;
+  color: #fff;
+}
+h2 { font-size: var(--text-h2) !important; }
 h3 { font-size: var(--text-h3); }
 h4 { font-size: var(--text-h4); }
 h5 { font-size: var(--text-h5); }
