@@ -40,7 +40,7 @@ export function AdminLoginPage() {
       <header className="admin-login-header" style={{ padding: '24px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
         <div className="container admin-login-header__inner" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Link to="/" style={{ color: '#fff', textDecoration: 'none' }}>
-            <img className="admin-login-logo" src={`${import.meta.env.BASE_URL}rlklein-logo.png`} alt="R.L. Klein Inc. & Associates" />
+            <img className="admin-login-logo" src={`${import.meta.env.BASE_URL}rlk-secondary.png`} alt="R.L. Klein Inc. & Associates" />
           </Link>
           <Link to="/" style={{ fontSize: '13px', color: '#CBD5E1' }}>
             &larr; Return to Public Website

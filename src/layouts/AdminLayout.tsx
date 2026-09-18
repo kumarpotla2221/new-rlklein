@@ -30,7 +30,7 @@ export function AdminLayout() {
       <aside className={`admin-sidebar ${sidebarOpen ? 'admin-sidebar--open' : ''}`} aria-label="Admin Navigation">
         <div className="admin-sidebar__header">
           <Link to="/" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: '#fff' }}>
-            <img className="admin-brand-logo" src={`${import.meta.env.BASE_URL}rlklein-logo.png`} alt="R.L. Klein Inc. & Associates" />
+            <img className="admin-brand-logo" src={`${import.meta.env.BASE_URL}rlk-secondary.png`} alt="R.L. Klein Inc. & Associates" />
             <ExternalLink size={12} style={{ opacity: 0.6 }} />
           </Link>
           <div className="admin-sidebar__tag">Recruitment &amp; Staffing Admin</div>
