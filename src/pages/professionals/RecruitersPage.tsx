@@ -19,8 +19,8 @@ interface RecruiterProfile {
 const RECRUITERS: RecruiterProfile[] = [
   {
     id: 'rec-1',
-    name: 'Senior Clinical Recruitment Coordinator',
-    designation: 'Nursing & Allied Health Lead',
+    name: 'Johson',
+    designation: 'Recruitment Lead',
     specialties: ['Registered Nurses (RN)', 'LVNs', 'Allied Healthcare'],
     bio: 'Guiding nursing and allied health candidates through credentialing, facility orientation, and California correctional placements.',
     email: 'operations@rlklein.com',
@@ -31,8 +31,8 @@ const RECRUITERS: RecruiterProfile[] = [
   },
   {
     id: 'rec-2',
-    name: 'Physician & Advanced Practice Specialist',
-    designation: 'Medical Staffing Coordinator',
+    name: 'Adam',
+    designation: 'Senior Recruiter',
     specialties: ['Internal Medicine', 'Family Medicine', 'Nurse Practitioners', 'PAs'],
     bio: 'Specializing in physician and advanced practice placements across institutional medical clinics throughout California.',
     email: 'operations@rlklein.com',
@@ -43,8 +43,8 @@ const RECRUITERS: RecruiterProfile[] = [
   },
   {
     id: 'rec-3',
-    name: 'Behavioral & Dental Health Coordinator',
-    designation: 'Mental Health & Dental Recruiter',
+    name: 'Ron',
+    designation: 'Senior Recruiter',
     specialties: ['LCSW / LMFT', 'Psychiatry', 'Psychologists', 'Dentists / RDH'],
     bio: 'Dedicated coordinator supporting mental health professionals and dental teams through credentialing and facility onboarding.',
     email: 'operations@rlklein.com',
