@@ -59,17 +59,15 @@
 .admin-brand-logo {
   display: block;
   width: 190px;
-  height: auto;
-  max-height: 72px;
-  object-fit: contain;
+  height: 72px;
+  object-fit: cover;
 }
 
 .admin-login-logo {
   display: block;
   width: 220px;
-  height: auto;
-  max-height: 64px;
-  object-fit: contain;
+  height: 64px;
+  object-fit: cover;
 }
 
 @media (max-width: 600px) {
