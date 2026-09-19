@@ -10,6 +10,7 @@ import { JobDetailsPage } from './pages/public/JobDetailsPage';
 import { ApplyPage } from './pages/public/ApplyPage';
 import { ConsentAgreementPage } from './pages/public/ConsentAgreementPage';
 import { PrivacyPolicyPage } from './pages/public/PrivacyPolicyPage';
+import { TermsOfUsePage } from './pages/public/TermsOfUsePage';
 import { WhoWeArePage } from './pages/about/WhoWeArePage';
 import { TeamPage } from './pages/about/TeamPage';
 import { AwardsRecognitionPage } from './pages/about/AwardsRecognitionPage';
@@ -75,7 +76,7 @@ function App() {
             <Route path="/healthcare-professionals/faq" element={<ProfessionalsFAQPage />} />
             <Route path="/contact" element={<Navigate to="/facilities/staffing-request" replace />} />
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-            <Route path="/terms" element={<Navigate to="/about/who-we-are" replace />} />
+            <Route path="/terms" element={<TermsOfUsePage />} />
             <Route path="/about/safety-compliance" element={<SafetyCompliancePage />} />
             <Route path="/joint-commision" element={<SafetyCompliancePage />} />
             <Route path="/joint-commission" element={<SafetyCompliancePage />} />
