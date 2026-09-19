@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/ui/Typography';
-import { Mail, Phone, X, ArrowRight, ShieldCheck, Award } from 'lucide-react';
+import { Mail, Phone, X, ArrowRight } from 'lucide-react';
 
 interface ExecutiveMember {
   id: string;
@@ -27,7 +27,7 @@ const LEADERSHIP_TEAM: ExecutiveMember[] = [
     responsibilities: 'Executive leadership, strategic growth, operational excellence, and client partnerships.',
     email: 'jim@rlklein.com',
     phone: '562-427-5577',
-    imageUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=80',
+    imageUrl: `${import.meta.env.BASE_URL}james-w-kommu.jpg`,
   },
   {
     id: 'lead-ops',
@@ -67,110 +67,67 @@ const LEADERSHIP_TEAM: ExecutiveMember[] = [
 export function TeamPage() {
   const [selectedMember, setSelectedMember] = useState<ExecutiveMember | null>(null);
 
-  const ceo = LEADERSHIP_TEAM.find((m) => m.isCEO);
-  const otherMembers = LEADERSHIP_TEAM.filter((m) => !m.isCEO);
-
   return (
     <div className="team-page">
       <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'About Us', href: '/about/who-we-are' }, { label: 'Our Team' }]} />
 
-      <header className="page-hero">
-        <div className="container">
-          <div className="page-hero__content">
-            <span className="eyebrow" style={{ color: '#A0B8E8' }}>Corporate Leadership</span>
-            <h1>Our Leadership Team</h1>
-            <p className="page-hero__subtitle">
-              Guided by experienced executives and operational directors dedicated to dependable healthcare staffing, regulatory compliance, and candidate advocacy.
-            </p>
-          </div>
+      <header className="team-intro">
+        <div className="container team-intro__inner">
+          <span className="eyebrow">Our people</span>
+          <h1>We work for you.</h1>
+          <h2>We can&apos;t wait to get to know you</h2>
+          <p>At R.L. Klein, staffing is about much more than filling a position. It&apos;s about the people who make dependable healthcare possible. Meet the team dedicated to helping you find the right opportunity and supporting you at every step.</p>
         </div>
       </header>
 
-      <section className="section bg-white">
+      <section className="team-gallery section bg-white">
         <div className="container">
-          {/* 67 — CEO SECTION (PROMINENT FIRST) */}
-          {ceo && (
-            <div style={{ marginBottom: 60 }}>
-              <span className="eyebrow" style={{ display: 'block', marginBottom: 12 }}>Executive Leadership</span>
-              <div className="admin-card" style={{ display: 'grid', gridTemplateColumns: '320px 1fr', gap: 36, overflow: 'hidden' }}>
-                <div style={{ backgroundColor: 'var(--color-navy)', height: '100%', minHeight: 320 }}>
-                  <img
-                    src={ceo.imageUrl}
-                    alt={ceo.name}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  />
-                </div>
-                <div style={{ padding: '36px 36px 36px 0', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                  <span style={{ fontSize: '12px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-violet)', fontWeight: 600 }}>
-                    {ceo.title}
-                  </span>
-                  <h2 style={{ fontSize: '28px', color: 'var(--color-navy)', marginTop: 4, marginBottom: 16 }}>
-                    {ceo.name}
-                  </h2>
-                  <p style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--color-gray-700)', marginBottom: 20 }}>
-                    {ceo.bio}
-                  </p>
-                  <p style={{ fontSize: '14px', color: 'var(--color-gray-600)', marginBottom: 24 }}>
-                    <strong>Key Responsibilities: </strong>{ceo.responsibilities}
-                  </p>
-                  <div style={{ display: 'flex', gap: 20, fontSize: '14px', borderTop: '1px solid var(--color-gray-100)', paddingTop: 16 }}>
-                    <a href={`mailto:${ceo.email}`} style={{ color: 'var(--color-violet)', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                      <Mail size={15} />
-                      <span>{ceo.email}</span>
-                    </a>
-                    <a href={`tel:${ceo.phone}`} style={{ color: 'var(--color-navy)', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                      <Phone size={15} />
-                      <span>{ceo.phone}</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+          <div className="team-section-heading">
+            <span className="eyebrow">The people behind the support</span>
+            <h2>Meet The Team</h2>
+            <p>Tap on a picture to get to know your future biggest fans.</p>
+          </div>
+          <div className="team-member-grid">
+            {LEADERSHIP_TEAM.map((member) => (
+              <button key={member.id} type="button" className="team-member-tile" onClick={() => setSelectedMember(member)}>
+                <span className="team-member-tile__image-wrap">
+                  <img src={member.imageUrl} alt={member.name} className="team-member-tile__image" />
+                  <span className="team-member-tile__view">View profile <ArrowRight size={15} /></span>
+                </span>
+                <span className="team-member-tile__content">
+                  <span className="team-member-tile__name">{member.name}</span>
+                  <span className="team-member-tile__title">{member.title}</span>
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          {/* Other Leadership Team */}
-          <div>
-            <span className="eyebrow" style={{ display: 'block', marginBottom: 16 }}>Operational &amp; Compliance Directors</span>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 28 }}>
-              {otherMembers.map((member) => (
-                <div key={member.id} className="admin-card" style={{ display: 'flex', flexDirection: 'column' }}>
-                  <div style={{ height: 220, overflow: 'hidden', backgroundColor: 'var(--color-navy)' }}>
-                    <img
-                      src={member.imageUrl}
-                      alt={member.name}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
-                  </div>
-                  <div style={{ padding: 24, display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                    <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-violet)', fontWeight: 600 }}>
-                      {member.title}
-                    </span>
-                    <h3 style={{ fontSize: '18px', color: 'var(--color-navy)', marginTop: 4, marginBottom: 8 }}>
-                      {member.name}
-                    </h3>
-                    <div style={{ fontSize: '12px', color: 'var(--color-gray-500)', marginBottom: 12 }}>
-                      {member.department}
-                    </div>
-                    <p style={{ fontSize: '14px', color: 'var(--color-gray-600)', lineHeight: 1.5, marginBottom: 16, flexGrow: 1 }}>
-                      {member.bio}
-                    </p>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 16, borderTop: '1px solid var(--color-gray-100)' }}>
-                      <a href={`mailto:${member.email}`} style={{ fontSize: '13px', color: 'var(--color-violet)' }}>
-                        {member.email}
-                      </a>
-                      <button
-                        type="button"
-                        onClick={() => setSelectedMember(member)}
-                        className="btn btn--ghost btn--sm"
-                        style={{ fontSize: '12px', fontWeight: 600 }}
-                      >
-                        Profile &rarr;
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+      <section className="team-commitment section">
+        <div className="container">
+          <div className="team-section-heading team-section-heading--light">
+            <span className="eyebrow">Our commitment to you</span>
+            <h2>What you can expect from our team</h2>
+            <p>We live our core values every day so you feel valued, appreciated, and cared for.</p>
+          </div>
+          <div className="team-values-grid">
+            {[
+              ['We are humble and kind', 'We take the time to know you as an individual and help you find work that fits your experience and needs.'],
+              ['We have a passion for caring', 'Expect regular check-ins and a real person you can call or text throughout your assignment.'],
+              ['We build open and honest relationships', 'We set clear expectations about your contract, pay, benefits, and every next step.'],
+              ['We will be resourceful', 'From credentialing to housing details, we take care of the practical work behind a smooth assignment.'],
+              ['We will create fun and happiness', 'When you feel supported, you can bring your best care to the people who need it most.'],
+            ].map(([title, text], index) => (
+              <article key={title} className="team-value">
+                <span className="team-value__number">0{index + 1}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+          <div className="team-commitment__cta">
+            <Link to="/hot-jobs" className="btn btn--accent btn--lg">Get started <ArrowRight size={17} /></Link>
           </div>
         </div>
       </section>
