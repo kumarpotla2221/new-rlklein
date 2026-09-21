@@ -73,6 +73,10 @@ export function Footer() {
                 <Mail size={14} />
                 <span>info@rlklein.com</span>
               </a>
+              <a href="mailto:operations@rlklein.com" className="site-footer__contact-item">
+                <Mail size={14} />
+                <span>operations@rlklein.com</span>
+              </a>
               <div className="site-footer__contact-item">
                 <Clock size={14} />
                 <span>Mon–Sat, 9 AM–6 PM PST</span>
