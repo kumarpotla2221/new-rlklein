@@ -355,6 +355,18 @@ export const SHIFT_TYPES = [
   'Day', 'Evening', 'Night', 'Rotating', 'Flexible',
 ];
 
+export const SHIFT_PATTERNS = [
+  '8-Hour', '10-Hour', '12-Hour', 'Rotating', 'Flexible',
+];
+
+export const CONTRACT_TYPES = [
+  'W2', '1099', 'Travel Contract', 'Local Contract', 'Direct Hire',
+];
+
+export const PAY_FREQUENCIES = [
+  'Weekly', 'Bi-Weekly', 'Semi-Monthly', 'Monthly',
+];
+
 export const STATE_ABBREVIATIONS: Record<string, string> = {
   'Alabama': 'AL', 'Alaska': 'AK', 'Arizona': 'AZ', 'Arkansas': 'AR',
   'California': 'CA', 'Colorado': 'CO', 'Connecticut': 'CT', 'Delaware': 'DE',

@@ -2511,6 +2511,16 @@
   justify-content: space-between;
 }
 
+.job-modal__preview-banner {
+  background-color: var(--color-warning-light);
+  color: var(--color-warning);
+  border: 1px solid #F2D49B;
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-small);
+  font-weight: var(--fw-medium);
+}
+
 .job-modal__header h2 {
   color: var(--color-white);
   font-size: 20px;

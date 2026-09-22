@@ -33,7 +33,7 @@ function persistJobs() {
 export const jobService = {
   async getJobs(filters?: JobFilters): Promise<Job[]> {
     await delay();
-    let jobs = [...jobsStore];
+    let jobs = [...jobsStore].filter(j => j.visibility !== 'unlisted');
 
     if (filters?.status) {
       jobs = jobs.filter(j => j.status === filters.status);
@@ -122,11 +122,13 @@ export const jobService = {
     return [...jobsStore];
   },
 
-  async createJob(job: Omit<Job, 'id' | 'slug' | 'postedDate' | 'applicationCount'>): Promise<Job> {
+  async createJob(job: Omit<Job, 'id' | 'slug' | 'postedDate' | 'applicationCount'> & { id?: string }): Promise<Job> {
     await delay();
+    const { id: customId, ...rest } = job;
+    const trimmedId = customId?.trim();
     const newJob: Job = {
-      ...job,
-      id: `RLK-${Date.now()}`,
+      ...rest,
+      id: trimmedId && !jobsStore.some(j => j.id === trimmedId) ? trimmedId : `RLK-${Date.now()}`,
       slug: job.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + Date.now(),
       postedDate: new Date().toISOString().split('T')[0],
       applicationCount: 0,

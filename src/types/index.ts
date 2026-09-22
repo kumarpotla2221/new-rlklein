@@ -6,6 +6,7 @@ export type JobStatus = 'draft' | 'published' | 'paused' | 'expired' | 'archived
 export type EmploymentType = 'Full-Time' | 'Part-Time' | 'Per Diem' | 'Contract' | 'Temporary';
 export type ShiftType = 'Day' | 'Evening' | 'Night' | 'Rotating' | 'Flexible';
 export type CompensationType = 'hourly' | 'weekly' | 'salary' | 'negotiable';
+export type JobVisibility = 'public' | 'unlisted';
 
 export interface Job {
   id: string;
@@ -15,28 +16,45 @@ export interface Job {
   specialty: string;
   state: string;
   city: string;
+  country?: string;
   facility?: string;
+  facilityType?: string;
   workSetting: string;
   employmentType: EmploymentType;
   shift: ShiftType;
+  shiftsPerWeek?: number;
+  shiftPattern?: string;
   hoursPerWeek?: number;
   startDate?: string;
+  endDate?: string;
   assignmentDuration?: string;
+  assignmentTerm?: string;
+  contractType?: string;
+  extensionAvailable?: boolean;
   status: JobStatus;
   featured: boolean;
+  visibility?: JobVisibility;
   postedDate: string;
   expirationDate?: string;
   compensationType?: CompensationType;
   compensationMin?: number;
   compensationMax?: number;
+  payFrequency?: string;
   showCompensation: boolean;
   overview: string;
   responsibilities: string[];
   qualifications: string[];
   preferredQualifications?: string[];
   requiredCredentials: string[];
+  benefits?: string[];
   additionalCompensation?: string;
   applicationCount?: number;
+  agencyName?: string;
+  agencyLocation?: string;
+  agencyExperience?: string;
+  agencySupport?: string;
+  agencyCertifications?: string;
+  jobBoardDisclaimer?: string;
 }
 
 export type ApplicationStatus =
