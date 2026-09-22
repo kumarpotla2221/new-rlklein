@@ -5,9 +5,10 @@ import { MapPin, Briefcase, Clock, Calendar } from 'lucide-react';
 
 interface JobCardProps {
   job: Job;
+  onViewDetails?: (job: Job) => void;
 }
 
-export function JobCard({ job }: JobCardProps) {
+export function JobCard({ job, onViewDetails }: JobCardProps) {
   const formattedStartDate = job.startDate
     ? new Date(job.startDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
     : 'Immediate';
@@ -49,9 +50,15 @@ export function JobCard({ job }: JobCardProps) {
       )}
 
       <div className="job-card__footer">
-        <Link to={`/jobs/${job.slug}`} className="btn btn--secondary btn--sm">
-          View Job
-        </Link>
+        {onViewDetails ? (
+          <button type="button" className="btn btn--secondary btn--sm" onClick={() => onViewDetails(job)}>
+            View Job
+          </button>
+        ) : (
+          <Link to={`/jobs/${job.slug}`} className="btn btn--secondary btn--sm">
+            View Job
+          </Link>
+        )}
         <Link to={`/apply/${job.id}`} className="btn btn--primary btn--sm">
           Apply Now
         </Link>

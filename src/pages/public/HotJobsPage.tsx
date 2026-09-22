@@ -4,6 +4,7 @@ import type { Job, JobFilters as FilterType } from '../../types';
 import { JobCard } from '../../components/jobs/JobCard';
 import { JobFiltersSidebar } from '../../components/jobs/JobFiltersSidebar';
 import { JobsTable } from '../../components/jobs/JobsTable';
+import { JobDetailsModal } from '../../components/jobs/JobDetailsModal';
 import { Breadcrumbs } from '../../components/ui/Typography';
 import { Briefcase } from 'lucide-react';
 
@@ -27,6 +28,7 @@ export function HotJobsPage({ hotOnly = true }: { hotOnly?: boolean }) {
   const [sortBy, setSortBy] = useState<SortOption>('featured');
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+  const [selectedJob, setSelectedJob] = useState<Job | null>(null);
 
   useEffect(() => {
     async function loadJobs() {
@@ -145,11 +147,11 @@ export function HotJobsPage({ hotOnly = true }: { hotOnly?: boolean }) {
               ) : (
                 <>
                   <div className="jobs-table-view">
-                    <JobsTable jobs={pagedJobs} />
+                    <JobsTable jobs={pagedJobs} onOpenDetails={setSelectedJob} />
                   </div>
                   <div className="jobs-card-view jobs-grid">
                     {pagedJobs.map((job) => (
-                      <JobCard key={job.id} job={job} />
+                      <JobCard key={job.id} job={job} onViewDetails={setSelectedJob} />
                     ))}
                   </div>
 
@@ -201,6 +203,8 @@ export function HotJobsPage({ hotOnly = true }: { hotOnly?: boolean }) {
           </div>
         </div>
       </section>
+
+      <JobDetailsModal job={selectedJob} onClose={() => setSelectedJob(null)} />
     </div>
   );
 }

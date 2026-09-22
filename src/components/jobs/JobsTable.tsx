@@ -5,6 +5,7 @@ import { STATE_ABBREVIATIONS } from '../../data/jobs';
 
 interface JobsTableProps {
   jobs: Job[];
+  onOpenDetails: (job: Job) => void;
 }
 
 function isNew(postedDate: string) {
@@ -35,7 +36,7 @@ function ShiftIcon({ shift }: { shift: Job['shift'] }) {
   }
 }
 
-export function JobsTable({ jobs }: JobsTableProps) {
+export function JobsTable({ jobs, onOpenDetails }: JobsTableProps) {
   return (
     <div className="jobs-table-wrap">
       <table className="jobs-table">
@@ -99,7 +100,13 @@ export function JobsTable({ jobs }: JobsTableProps) {
               <td>
                 <div className="jobs-table__actions">
                   <Link to={`/apply/${job.id}`} className="btn btn--primary btn--sm jobs-table__action-btn">Apply</Link>
-                  <Link to={`/jobs/${job.slug}`} className="btn btn--secondary btn--sm jobs-table__action-btn">Details</Link>
+                  <button
+                    type="button"
+                    className="btn btn--secondary btn--sm jobs-table__action-btn"
+                    onClick={() => onOpenDetails(job)}
+                  >
+                    Details
+                  </button>
                 </div>
               </td>
             </tr>
