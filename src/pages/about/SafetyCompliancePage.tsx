@@ -78,9 +78,9 @@ export function SafetyCompliancePage() {
                 <span><strong>Online</strong><small>Submit a report online &mdash; anonymously if you prefer.</small></span>
                 <ExternalLink size={17} />
               </a>
-              <div className="safety-contact-card__row"><span><strong>By Phone</strong><small>1-800-994-6610<br />Office of Quality Monitoring</small></span><Phone size={17} /></div>
+              <div className="safety-contact-card__row"><span><strong>By Phone</strong><small>1-800-994-6610<br />Office of Quality and Patient Safety</small></span><Phone size={17} /></div>
               <a href="https://www.jointcommission.org/en" target="_blank" rel="noreferrer" className="safety-contact-card__row"><span><strong>Website</strong><small>www.jointcommission.org<br />Learn more about the reporting process.</small></span><ExternalLink size={17} /></a>
-              <div className="safety-contact-card__row"><span><strong>By Mail</strong><small>The Joint Commission Office of Quality Monitoring<br />One Renaissance Boulevard<br />Oakbrook Terrace, IL 60181</small></span></div>
+              <div className="safety-contact-card__row"><span><strong>By Mail</strong><small>The Joint Commission Office of Quality and Patient Safety<br />One Renaissance Boulevard<br />Oakbrook Terrace, IL 60181</small></span></div>
             </div>
           </div>
         </div>
