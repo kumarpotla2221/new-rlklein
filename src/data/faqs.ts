@@ -41,7 +41,7 @@ export const FAQS: FAQ[] = [
     id: 'faq-006',
     category: 'Healthcare Professionals',
     question: 'How do I apply for a healthcare position?',
-    answer: 'You can apply by browsing our Hot Jobs section, selecting a position that matches your qualifications and interests, and clicking "Apply Now." You will complete a simple application form and upload your resume. No account creation is required.',
+    answer: 'You can apply by browsing our Find Your Next Role section, selecting a position that matches your qualifications and interests, and clicking "Apply Now." You will complete a simple application form and upload your resume. No account creation is required.',
   },
   {
     id: 'faq-007',

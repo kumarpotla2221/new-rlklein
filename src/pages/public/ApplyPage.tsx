@@ -180,7 +180,7 @@ export function ApplyPage() {
 
             <div style={{ display: 'flex', justifyContent: 'center', gap: 16, flexWrap: 'wrap' }}>
               <Link to="/hot-jobs" className="btn btn--primary btn--md">
-                View More Hot Jobs
+                View More Find Your Next Role
               </Link>
               <Link to="/" className="btn btn--secondary btn--md">
                 Return Home
@@ -197,7 +197,7 @@ export function ApplyPage() {
       <Breadcrumbs
         items={[
           { label: 'Home', href: '/' },
-          { label: 'Hot Jobs', href: '/hot-jobs' },
+          { label: 'Find Your Next Role', href: '/hot-jobs' },
           { label: associatedJob ? `Apply: ${associatedJob.title}` : 'Apply for Healthcare Opportunity' },
         ]}
       />

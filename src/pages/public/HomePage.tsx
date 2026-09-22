@@ -350,19 +350,19 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 20 — HOT JOBS HOMEPAGE (DYNAMICALLY LOADED FROM JOB SERVICE) */}
-      <section className="section bg-off-white" aria-label="Featured Hot Jobs">
+      {/* 20 — FIND YOUR NEXT ROLE HOMEPAGE (DYNAMICALLY LOADED FROM JOB SERVICE) */}
+      <section className="section bg-off-white" aria-label="Featured Find Your Next Role">
         <div className="container">
           <div className="section-heading" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16 }}>
             <div>
               <span className="eyebrow">Immediate Openings</span>
-              <h2>Hot Jobs</h2>
+              <h2>Find Your Next Role</h2>
               <p className="section-heading__subtitle">
                 Explore current healthcare opportunities with R.L. Klein &amp; Associates.
               </p>
             </div>
             <Link to="/hot-jobs" className="btn btn--secondary btn--md">
-              <span>View All Hot Jobs</span>
+              <span>View All Find Your Next Role</span>
               <ArrowRight size={14} />
             </Link>
           </div>
@@ -373,7 +373,7 @@ export function HomePage() {
             </div>
           ) : featuredJobs.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '48px 0', background: '#fff', borderRadius: 8 }}>
-              <p>No hot jobs are currently available. Check back soon for new opportunities.</p>
+              <p>No Find Your Next Role opportunities are currently available. Check back soon for new opportunities.</p>
               <Link to="/hot-jobs" className="btn btn--primary btn--sm" style={{ marginTop: 16 }}>Browse All Jobs</Link>
             </div>
           ) : (
@@ -386,7 +386,7 @@ export function HomePage() {
 
           <div style={{ textAlign: 'center', marginTop: 48 }}>
             <Link to="/hot-jobs" className="btn btn--primary btn--lg">
-              <span>View All Available Hot Jobs</span>
+              <span>View All Available Find Your Next Role Opportunities</span>
               <ArrowRight size={16} />
             </Link>
           </div>

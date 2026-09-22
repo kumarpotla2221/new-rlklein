@@ -127,7 +127,7 @@ export function RecruitersPage() {
               Call our main line at <strong>562-427-5577</strong> or apply directly without creating an account.
             </p>
             <Link to="/hot-jobs" className="btn btn--primary btn--md">
-              <span>View All Hot Jobs</span>
+              <span>View All Find Your Next Role</span>
               <ArrowRight size={14} />
             </Link>
           </div>

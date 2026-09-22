@@ -6,7 +6,7 @@ const CANDIDATE_STEPS = [
   {
     step: '01',
     title: 'Explore Opportunities',
-    desc: 'Browse our live Hot Jobs directory by profession, setting, shift, and specialty. No account or password required.',
+    desc: 'Browse our live Find Your Next Role directory by profession, setting, shift, and specialty. No account or password required.',
     icon: Search,
   },
   {

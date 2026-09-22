@@ -72,7 +72,7 @@ export function AdminLayout() {
             className={({ isActive }) => `admin-nav-item ${isActive ? 'admin-nav-item--active' : ''}`}
           >
             <span aria-hidden="true">★</span>
-            <span>Hot Jobs</span>
+            <span>Find Your Next Role</span>
           </NavLink>
 
           <NavLink
@@ -101,7 +101,7 @@ export function AdminLayout() {
 
           <Link to="/hot-jobs" target="_blank" className="admin-nav-item">
             <FileText size={18} />
-            <span>Live Hot Jobs</span>
+            <span>Live Find Your Next Role</span>
             <ChevronRight size={14} style={{ marginLeft: 'auto', opacity: 0.4 }} />
           </Link>
         </nav>

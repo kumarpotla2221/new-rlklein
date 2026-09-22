@@ -34,7 +34,7 @@ const FOOTER_NAV = [
   {
     heading: 'Company',
     links: [
-      { label: 'Hot Jobs', href: '/hot-jobs' },
+      { label: 'Find Your Next Role', href: '/hot-jobs' },
       { label: 'Who We Are', href: '/about/who-we-are' },
       { label: 'Our Team', href: '/about/team' },
       { label: 'Awards & Recognition', href: '/about/awards-recognition' },

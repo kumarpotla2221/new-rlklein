@@ -60,13 +60,13 @@ export function HotJobsPage({ hotOnly = true }: { hotOnly?: boolean }) {
 
   return (
     <div className="hot-jobs-page">
-      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Hot Jobs' }]} />
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Find Your Next Role' }]} />
 
       <header className="page-hero">
         <div className="container">
           <div className="page-hero__content">
             <span className="eyebrow" style={{ color: '#A0B8E8' }}>Current Opportunities</span>
-            <h1>{hotOnly ? 'Hot Jobs' : 'Healthcare Jobs'}</h1>
+            <h1>{hotOnly ? 'Find Your Next Role' : 'Healthcare Jobs'}</h1>
             <p className="page-hero__subtitle">
               {hotOnly ? 'Find highlighted healthcare opportunities with R.L. Klein & Associates.' : 'Browse published healthcare opportunities across correctional, government, and institutional healthcare facilities.'}
             </p>

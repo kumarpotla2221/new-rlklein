@@ -42,7 +42,7 @@ const NAV_ITEMS: NavItem[] = [
       { label: 'Staffing Request', href: '/facilities/staffing-request', description: 'Submit your staffing requirement' },
     ],
   },
-  { label: 'Hot Jobs', href: '/hot-jobs' },
+  { label: 'Find Your Next Role', href: '/hot-jobs' },
   {
     label: 'About Us',
     children: [
@@ -170,7 +170,7 @@ export function Header() {
             <Link to="/apply" className="header-quick-apply">Quick Apply</Link>
             <Link to="/hot-jobs" className="header-action-link">
               <BriefcaseBusiness size={20} />
-              <span>Hot Jobs</span>
+              <span>Find Your Next Role</span>
             </Link>
             <a href="tel:5624275577" className="header-action-link header-phone-link">
               <Phone size={20} />

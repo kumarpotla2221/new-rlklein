@@ -17,7 +17,7 @@ export function ProfessionalsMainPage() {
             </p>
             <div className="page-hero__actions">
               <Link to="/hot-jobs" className="btn btn--accent btn--md">
-                <span>Browse Hot Jobs</span>
+                <span>Browse Find Your Next Role</span>
                 <ArrowRight size={14} />
               </Link>
               <Link to="/apply" className="btn btn--outline-white btn--md">

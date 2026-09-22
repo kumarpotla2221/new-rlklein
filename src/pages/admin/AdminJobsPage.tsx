@@ -163,7 +163,7 @@ export function AdminJobsPage() {
         </select>
         <label className="form-checkbox-label" style={{ whiteSpace: 'nowrap' }}>
           <input type="checkbox" className="form-checkbox" checked={hotOnly} onChange={(event) => setHotOnly(event.target.checked)} />
-          <span>Hot jobs only</span>
+          <span>Find Your Next Role only</span>
         </label>
         <select className="form-select" value={sortOrder} onChange={(event) => setSortOrder(event.target.value as 'newest' | 'oldest')} aria-label="Sort jobs">
           <option value="newest">Newest first</option>

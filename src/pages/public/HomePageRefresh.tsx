@@ -42,7 +42,7 @@ export function HomePageRefresh() {
             <h1>Your next healthcare opportunity starts here.</h1>
             <p>R.L. Klein &amp; Associates connects qualified healthcare professionals with dependable opportunities and helps public and correctional facilities build stronger teams.</p>
             <div className="refresh-hero__actions">
-              <Link to="/hot-jobs" className="btn btn--accent btn--lg">Find Hot Jobs <ArrowRight size={17} /></Link>
+              <Link to="/hot-jobs" className="btn btn--accent btn--lg">Find Your Next Role <ArrowRight size={17} /></Link>
               <Link to="/facilities/staffing-request" className="btn btn--outline-white btn--lg">Request Staffing</Link>
             </div>
             <div className="refresh-hero__proof">
@@ -71,7 +71,7 @@ export function HomePageRefresh() {
       <section className="section bg-white" aria-label="Featured healthcare jobs">
         <div className="container">
           <div className="refresh-section-heading">
-            <div><span className="eyebrow">Current opportunities</span><h2>Featured Hot Jobs</h2><p>Explore open positions across healthcare settings and specialties.</p></div>
+            <div><span className="eyebrow">Current opportunities</span><h2>Featured Find Your Next Role</h2><p>Explore open positions across healthcare settings and specialties.</p></div>
             <Link to="/hot-jobs" className="text-link">View all jobs <ArrowRight size={15} /></Link>
           </div>
           {loading ? <div className="refresh-loading">Loading current opportunities...</div> : featuredJobs.length > 0 ? (

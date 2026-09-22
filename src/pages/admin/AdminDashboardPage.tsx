@@ -83,7 +83,7 @@ export function AdminDashboardPage() {
         </div>
 
         <div className="admin-stat-card">
-          <span className="admin-stat-label">Hot Jobs</span>
+          <span className="admin-stat-label">Find Your Next Role</span>
           <span className="admin-stat-val" style={{ color: 'var(--color-violet)' }}>{hotJobsCount}</span>
           <span style={{ fontSize: '12px', color: 'var(--color-gray-500)' }}>Published and featured</span>
         </div>

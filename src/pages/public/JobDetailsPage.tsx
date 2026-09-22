@@ -54,7 +54,7 @@ export function JobDetailsPage() {
         </p>
         <Link to="/hot-jobs" className="btn btn--primary btn--md">
           <ArrowLeft size={16} />
-          <span>Browse Active Hot Jobs</span>
+          <span>Browse Active Find Your Next Role</span>
         </Link>
       </div>
     );
@@ -69,7 +69,7 @@ export function JobDetailsPage() {
       <Breadcrumbs
         items={[
           { label: 'Home', href: '/' },
-          { label: 'Hot Jobs', href: '/hot-jobs' },
+          { label: 'Find Your Next Role', href: '/hot-jobs' },
           { label: job.title },
         ]}
       />

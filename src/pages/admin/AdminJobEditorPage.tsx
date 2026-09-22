@@ -527,7 +527,7 @@ export function AdminJobEditorPage() {
                   checked={form.featured}
                   onChange={handleChange}
                 />
-                <span><strong>Featured Opportunity</strong> (Eligible for Homepage Hot Jobs)</span>
+                <span><strong>Featured Opportunity</strong> (Eligible for Homepage Find Your Next Role)</span>
               </label>
             </div>
           </div>
