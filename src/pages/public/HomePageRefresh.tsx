@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BadgeCheck, Building2, CheckCircle2, Clock3, FileCheck2, HeartHandshake, ShieldCheck, Stethoscope, Users } from 'lucide-react';
+import { ArrowRight, BadgeCheck, Building2, Clock3, FileCheck2, HeartHandshake, ShieldCheck, Stethoscope, Users } from 'lucide-react';
 import { jobService } from '../../services/jobService';
 import type { Job } from '../../types';
 import { JobCard } from '../../components/jobs/JobCard';
 import { SERVICE_AREAS } from '../../data/services';
 
-const HERO_IMAGE = 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1500&q=85';
+import HERO_IMAGE from '../../../RLklein Hero.jpg';
 const TEAM_IMAGE = 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=85';
 
 const BENEFITS = [
@@ -35,7 +35,11 @@ export function HomePageRefresh() {
 
   return (
     <div className="home-refresh">
-      <section className="refresh-hero" aria-label="Healthcare staffing introduction">
+      <section
+        className="refresh-hero"
+        aria-label="Healthcare staffing introduction"
+        style={{ backgroundImage: `linear-gradient(90deg, rgba(13, 34, 64, 0.9) 0%, rgba(13, 34, 64, 0.7) 48%, rgba(13, 34, 64, 0.2) 100%), url("${HERO_IMAGE}")` }}
+      >
         <div className="container refresh-hero__inner">
           <div className="refresh-hero__copy">
             <span className="eyebrow refresh-hero__eyebrow">Healthcare staffing since 1984</span>
@@ -50,10 +54,6 @@ export function HomePageRefresh() {
               <span><strong>CDCR</strong> healthcare expertise</span>
               <span><strong>100%</strong> compliance focused</span>
             </div>
-          </div>
-          <div className="refresh-hero__media">
-            <img src={HERO_IMAGE} alt="Healthcare professional reviewing clinical information" />
-            <div className="refresh-hero__media-note"><CheckCircle2 size={18} /><span>People-centered. Compliance-focused.</span></div>
           </div>
         </div>
       </section>
