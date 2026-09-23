@@ -11,6 +11,7 @@ import { ApplyPage } from './pages/public/ApplyPage';
 import { ConsentAgreementPage } from './pages/public/ConsentAgreementPage';
 import { PrivacyPolicyPage } from './pages/public/PrivacyPolicyPage';
 import { TermsOfUsePage } from './pages/public/TermsOfUsePage';
+import { ContactPage } from './pages/public/ContactPage';
 import { WhoWeArePage } from './pages/about/WhoWeArePage';
 import { TeamPage } from './pages/about/TeamPage';
 import { AwardsRecognitionPage } from './pages/about/AwardsRecognitionPage';
@@ -74,7 +75,7 @@ function App() {
             <Route path="/healthcare-professionals/recruiters" element={<RecruitersPage />} />
             <Route path="/healthcare-professionals/credentialing-onboarding" element={<CredentialingOnboardingPage />} />
             <Route path="/healthcare-professionals/faq" element={<ProfessionalsFAQPage />} />
-            <Route path="/contact" element={<Navigate to="/facilities/staffing-request" replace />} />
+            <Route path="/contact" element={<ContactPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
             <Route path="/terms" element={<TermsOfUsePage />} />
             <Route path="/about/safety-compliance" element={<SafetyCompliancePage />} />
