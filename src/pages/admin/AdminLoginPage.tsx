@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { User, KeyRound } from 'lucide-react';
+import { User, KeyRound, Eye, EyeOff } from 'lucide-react';
 
 const REMEMBER_KEY = 'rlk_admin_remembered_email';
 
@@ -16,6 +16,7 @@ function readRememberedEmail() {
 export function AdminLoginPage() {
   const [email, setEmail] = useState(readRememberedEmail);
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [remember, setRemember] = useState(() => readRememberedEmail() !== '');
   const [localError, setLocalError] = useState<string | null>(null);
   const { login, isLoading } = useAuth();
@@ -114,13 +115,22 @@ export function AdminLoginPage() {
               <KeyRound size={16} className="admin-login__icon" />
               <span className="sr-only">Password</span>
               <input
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 placeholder="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 autoComplete="current-password"
                 required
               />
+              <button
+                type="button"
+                className="admin-login__toggle"
+                onClick={() => setShowPassword((v) => !v)}
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                aria-pressed={showPassword}
+              >
+                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+              </button>
             </label>
 
             <button type="submit" disabled={isLoading} className="admin-login__submit">
