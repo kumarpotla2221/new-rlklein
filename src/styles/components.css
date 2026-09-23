@@ -3786,7 +3786,7 @@
   max-width: 610px;
   margin-top: 24px;
   color: #D5DEEC;
-  font-size: clamp(17px, 1.7vw, 21px);
+  font-size: clamp(17px, 1.7vw, 16px);
   line-height: 1.65;
 }
 
