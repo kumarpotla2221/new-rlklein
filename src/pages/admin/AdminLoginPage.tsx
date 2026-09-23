@@ -1,11 +1,22 @@
 import { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { ShieldCheck, Lock, Mail, ArrowRight } from 'lucide-react';
+import { User, KeyRound } from 'lucide-react';
+
+const REMEMBER_KEY = 'rlk_admin_remembered_email';
+
+function readRememberedEmail() {
+  try {
+    return localStorage.getItem(REMEMBER_KEY) ?? '';
+  } catch {
+    return '';
+  }
+}
 
 export function AdminLoginPage() {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(readRememberedEmail);
   const [password, setPassword] = useState('');
+  const [remember, setRemember] = useState(() => readRememberedEmail() !== '');
   const [localError, setLocalError] = useState<string | null>(null);
   const { login, isLoading } = useAuth();
   const navigate = useNavigate();
@@ -24,6 +35,12 @@ export function AdminLoginPage() {
 
     try {
       await login(email, password);
+      try {
+        if (remember) localStorage.setItem(REMEMBER_KEY, email);
+        else localStorage.removeItem(REMEMBER_KEY);
+      } catch {
+        // Storage unavailable; remembering the email is a convenience only.
+      }
       navigate(from, { replace: true });
     } catch (err) {
       setLocalError(err instanceof Error ? err.message : 'Authentication failed.');
@@ -36,99 +53,106 @@ export function AdminLoginPage() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'var(--color-navy)', color: '#fff' }}>
-      <header className="admin-login-header" style={{ padding: '24px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-        <div className="container admin-login-header__inner" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Link to="/" style={{ color: '#fff', textDecoration: 'none' }}>
-            <img className="admin-login-logo" src={`${import.meta.env.BASE_URL}rlk-secondary.png`} alt="R.L. Klein Inc. & Associates" />
+    <div className="admin-login">
+      <div className="admin-login__card">
+        <svg className="admin-login__panel" viewBox="0 0 750 435" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 0 H385 C 420 90, 440 170, 445 250 C 450 330, 470 400, 490 435 H0 Z" />
+        </svg>
+
+        <svg className="admin-login__decor" viewBox="0 0 360 435" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="admin-login-orb" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#1E2170" />
+              <stop offset="100%" stopColor="#3A43B8" />
+            </linearGradient>
+            <linearGradient id="admin-login-moon" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#2A2E8E" />
+              <stop offset="100%" stopColor="#1B1E66" />
+            </linearGradient>
+          </defs>
+          <circle cx="170" cy="96" r="32" fill="url(#admin-login-orb)" />
+          <path d="M262 113 a 92 92 0 0 1 0 184 C 226 255, 228 155, 262 113 Z" fill="url(#admin-login-moon)" />
+          <g fill="none" stroke="#4E62D8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M48 48 C 56 26, 70 26, 76 40 S 96 54, 104 32" strokeWidth="5" />
+            <circle cx="185" cy="24" r="18" />
+            <path d="M285 88 l -8 16 h 16 Z" />
+            <circle cx="82" cy="187" r="7" />
+            <path d="M132 158 v 30 M117 173 h 30" />
+            <circle cx="262" cy="205" r="92" />
+            <circle cx="292" cy="160" r="8" />
+            <path d="M334 318 v 24 M322 330 h 24" />
+            <path d="M162 322 c 10 -6, 12 4, 4 8 s -6 12, 6 8" />
+            <circle cx="296" cy="352" r="7" />
+            <path d="M160 390 l 16 8 l -14 10 Z" />
+            <path d="M305 385 v 22 M294 396 h 22" />
+          </g>
+        </svg>
+
+        <main className="admin-login__form-side">
+          <h1 className="sr-only">Admin Sign In</h1>
+          <Link to="/" className="admin-login__logo-link">
+            <img className="admin-login__logo" src={`${import.meta.env.BASE_URL}rlklein-logo.png`} alt="R.L. Klein Inc. & Associates" />
           </Link>
-          <Link to="/" style={{ fontSize: '13px', color: '#CBD5E1' }}>
-            &larr; Return to Public Website
-          </Link>
-        </div>
-      </header>
 
-      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px 20px' }}>
-        <div style={{ width: '100%', maxWidth: '440px', backgroundColor: '#fff', color: 'var(--color-gray-800)', borderRadius: '12px', padding: '40px', boxShadow: 'var(--shadow-xl)' }}>
-          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-            <div style={{ width: 48, height: 48, borderRadius: '50%', backgroundColor: 'var(--color-off-white)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', color: 'var(--color-navy)' }}>
-              <ShieldCheck size={26} />
-            </div>
-            <h1 style={{ fontSize: '24px', color: 'var(--color-navy)', marginBottom: 6 }}>Administrative Portal</h1>
-            <p style={{ fontSize: '14px', color: 'var(--color-gray-500)' }}>
-              Restricted to authorized R.L. Klein recruiters &amp; administrators.
-            </p>
-          </div>
+          {localError && <div className="admin-login__error" role="alert">{localError}</div>}
 
-          {localError && (
-            <div style={{ backgroundColor: 'var(--color-error-light)', color: 'var(--color-error)', padding: '12px 16px', borderRadius: '4px', fontSize: '13px', marginBottom: '20px' }}>
-              {localError}
-            </div>
-          )}
+          <form onSubmit={handleSubmit} noValidate>
+            <label className="admin-login__field">
+              <User size={16} className="admin-login__icon" />
+              <span className="sr-only">Email</span>
+              <input
+                type="email"
+                placeholder="admin email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                autoComplete="email"
+                required
+              />
+            </label>
 
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="admin-email" className="form-label">Administrative Email</label>
-              <div style={{ position: 'relative' }}>
-                <Mail size={16} style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: 'var(--color-gray-400)' }} />
-                <input
-                  type="email"
-                  id="admin-email"
-                  className="form-input"
-                  style={{ paddingLeft: '38px' }}
-                  placeholder="name@rlklein.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  autoComplete="email"
-                  required
-                />
-              </div>
-            </div>
+            <label className="admin-login__field">
+              <KeyRound size={16} className="admin-login__icon" />
+              <span className="sr-only">Password</span>
+              <input
+                type="password"
+                placeholder="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
+                required
+              />
+            </label>
 
-            <div className="form-group" style={{ marginBottom: 24 }}>
-              <label htmlFor="admin-password" className="form-label">Password</label>
-              <div style={{ position: 'relative' }}>
-                <Lock size={16} style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: 'var(--color-gray-400)' }} />
-                <input
-                  type="password"
-                  id="admin-password"
-                  className="form-input"
-                  style={{ paddingLeft: '38px' }}
-                  placeholder="••••••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  autoComplete="current-password"
-                  required
-                />
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="btn btn--primary btn--md"
-              style={{ width: '100%', justifyContent: 'center' }}
-            >
-              {isLoading ? 'Authenticating...' : 'Sign In to Portal'}
-              <ArrowRight size={16} />
+            <button type="submit" disabled={isLoading} className="admin-login__submit">
+              {isLoading ? 'Signing in...' : 'Login'}
             </button>
+
+            <div className="admin-login__row">
+              <label className="admin-login__remember">
+                <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} />
+                Remember
+              </label>
+              <Link to="/" className="admin-login__link">Public Website</Link>
+            </div>
+
+            <a
+              href="mailto:operations@rlklein.com?subject=Admin%20Portal%20Password%20Reset"
+              className="admin-login__forgot"
+            >
+              Forgot Password?
+            </a>
           </form>
 
-          {/* Development Helper Box */}
-          <div style={{ marginTop: '28px', paddingTop: '20px', borderTop: '1px solid var(--color-gray-200)', textAlign: 'center' }}>
-            <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-gray-500)', display: 'block', marginBottom: 8 }}>
-              Development Credentials
-            </span>
-            <button
-              type="button"
-              onClick={handleFillDemo}
-              className="btn btn--ghost btn--sm"
-              style={{ fontSize: '12px', color: 'var(--color-violet)' }}
-            >
-              Click to autofill authorized admin login
+          {import.meta.env.DEV && (
+            <button type="button" onClick={handleFillDemo} className="admin-login__demo">
+              Development: autofill admin credentials
             </button>
-          </div>
-        </div>
+          )}
+
+          <p className="admin-login__copyright">
+            Copyright &copy;{new Date().getFullYear()} R.L. Klein &amp; Associates Inc. All rights reserved
+          </p>
+        </main>
       </div>
     </div>
   );
