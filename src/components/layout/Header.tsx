@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown, ArrowRight, Phone, UserRound, BriefcaseBusiness } from 'lucide-react';
+import { Menu, X, ChevronDown, ArrowRight, Phone, UserRound, Flame } from 'lucide-react';
 
 interface NavItem {
   label: string;
@@ -167,9 +167,9 @@ export function Header() {
 
           {/* Reference-style utility actions */}
           <div className="site-header__ctas">
-            <Link to="/apply" className="header-quick-apply">Quick Apply</Link>
-            <Link to="/hot-jobs" className="header-action-link">
-              <BriefcaseBusiness size={20} />
+            <Link to="/apply" className="header-action-link">Quick Apply</Link>
+            <Link to="/hot-jobs" className="header-quick-apply">
+              <Flame size={18} className="header-fire-icon" aria-hidden="true" />
               <span>Find Your Next Role</span>
             </Link>
             <a href="tel:5624275577" className="header-action-link header-phone-link">

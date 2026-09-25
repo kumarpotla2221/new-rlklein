@@ -55,7 +55,7 @@ export function Footer() {
         <div className="site-footer__top">
           <div className="site-footer__brand">
             <div className="site-footer__logo">
-              <img src={`${import.meta.env.BASE_URL}rlk-secondary.png`} alt="R.L. Klein Inc. & Associates" />
+              <img src={`${import.meta.env.BASE_URL}rlklein-logo.png`} alt="R.L. Klein Inc. & Associates" />
             </div>
             <p className="site-footer__tagline">
               Healthcare staffing and workforce solutions for government and correctional healthcare environments. Dependable. Compliance-focused. People-centered.
