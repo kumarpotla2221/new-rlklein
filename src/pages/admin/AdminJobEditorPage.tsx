@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { jobService } from '../../services/jobService';
+import { errorMessage as apiErrorMessage } from '../../services/apiClient';
 import type { Job, JobStatus, JobVisibility, EmploymentType, ShiftType, CompensationType } from '../../types';
 import { PROFESSIONS, STATES, WORK_SETTINGS, SPECIALTIES, SHIFT_PATTERNS, CONTRACT_TYPES, PAY_FREQUENCIES, STATE_ABBREVIATIONS } from '../../data/jobs';
 import { ArrowLeft, Save, Send, Eye } from 'lucide-react';
@@ -68,7 +69,7 @@ export function AdminJobEditorPage() {
     // 12. Job Board Disclaimer
     jobBoardDisclaimer: '',
     // 13. Publishing & Feature Flags
-    status: 'published' as JobStatus,
+    status: 'active' as JobStatus,
     featured: false,
     visibility: 'public' as JobVisibility,
   });
@@ -78,7 +79,7 @@ export function AdminJobEditorPage() {
       if (!jobId) return;
       setLoading(true);
       try {
-        const found = await jobService.getJobById(jobId);
+        const found = await jobService.getJobByIdAdmin(jobId);
         if (found) {
           setForm({
             title: found.title,
@@ -191,7 +192,7 @@ export function AdminJobEditorPage() {
       agencyCertifications: form.agencyCertifications,
       jobBoardDisclaimer: form.jobBoardDisclaimer,
       status,
-      featured: status === 'published' ? form.featured : form.featured,
+      featured: form.featured,
       visibility: form.visibility,
     };
   };
@@ -228,7 +229,7 @@ export function AdminJobEditorPage() {
       navigate('/admin/jobs');
     } catch (err) {
       console.error('Save error', err);
-      setErrorMessage('Failed to save job posting.');
+      setErrorMessage(apiErrorMessage(err, 'Failed to save job posting.'));
     } finally {
       setSubmitting(false);
     }
@@ -277,7 +278,7 @@ export function AdminJobEditorPage() {
           </button>
           <button
             type="button"
-            onClick={() => handleSave('published')}
+            onClick={() => handleSave('active')}
             disabled={submitting}
             className="btn btn--primary btn--sm"
           >
@@ -873,11 +874,9 @@ export function AdminJobEditorPage() {
                 value={form.status}
                 onChange={handleChange}
               >
-                <option value="published">Published (Visible on job boards)</option>
+                <option value="active">Active (Visible on job boards)</option>
                 <option value="draft">Draft (Hidden from public)</option>
-                <option value="paused">Paused (Temporarily hidden)</option>
-                <option value="expired">Expired</option>
-                <option value="archived">Archived</option>
+                <option value="closed">Closed (Hidden from public)</option>
               </select>
             </div>
             <div className="form-group">

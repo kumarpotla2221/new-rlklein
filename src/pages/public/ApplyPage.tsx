@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { jobService } from '../../services/jobService';
-import { applicationService } from '../../services/applicationService';
+import { applicationService, RESUME_MAX_BYTES } from '../../services/applicationService';
+import { errorMessage } from '../../services/apiClient';
 import type { Job, Application } from '../../types';
 import { Breadcrumbs } from '../../components/ui/Typography';
 import { PROFESSIONS, STATES } from '../../data/jobs';
@@ -87,6 +88,10 @@ export function ApplyPage() {
         setErrors((prev) => ({ ...prev, resume: 'Please upload a PDF, DOC, or DOCX file.' }));
         return;
       }
+      if (file.size > RESUME_MAX_BYTES) {
+        setErrors((prev) => ({ ...prev, resume: 'Resume must be 10 MB or smaller.' }));
+        return;
+      }
       setResumeFile(file);
       setErrors((prev) => {
         const next = { ...prev };
@@ -135,15 +140,15 @@ export function ApplyPage() {
         preferredLocation: formData.preferredLocation,
         preferredShift: formData.preferredShift,
         availableStartDate: formData.availableStartDate,
-        resumeFileName: selectedResume!.name,
         message: formData.message,
-      });
+      }, selectedResume!);
 
       setSubmittedApplication(created);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
       console.error('Submission failed', err);
-      setErrors({ form: 'Application submission failed. Please check your connection and try again.' });
+      setErrors({ form: errorMessage(err, 'Application submission failed. Please check your connection and try again.') });
+      window.scrollTo({ top: 150, behavior: 'smooth' });
     } finally {
       setSubmitting(false);
     }

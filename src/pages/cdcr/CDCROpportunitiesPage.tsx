@@ -10,7 +10,7 @@ export function CDCROpportunitiesPage() {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState<FilterType>({
-    status: 'published',
+    status: 'active',
     state: 'California',
     workSetting: 'Correctional Healthcare',
   });
@@ -39,7 +39,7 @@ export function CDCROpportunitiesPage() {
 
   const handleReset = () => {
     setFilters({
-      status: 'published',
+      status: 'active',
       state: 'California',
       workSetting: 'Correctional Healthcare',
     });

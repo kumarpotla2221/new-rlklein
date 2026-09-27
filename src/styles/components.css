@@ -2812,7 +2812,8 @@
   color: #1A3A5C;
 }
 
-.status-badge--under-review {
+.status-badge--under-review,
+.status-badge--reviewed {
   background-color: #EAEBF7;
   color: #3D4F8C;
 }
@@ -2842,7 +2843,8 @@
   color: #C5221F;
 }
 
-.status-badge--published {
+.status-badge--published,
+.status-badge--active {
   background-color: #E6F4EA;
   color: #137333;
 }
@@ -2862,7 +2864,8 @@
   color: #C5221F;
 }
 
-.status-badge--archived {
+.status-badge--archived,
+.status-badge--closed {
   background-color: #E8EAED;
   color: #3C4043;
 }

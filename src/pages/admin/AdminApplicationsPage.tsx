@@ -8,8 +8,7 @@ import { Search, Eye, Users, FileText } from 'lucide-react';
 const STATUS_TABS: Array<{ label: string; value: string }> = [
   { label: 'All', value: 'all' },
   { label: 'New', value: 'new' },
-  { label: 'Under Review', value: 'under-review' },
-  { label: 'Credentialing', value: 'credentialing' },
+  { label: 'Reviewed', value: 'reviewed' },
   { label: 'Shortlisted', value: 'shortlisted' },
   { label: 'Interview', value: 'interview' },
   { label: 'Hired', value: 'hired' },

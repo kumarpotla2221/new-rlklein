@@ -22,7 +22,7 @@ export function HotJobsPage({ hotOnly = true }: { hotOnly?: boolean }) {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState<FilterType>({
-    status: 'published',
+    status: 'active',
     ...(hotOnly ? { featured: true } : {}),
   });
   const [sortBy, setSortBy] = useState<SortOption>('featured');
@@ -78,7 +78,7 @@ export function HotJobsPage({ hotOnly = true }: { hotOnly?: boolean }) {
   };
 
   const handleReset = () => {
-    setFilters({ status: 'published', ...(hotOnly ? { featured: true } : {}) });
+    setFilters({ status: 'active', ...(hotOnly ? { featured: true } : {}) });
     setSortBy('featured');
   };
 

@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
+import React, { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react';
 import { authService } from '../services/authService';
+import { SESSION_EXPIRED_EVENT } from '../services/apiClient';
 import type { AdminUser } from '../types';
 
 interface AuthContextType {
@@ -16,7 +17,25 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [admin, setAdmin] = useState<AdminUser | null>(() => authService.getCurrentAdmin());
   const [isLoading, setIsLoading] = useState(false);
+  // A stored session is confirmed with the server before admin pages render.
+  const [isVerifying, setIsVerifying] = useState(() => authService.getCurrentAdmin() !== null);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!isVerifying) return;
+    let cancelled = false;
+    authService.verifySession()
+      .then((verified) => { if (!cancelled) setAdmin(verified); })
+      .finally(() => { if (!cancelled) setIsVerifying(false); });
+    return () => { cancelled = true; };
+  }, [isVerifying]);
+
+  // Any admin API call rejected by the server signs the UI out.
+  useEffect(() => {
+    const handleExpired = () => setAdmin(null);
+    window.addEventListener(SESSION_EXPIRED_EVENT, handleExpired);
+    return () => window.removeEventListener(SESSION_EXPIRED_EVENT, handleExpired);
+  }, []);
 
   const login = useCallback(async (email: string, password: string) => {
     setIsLoading(true);
@@ -41,7 +60,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     <AuthContext.Provider value={{
       admin,
       isAuthenticated: !!admin,
-      isLoading,
+      isLoading: isLoading || isVerifying,
       error,
       login,
       logout,

@@ -91,7 +91,7 @@ export function AdminJobsPage() {
     .filter((job) => locationFilter === 'all' || job.state === locationFilter)
     .filter((job) => typeFilter === 'all' || job.employmentType === typeFilter)
     .filter((job) => specialtyFilter === 'all' || job.specialty === specialtyFilter)
-    .filter((job) => !hotOnly || (job.status === 'published' && job.featured))
+    .filter((job) => !hotOnly || (job.status === 'active' && job.featured))
     .filter((job) => {
       const query = search.trim().toLowerCase();
       return !query || [job.title, job.profession, job.specialty, job.city, job.state, job.id]
@@ -127,7 +127,7 @@ export function AdminJobsPage() {
 
       {/* Filter Tabs */}
       <div style={{ display: 'flex', gap: 8, marginBottom: 20, flexWrap: 'wrap', borderBottom: '1px solid var(--color-gray-200)', paddingBottom: 12 }}>
-        {['all', 'published', 'draft', 'paused', 'expired', 'archived'].map((tab) => {
+        {['all', 'active', 'draft', 'closed'].map((tab) => {
           const count = tab === 'all' ? jobs.length : jobs.filter((j) => j.status === tab).length;
           return (
             <button
@@ -217,8 +217,8 @@ export function AdminJobsPage() {
                     <td style={{ fontSize: '12px', whiteSpace: 'nowrap' }}>{j.postedDate}</td>
                     <td>
                       <div className="admin-actions-cell" style={{ justifyContent: 'flex-end' }}>
-                        {j.status === 'published' && (
-                          <Link to={`/hot-jobs/${j.slug}`} target="_blank" className="btn btn--ghost btn--icon" title="View live page">
+                        {j.status === 'active' && (
+                          <Link to={`/jobs/${j.slug}`} target="_blank" className="btn btn--ghost btn--icon" title="View live page">
                             <ExternalLink size={15} />
                           </Link>
                         )}
@@ -228,21 +228,21 @@ export function AdminJobsPage() {
                         <button onClick={() => handleDuplicate(j.id)} className="btn btn--ghost btn--icon" title="Duplicate job">
                           <Copy size={15} />
                         </button>
-                        {j.status !== 'published' && (
-                          <button onClick={() => handleStatusChange(j.id, 'published')} className="btn btn--ghost btn--icon" title="Publish job" style={{ color: 'var(--color-success)' }}>
+                        {j.status !== 'active' && (
+                          <button onClick={() => handleStatusChange(j.id, 'active')} className="btn btn--ghost btn--icon" title="Publish job" style={{ color: 'var(--color-success)' }}>
                             <CheckCircle size={15} />
                           </button>
                         )}
-                        {j.status === 'published' && (
-                          <button onClick={() => handleStatusChange(j.id, 'paused')} className="btn btn--ghost btn--icon" title="Pause job" style={{ color: 'var(--color-warning)' }}>
+                        {j.status === 'active' && (
+                          <button onClick={() => handleStatusChange(j.id, 'closed')} className="btn btn--ghost btn--icon" title="Close job" style={{ color: 'var(--color-warning)' }}>
                             <PauseCircle size={15} />
                           </button>
                         )}
                         <button onClick={() => jobService.updateJob(j.id, { featured: !j.featured }).then(loadJobs)} className="btn btn--ghost btn--icon" title={j.featured ? 'Remove hot job status' : 'Mark as hot job'} style={{ color: j.featured ? 'var(--color-violet)' : undefined }}>
                           {j.featured ? '★' : '☆'}
                         </button>
-                        {j.status !== 'archived' && (
-                          <button onClick={() => handleStatusChange(j.id, 'archived')} className="btn btn--ghost btn--icon" title="Archive job">
+                        {j.status === 'draft' && (
+                          <button onClick={() => handleStatusChange(j.id, 'closed')} className="btn btn--ghost btn--icon" title="Archive job">
                             <Archive size={15} />
                           </button>
                         )}

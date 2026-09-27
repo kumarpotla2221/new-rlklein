@@ -1,60 +1,47 @@
 // ============================================================
 // AUTH SERVICE — Admin Authentication
-// NOTE: In production, this must connect to a secure backend.
-// Never store real credentials in frontend code.
+// Credentials are checked by Google Apps Script against the private Admins
+// sheet. The browser only ever holds a revocable session token issued by the
+// server; every admin API call is re-authorized server-side.
 // ============================================================
 
+import { apiPost, adminPost, readSession, saveSession, clearSession, ApiError } from './apiClient';
 import type { AdminUser } from '../types';
-
-const ADMIN_SESSION_KEY = 'rlk_admin_session';
-
-// DEVELOPMENT ONLY — replace with real auth endpoint in production
-const DEV_ADMIN_CREDENTIALS = {
-  email: 'admin@rlklein.com',
-  password: 'RLK-Admin-2024!',
-};
-
-const DEV_ADMIN_USER: AdminUser = {
-  id: 'admin-001',
-  email: 'admin@rlklein.com',
-  name: 'R.L. Klein Administrator',
-  role: 'admin',
-};
 
 export const authService = {
   async loginAdmin(email: string, password: string): Promise<AdminUser> {
-    // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 800));
-
-    // DEVELOPMENT: In production, call your auth API here
-    if (
-      email === DEV_ADMIN_CREDENTIALS.email &&
-      password === DEV_ADMIN_CREDENTIALS.password
-    ) {
-      const token = btoa(JSON.stringify({ userId: DEV_ADMIN_USER.id, exp: Date.now() + 3600000 * 8 }));
-      sessionStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify({ user: DEV_ADMIN_USER, token }));
-      return DEV_ADMIN_USER;
-    }
-    throw new Error('Invalid credentials. Please check your email and password.');
+    const result = await apiPost<{ token: string; expiresAt: number; admin: AdminUser }>('login', {
+      username: email.trim(),
+      password,
+    });
+    saveSession(result);
+    return result.admin;
   },
 
   logoutAdmin(): void {
-    sessionStorage.removeItem(ADMIN_SESSION_KEY);
+    const session = readSession();
+    clearSession();
+    if (session) {
+      // Revoke the token on the server; the local session is already gone either way.
+      apiPost('logout', { token: session.token }).catch(() => {});
+    }
   },
 
+  /** Last known admin from this tab's session (for first paint only — not an authorization check). */
   getCurrentAdmin(): AdminUser | null {
+    return readSession()?.admin ?? null;
+  },
+
+  /** Asks the server whether the stored session is still valid. */
+  async verifySession(): Promise<AdminUser | null> {
+    if (!readSession()) return null;
     try {
-      const session = sessionStorage.getItem(ADMIN_SESSION_KEY);
-      if (!session) return null;
-      const { user, token } = JSON.parse(session);
-      const decoded = JSON.parse(atob(token));
-      if (decoded.exp < Date.now()) {
-        this.logoutAdmin();
-        return null;
-      }
-      return user as AdminUser;
-    } catch {
-      return null;
+      const { admin } = await adminPost<{ admin: AdminUser }>('getSession');
+      return admin;
+    } catch (err) {
+      if (err instanceof ApiError && err.code === 'UNAUTHORIZED') return null;
+      // Network trouble: keep the session; the server still checks every admin call.
+      return readSession()?.admin ?? null;
     }
   },
 

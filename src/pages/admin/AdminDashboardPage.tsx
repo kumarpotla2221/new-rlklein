@@ -30,10 +30,10 @@ export function AdminDashboardPage() {
     loadData();
   }, []);
 
-  const activeJobsCount = jobs.filter((j) => j.status === 'published').length;
-  const hotJobsCount = jobs.filter((j) => j.status === 'published' && j.featured).length;
+  const activeJobsCount = jobs.filter((j) => j.status === 'active').length;
+  const hotJobsCount = jobs.filter((j) => j.status === 'active' && j.featured).length;
   const draftJobsCount = jobs.filter((j) => j.status === 'draft').length;
-  const closedJobsCount = jobs.filter((j) => j.status === 'expired' || j.status === 'archived' || j.status === 'paused').length;
+  const closedJobsCount = jobs.filter((j) => j.status === 'closed').length;
   const newAppsCount = applications.filter((a) => a.status === 'new').length;
   const shortlistedCount = applications.filter((a) => a.status === 'shortlisted').length;
 

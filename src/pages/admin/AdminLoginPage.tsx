@@ -55,11 +55,6 @@ export function AdminLoginPage() {
     }
   };
 
-  const handleFillDemo = () => {
-    setEmail('admin@rlklein.com');
-    setPassword('RLK-Admin-2024!');
-  };
-
   return (
     <div className="admin-login">
       <aside className="admin-login__brand">
@@ -196,12 +191,6 @@ export function AdminLoginPage() {
               <a href="mailto:operations@rlklein.com?subject=Admin%20Portal%20Access%20Request">create an account</a>
             </p>
           </div>
-
-          {import.meta.env.DEV && (
-            <button type="button" onClick={handleFillDemo} className="admin-login__demo">
-              Development: autofill admin credentials
-            </button>
-          )}
         </div>
 
         <footer className="admin-login__meta">

@@ -2,7 +2,8 @@
 // R.L. KLEIN & ASSOCIATES — TYPE DEFINITIONS
 // ============================================================
 
-export type JobStatus = 'draft' | 'published' | 'paused' | 'expired' | 'archived';
+// Stored in the Jobs sheet as Active / Draft / Closed.
+export type JobStatus = 'active' | 'draft' | 'closed';
 export type EmploymentType = 'Full-Time' | 'Part-Time' | 'Per Diem' | 'Contract' | 'Temporary';
 export type ShiftType = 'Day' | 'Evening' | 'Night' | 'Rotating' | 'Flexible';
 export type CompensationType = 'hourly' | 'weekly' | 'salary' | 'negotiable';
@@ -57,10 +58,10 @@ export interface Job {
   jobBoardDisclaimer?: string;
 }
 
+// Stored in the Applications sheet as New / Reviewed / Shortlisted / Interview / Hired / Rejected.
 export type ApplicationStatus =
   | 'new'
-  | 'under-review'
-  | 'credentialing'
+  | 'reviewed'
   | 'shortlisted'
   | 'interview'
   | 'hired'

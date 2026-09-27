@@ -5,6 +5,9 @@ type BadgeVariant = ApplicationStatus | JobStatus | 'featured' | string;
 
 const STATUS_LABELS: Record<string, string> = {
   'new': 'New',
+  'reviewed': 'Reviewed',
+  'active': 'Active',
+  'closed': 'Closed',
   'under-review': 'Under Review',
   'credentialing': 'Credentialing',
   'shortlisted': 'Shortlisted',

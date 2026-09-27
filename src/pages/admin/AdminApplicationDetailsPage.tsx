@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { applicationService } from '../../services/applicationService';
+import { errorMessage } from '../../services/apiClient';
 import type { Application, ApplicationStatus } from '../../types';
 import { StatusBadge } from '../../components/ui/StatusBadge';
 import { 
@@ -17,8 +18,7 @@ import {
 
 const ALL_STATUSES: ApplicationStatus[] = [
   'new',
-  'under-review',
-  'credentialing',
+  'reviewed',
   'shortlisted',
   'interview',
   'hired',
@@ -26,13 +26,14 @@ const ALL_STATUSES: ApplicationStatus[] = [
 ];
 
 export function AdminApplicationDetailsPage() {
-  const { id } = useParams<{ id: string }>();
+  const { applicationId: id } = useParams<{ applicationId: string }>();
   const [app, setApp] = useState<Application | null>(null);
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState<ApplicationStatus>('new');
   const [newNote, setNewNote] = useState('');
   const [savingNote, setSavingNote] = useState(false);
   const [feedbackMsg, setFeedbackMsg] = useState<string | null>(null);
+  const [downloading, setDownloading] = useState(false);
 
   useEffect(() => {
     async function loadApp() {
@@ -55,6 +56,7 @@ export function AdminApplicationDetailsPage() {
 
   const handleStatusChange = async (newStatus: ApplicationStatus) => {
     if (!id) return;
+    const previousStatus = status;
     setStatus(newStatus);
     try {
       await applicationService.updateApplicationStatus(id, newStatus);
@@ -62,6 +64,29 @@ export function AdminApplicationDetailsPage() {
       setTimeout(() => setFeedbackMsg(null), 3000);
     } catch (err) {
       console.error('Failed to update status', err);
+      setStatus(previousStatus);
+      alert(errorMessage(err, 'Failed to update the application status.'));
+    }
+  };
+
+  const handleDownloadResume = async () => {
+    if (!id || downloading) return;
+    setDownloading(true);
+    try {
+      const { blob, fileName } = await applicationService.getResume(id);
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 10000);
+    } catch (err) {
+      console.error('Failed to download resume', err);
+      alert(errorMessage(err, 'The resume could not be downloaded.'));
+    } finally {
+      setDownloading(false);
     }
   };
 
@@ -272,7 +297,8 @@ export function AdminApplicationDetailsPage() {
               </div>
               <button
                 type="button"
-                onClick={() => alert(`Simulated download for: ${app.resumeFileName || 'resume.pdf'}`)}
+                onClick={handleDownloadResume}
+                disabled={downloading}
                 className="btn btn--ghost btn--sm"
                 title="Download Resume"
               >
