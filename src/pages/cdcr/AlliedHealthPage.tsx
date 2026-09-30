@@ -19,7 +19,7 @@ export function AlliedHealthPage() {
       <Breadcrumbs
         items={[
           { label: 'Home', href: '/' },
-          { label: 'CDCR Healthcare', href: '/cdcr-healthcare' },
+          { label: 'Correctional Healthcare', href: '/cdcr-healthcare' },
           { label: 'Allied Health' },
         ]}
       />

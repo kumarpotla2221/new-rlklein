@@ -3,14 +3,14 @@ import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 
 const FOOTER_NAV = [
   {
-    heading: 'CDCR Healthcare',
+    heading: 'Correctional Healthcare',
     links: [
       { label: 'Correctional Healthcare', href: '/cdcr-healthcare/correctional-healthcare' },
       { label: 'Medical Staffing', href: '/cdcr-healthcare/medical-staffing' },
       { label: 'Mental & Behavioral Health', href: '/cdcr-healthcare/mental-behavioral-health' },
       { label: 'Dental Healthcare', href: '/cdcr-healthcare/dental-healthcare' },
       { label: 'Allied Health', href: '/cdcr-healthcare/allied-health' },
-      { label: 'CDCR Opportunities', href: '/cdcr-healthcare/opportunities' },
+      { label: 'Correctional Healthcare Opportunities', href: '/cdcr-healthcare/opportunities' },
     ],
   },
   {

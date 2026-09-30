@@ -50,8 +50,8 @@ export function CDCROpportunitiesPage() {
       <Breadcrumbs
         items={[
           { label: 'Home', href: '/' },
-          { label: 'CDCR Healthcare', href: '/cdcr-healthcare' },
-          { label: 'CDCR Opportunities' },
+          { label: 'Correctional Healthcare', href: '/cdcr-healthcare' },
+          { label: 'Correctional Healthcare Opportunities' },
         ]}
       />
 

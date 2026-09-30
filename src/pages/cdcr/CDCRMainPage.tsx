@@ -5,19 +5,19 @@ import { ArrowRight, ShieldCheck, Stethoscope, HeartPulse, Sparkles, Building2, 
 export function CDCRMainPage() {
   return (
     <div className="cdcr-main-page">
-      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'CDCR Healthcare' }]} />
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Correctional Healthcare' }]} />
 
       <header className="page-hero">
         <div className="container">
           <div className="page-hero__content">
             <span className="eyebrow" style={{ color: '#A0B8E8' }}>Public Sector Healthcare Partnership</span>
-            <h1>CDCR Healthcare Staffing &amp; Workforce Solutions</h1>
+            <h1>Correctional Healthcare Staffing &amp; Workforce Solutions</h1>
             <p className="page-hero__subtitle">
               Delivering specialized, compliant healthcare professionals to California Department of Corrections and Rehabilitation facilities. For over four decades, R.L. Klein has supported institutional healthcare continuity across the state.
             </p>
             <div className="page-hero__actions">
               <Link to="/cdcr-healthcare/opportunities" className="btn btn--accent btn--md">
-                <span>View CDCR Healthcare Openings</span>
+                <span>View Correctional Healthcare Openings</span>
                 <ArrowRight size={14} />
               </Link>
               <Link to="/facilities/staffing-request" className="btn btn--outline-white btn--md">

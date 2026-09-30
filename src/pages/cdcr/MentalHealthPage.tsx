@@ -16,7 +16,7 @@ export function MentalHealthPage() {
       <Breadcrumbs
         items={[
           { label: 'Home', href: '/' },
-          { label: 'CDCR Healthcare', href: '/cdcr-healthcare' },
+          { label: 'Correctional Healthcare', href: '/cdcr-healthcare' },
           { label: 'Mental & Behavioral Health' },
         ]}
       />

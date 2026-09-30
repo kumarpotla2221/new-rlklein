@@ -17,7 +17,7 @@ export function ComplianceCredentialingPage() {
       <Breadcrumbs
         items={[
           { label: 'Home', href: '/' },
-          { label: 'CDCR Healthcare', href: '/cdcr-healthcare' },
+          { label: 'Correctional Healthcare', href: '/cdcr-healthcare' },
           { label: 'Compliance & Credentialing' },
         ]}
       />

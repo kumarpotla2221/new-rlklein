@@ -10,7 +10,7 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   {
-    label: 'CDCR Healthcare',
+    label: 'Correctional Healthcare',
     children: [
       { label: 'Correctional Healthcare', href: '/cdcr-healthcare/correctional-healthcare', description: 'Specialized staffing for correctional facilities' },
       { label: 'Medical Staffing', href: '/cdcr-healthcare/medical-staffing', description: 'Physicians, nurses and medical professionals' },
@@ -19,8 +19,7 @@ const NAV_ITEMS: NavItem[] = [
       { label: 'Allied Health', href: '/cdcr-healthcare/allied-health', description: 'Pharmacy, lab, radiology and therapy' },
       { label: 'Compliance & Credentialing', href: '/cdcr-healthcare/compliance-credentialing', description: 'Qualification and credentialing process' },
       { label: 'Workforce Continuity', href: '/cdcr-healthcare/workforce-continuity', description: 'Staffing coverage and workforce planning' },
-      { label: 'CDCR Facilities', href: '/cdcr-healthcare/facilities', description: 'California facility locations' },
-      { label: 'CDCR Opportunities', href: '/cdcr-healthcare/opportunities', description: 'Current CDCR job openings' },
+      { label: 'Correctional Healthcare Opportunities', href: '/cdcr-healthcare/opportunities', description: 'Current CDCR job openings' },
     ],
   },
   {
