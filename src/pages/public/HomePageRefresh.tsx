@@ -51,7 +51,7 @@ export function HomePageRefresh() {
             </div>
             <div className="refresh-hero__proof">
               <span><strong>40+</strong> years of experience</span>
-              <span><strong>CDCR</strong> healthcare expertise</span>
+              <span><strong>CORRECTIONAL</strong> healthcare expertise</span>
               <span><strong>100%</strong> compliance focused</span>
             </div>
           </div>
