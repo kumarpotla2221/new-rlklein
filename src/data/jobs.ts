@@ -21,6 +21,8 @@ export const PROFESSIONS = [
   'Psychologist',
   'Registered Nurse',
   'Respiratory Therapist',
+  'LPT - Licensed Psychiatric Technician',
+  'RECT',
 ];
 
 export const SPECIALTIES = [
