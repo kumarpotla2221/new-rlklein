@@ -45,7 +45,10 @@ export function JobCard({ job, onViewDetails }: JobCardProps) {
 
       {job.showCompensation && job.compensationMin && job.compensationMax && (
         <div className="job-card__compensation">
-          ${job.compensationMin} – ${job.compensationMax} / {job.compensationType || 'hour'}
+          <span className="job-card__compensation-label">Pay range</span>
+          <span className="job-card__compensation-value">
+            ${job.compensationMin} – ${job.compensationMax} <small>/ {job.compensationType || 'hour'}</small>
+          </span>
         </div>
       )}
 
@@ -59,7 +62,7 @@ export function JobCard({ job, onViewDetails }: JobCardProps) {
             View Job
           </Link>
         )}
-        <Link to={`/apply/${job.id}`} className="btn btn--primary btn--sm">
+        <Link to={`/apply/${job.id}`} className="btn btn--accent btn--sm">
           Apply Now
         </Link>
       </div>

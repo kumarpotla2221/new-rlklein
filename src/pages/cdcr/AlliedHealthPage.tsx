@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/ui/Typography';
+import { photo } from '../../data/images';
 import { Activity, ArrowRight } from 'lucide-react';
 
 const ALLIED_DISCIPLINES = [
@@ -24,7 +25,8 @@ export function AlliedHealthPage() {
         ]}
       />
 
-      <header className="page-hero">
+      <header className="page-hero page-hero--photo">
+        <div className="page-hero__media"><img src={photo('labTechnician', 1600)} alt="" /></div>
         <div className="container">
           <div className="page-hero__content">
             <span className="eyebrow" style={{ color: '#A0B8E8' }}>Ancillary Healthcare Support</span>

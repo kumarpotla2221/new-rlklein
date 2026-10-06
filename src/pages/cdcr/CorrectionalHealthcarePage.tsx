@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/ui/Typography';
+import { photo } from '../../data/images';
 import { ShieldCheck, CheckCircle2, ArrowRight } from 'lucide-react';
 
 const WORKFLOW_STEPS = [
@@ -21,7 +22,8 @@ export function CorrectionalHealthcarePage() {
         ]}
       />
 
-      <header className="page-hero">
+      <header className="page-hero page-hero--photo">
+        <div className="page-hero__media"><img src={photo('correctionalCare', 1600)} alt="" /></div>
         <div className="container">
           <div className="page-hero__content">
             <span className="eyebrow" style={{ color: '#A0B8E8' }}>Specialized Healthcare Delivery</span>

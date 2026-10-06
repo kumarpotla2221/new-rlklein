@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/ui/Typography';
+import { photo } from '../../data/images';
 import { Award, ShieldCheck, History, HeartHandshake, CheckCircle2, ArrowRight } from 'lucide-react';
 
 export function WhoWeArePage() {
@@ -7,7 +8,8 @@ export function WhoWeArePage() {
     <div className="who-we-are-page">
       <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'About Us', href: '/about/who-we-are' }, { label: 'Who We Are' }]} />
 
-      <header className="page-hero">
+      <header className="page-hero page-hero--photo">
+        <div className="page-hero__media"><img src={photo('clinicalTeam', 1600)} alt="" /></div>
         <div className="container">
           <div className="page-hero__content">
             <span className="eyebrow" style={{ color: '#A0B8E8' }}>Our Heritage</span>

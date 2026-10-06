@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/ui/Typography';
+import HERO_IMAGE from '../../../RLklein Hero.jpg';
 import { Stethoscope, DollarSign, Users, ShieldCheck, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 export function ProfessionalsMainPage() {
@@ -7,7 +8,8 @@ export function ProfessionalsMainPage() {
     <div className="professionals-main-page">
       <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Healthcare Professionals' }]} />
 
-      <header className="page-hero">
+      <header className="page-hero page-hero--photo">
+        <div className="page-hero__media"><img src={HERO_IMAGE} alt="" /></div>
         <div className="container">
           <div className="page-hero__content">
             <span className="eyebrow" style={{ color: '#A0B8E8' }}>For Clinical Practitioners</span>

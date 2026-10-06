@@ -1,55 +1,79 @@
 /* ============================================================
    BUTTON COMPONENT STYLES
+   Sentence case, 6px radius, three heights (40 / 48 / 56).
    ============================================================ */
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-2);
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 24px;
   font-family: var(--font-body);
   font-size: var(--text-btn);
   font-weight: var(--fw-semibold);
-  letter-spacing: var(--ls-wider);
-  text-transform: uppercase;
+  letter-spacing: 0;
+  line-height: 1.2;
+  text-transform: none;
   text-decoration: none;
-  border: 2px solid transparent;
-  border-radius: var(--radius-md);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: all var(--transition-base);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
   white-space: nowrap;
-  line-height: 1;
   position: relative;
-  overflow: hidden;
+}
+
+.btn svg {
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.btn:hover svg:last-child:not(:first-child) {
+  transform: translateX(3px);
 }
 
 .btn:focus-visible {
-  outline: 2px solid var(--color-violet);
+  outline: 2px solid var(--color-blue);
   outline-offset: 3px;
+}
+
+.btn:active {
+  transform: translateY(1px);
 }
 
 /* -----------------------------------
    SIZES
 ----------------------------------- */
 .btn--sm {
-  padding: 10px 20px;
-  font-size: var(--text-small);
+  min-height: 40px;
+  padding: 0 16px;
+  font-size: 14px;
+  gap: 8px;
 }
 
 .btn--md {
-  padding: 13px 28px;
+  min-height: 48px;
+  padding: 0 24px;
 }
 
 .btn--lg {
-  padding: 16px 36px;
-  font-size: 14px;
+  min-height: 56px;
+  padding: 0 30px;
+  font-size: 16px;
 }
 
 /* -----------------------------------
    VARIANTS
 ----------------------------------- */
 
-/* PRIMARY: Navy solid */
+/* PRIMARY: Navy solid — default action on light surfaces */
 .btn--primary {
   background-color: var(--color-navy);
   color: var(--color-white);
@@ -59,47 +83,41 @@
 .btn--primary:hover {
   background-color: var(--color-navy-light);
   border-color: var(--color-navy-light);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
-}
-
-.btn--primary:active {
-  transform: translateY(0);
-  box-shadow: none;
+  color: var(--color-white);
 }
 
 /* SECONDARY: Outline navy */
 .btn--secondary {
-  background-color: transparent;
+  background-color: var(--color-white);
   color: var(--color-navy);
-  border-color: var(--color-navy);
+  border-color: var(--color-gray-200);
 }
 
 .btn--secondary:hover {
-  background-color: var(--color-navy);
-  color: var(--color-white);
-  transform: translateY(-1px);
+  background-color: var(--color-white);
+  border-color: var(--color-navy);
+  color: var(--color-navy);
 }
 
-/* ACCENT: Violet */
+/* ACCENT: Logo blue — the primary call to action */
 .btn--accent {
-  background-color: var(--color-violet);
+  background-color: var(--color-blue);
   color: var(--color-white);
-  border-color: var(--color-violet);
+  border-color: var(--color-blue);
 }
 
 .btn--accent:hover {
-  background-color: var(--color-violet-deep);
-  border-color: var(--color-violet-deep);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
+  background-color: var(--color-blue-dark);
+  border-color: var(--color-blue-dark);
+  color: var(--color-white);
+  box-shadow: 0 6px 16px rgba(15, 90, 174, 0.24);
 }
 
 /* OUTLINE WHITE — for dark backgrounds */
 .btn--outline-white {
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.04);
   color: var(--color-white);
-  border-color: rgba(255,255,255,0.5);
+  border-color: rgba(255, 255, 255, 0.55);
 }
 
 .btn--outline-white:hover {
@@ -116,9 +134,9 @@
 }
 
 .btn--white:hover {
-  background-color: var(--color-off-white);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
+  background-color: var(--color-blue-50);
+  border-color: var(--color-blue-50);
+  color: var(--color-navy);
 }
 
 /* GHOST */
@@ -129,16 +147,17 @@
 }
 
 .btn--ghost:hover {
-  background-color: var(--color-gray-100);
-  border-color: var(--color-gray-100);
+  background-color: var(--color-gray-50);
+  border-color: var(--color-gray-50);
 }
 
 /* -----------------------------------
    ICON BUTTON
 ----------------------------------- */
 .btn--icon {
+  min-height: 0;
   padding: 10px;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   aspect-ratio: 1;
 }
 
@@ -147,7 +166,6 @@
 ----------------------------------- */
 .btn--full {
   width: 100%;
-  height: 40px;
 }
 
 /* -----------------------------------
@@ -170,9 +188,9 @@
 .btn--loading::after {
   content: '';
   display: inline-block;
-  width: 14px;
-  height: 14px;
-  border: 2px solid rgba(255,255,255,0.4);
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
   border-top-color: currentColor;
   border-radius: 50%;
   animation: btn-spin 0.6s linear infinite;
@@ -181,3 +199,26 @@
 @keyframes btn-spin {
   to { transform: rotate(360deg); }
 }
+
+/* -----------------------------------
+   TEXT LINK — inline arrow links
+----------------------------------- */
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 8px;
+  color: var(--color-blue);
+  font-size: 15px;
+  font-weight: var(--fw-semibold);
+  text-underline-offset: 4px;
+}
+
+.text-link svg { transition: transform var(--transition-fast); }
+
+.text-link:hover {
+  color: var(--color-blue-dark);
+  text-decoration: underline;
+}
+
+.text-link:hover svg { transform: translateX(3px); }

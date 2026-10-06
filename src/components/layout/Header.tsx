@@ -55,6 +55,8 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Contact', href: '/contact' },
 ];
 
+const JOBS_CTA_HREF = '/hot-jobs';
+
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -104,6 +106,23 @@ export function Header() {
         className={`site-header ${scrolled ? 'site-header--scrolled' : ''}`}
         role="banner"
       >
+        <div className="site-header__utility">
+          <div className="container site-header__utility-inner">
+            <span className="site-header__tagline">Healthcare staffing for government &amp; correctional facilities since 1984</span>
+            <div className="site-header__utility-links">
+              <a href="tel:5624275577" className="header-action-link header-phone-link">
+                <Phone size={14} aria-hidden="true" />
+                <span>562-427-5577</span>
+              </a>
+              <Link to="/apply" className="header-action-link">Quick Apply</Link>
+              <Link to="/admin" className="header-action-link header-login-link">
+                <UserRound size={14} aria-hidden="true" />
+                <span>Log In</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+
         <div className="container site-header__inner">
           {/* Logo */}
           <Link to="/" className="site-header__logo" aria-label="R.L. Klein & Associates — Home">
@@ -112,10 +131,10 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <nav className="site-nav" aria-label="Main navigation" role="navigation">
-            {NAV_ITEMS.map((item) => (
+            {NAV_ITEMS.filter((item) => item.href !== JOBS_CTA_HREF).map((item) => (
               <div
                 key={item.label}
-                className="site-nav__item"
+                className={`site-nav__item ${item.children && item.children.length > 5 ? 'site-nav__item--wide' : ''}`}
                 onMouseEnter={() => item.children && setActiveDropdown(item.label)}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
@@ -164,20 +183,12 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Reference-style utility actions */}
+          {/* Primary job-seeker action — the desktop nav omits its duplicate link */}
           <div className="site-header__ctas">
-            <Link to="/apply" className="header-action-link">Quick Apply</Link>
-            <Link to="/hot-jobs" className="header-quick-apply">
-              <Flame size={18} className="header-fire-icon" aria-hidden="true" />
-              <span>Find Your Next Role</span>
-            </Link>
-            <a href="tel:5624275577" className="header-action-link header-phone-link">
-              <Phone size={20} />
-              <span>562-427-5577</span>
-            </a>
-            <Link to="/admin" className="header-action-link header-login-link">
-              <UserRound size={20} />
-              <span>Log In</span>
+            <Link to={JOBS_CTA_HREF} className="header-quick-apply">
+              <Flame size={17} className="header-fire-icon" aria-hidden="true" />
+              <span className="header-quick-apply__long">Find Your Next Role</span>
+              <span className="header-quick-apply__short">Find Jobs</span>
             </Link>
           </div>
 
@@ -217,12 +228,17 @@ export function Header() {
 
         <div className="mobile-menu__body">
           <div className="mobile-menu__ctas">
-            <Link to="/hot-jobs" className="btn btn--accent btn--full" onClick={() => setMobileOpen(false)}>
-              Find Jobs
+            <Link to="/hot-jobs" className="btn btn--accent btn--md btn--full" onClick={() => setMobileOpen(false)}>
+              Find Your Next Role <ArrowRight size={16} aria-hidden="true" />
             </Link>
-            <Link to="/facilities/staffing-request" className="btn btn--secondary btn--full" onClick={() => setMobileOpen(false)}>
-              Request Staffing
-            </Link>
+            <div className="mobile-menu__cta-pair">
+              <Link to="/apply" className="btn btn--secondary btn--md" onClick={() => setMobileOpen(false)}>
+                Quick Apply
+              </Link>
+              <Link to="/facilities/staffing-request" className="btn btn--secondary btn--md" onClick={() => setMobileOpen(false)}>
+                Request Staffing
+              </Link>
+            </div>
           </div>
 
           <nav className="mobile-nav" aria-label="Mobile navigation">
@@ -270,8 +286,12 @@ export function Header() {
           </nav>
 
           <div className="mobile-menu__contact">
-            <a href="tel:5624275577" className="mobile-menu__phone">562-427-5577</a>
+            <span className="mobile-menu__contact-label">Talk with our team</span>
+            <a href="tel:5624275577" className="mobile-menu__phone"><Phone size={15} aria-hidden="true" /> 562-427-5577</a>
             <a href="mailto:info@rlklein.com" className="mobile-menu__email">info@rlklein.com</a>
+            <Link to="/admin" className="mobile-menu__login" onClick={() => setMobileOpen(false)}>
+              <UserRound size={15} aria-hidden="true" /> Log In
+            </Link>
           </div>
         </div>
       </div>

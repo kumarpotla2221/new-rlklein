@@ -1,0 +1,281 @@
+/* ============================================================
+   SITE FOOTER
+   Light, scannable link groups; navy legal bar.
+   ============================================================ */
+.site-footer {
+  position: relative;
+  background-color: var(--surface-tint);
+  color: var(--text);
+  padding-top: clamp(56px, 6vw, 80px);
+  border-top: 1px solid var(--border);
+}
+
+.site-footer > .container { position: relative; }
+
+.site-footer__top {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(0, 2.4fr);
+  gap: clamp(40px, 5vw, 80px);
+  padding-bottom: 48px;
+}
+
+.site-footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.site-footer__logo img {
+  display: block;
+  width: 210px;
+  height: 86px;
+  object-fit: cover;
+  margin-left: -6px;
+}
+
+.site-footer__tagline {
+  max-width: 330px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--color-gray-600);
+}
+
+.site-footer__contact-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border-strong);
+}
+
+.site-footer__contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--color-gray-700);
+}
+
+.site-footer__contact-item svg { color: var(--color-blue); flex-shrink: 0; }
+
+a.site-footer__contact-item:hover { color: var(--color-blue); }
+
+.site-footer__contact-item:first-child {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: var(--fw-semibold);
+  color: var(--color-navy);
+}
+
+.site-footer__nav {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.site-footer__col-heading {
+  display: flex;
+  align-items: flex-end;
+  min-height: calc(2.6em + 12px);
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-strong);
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0;
+  line-height: 1.3;
+  text-transform: none;
+  color: var(--color-navy);
+}
+
+.site-footer__col-links {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.site-footer__link {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--color-gray-600);
+  transition: color var(--transition-fast);
+}
+
+.site-footer__link:hover {
+  color: var(--color-blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Offices */
+.site-footer__offices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  padding-block: 28px;
+  border-top: 1px solid var(--border-strong);
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.site-footer__office {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  padding-inline: 24px;
+}
+
+.site-footer__office:first-child { padding-left: 0; }
+
+.site-footer__office:not(:last-child) { border-right: 1px solid var(--border-strong); }
+
+.site-footer__office-label {
+  font-size: var(--text-caption);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--color-blue);
+}
+
+.site-footer__office-addr {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-gray-700);
+}
+
+/* Certifications */
+.site-footer__certifications {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-block: 28px;
+}
+
+.site-footer__certifications-label {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: var(--fw-semibold);
+  color: var(--color-navy);
+}
+
+.site-footer__certification-logos {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.site-footer__certification-logos img {
+  width: 72px;
+  height: 56px;
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  object-fit: contain;
+}
+
+.certification-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 126px;
+  margin-bottom: 22px;
+  padding: 16px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.certification-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Legal bar — full-bleed navy */
+.site-footer__bottom {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  padding-block: 22px;
+  color: var(--text-on-dark-muted);
+}
+
+.site-footer__bottom::before {
+  content: '';
+  position: absolute;
+  inset: 0 -100vmax;
+  background: var(--color-navy);
+  z-index: 0;
+}
+
+.site-footer__bottom > * { position: relative; z-index: 1; }
+
+.site-footer__copy {
+  font-size: var(--text-small);
+  color: var(--text-on-dark-muted);
+}
+
+.site-footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+}
+
+.site-footer__legal-link {
+  font-size: var(--text-small);
+  color: var(--text-on-dark-muted);
+}
+
+.site-footer__legal-link:hover { color: var(--color-white); }
+
+.site-footer { overflow: hidden; }
+
+/* -----------------------------------
+   RESPONSIVE
+----------------------------------- */
+@media (max-width: 1080px) {
+  .site-footer__top { grid-template-columns: 1fr; }
+  .site-footer__brand {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    column-gap: 40px;
+  }
+  .site-footer__logo { grid-row: span 2; }
+  .site-footer__tagline { max-width: 460px; }
+}
+
+@media (max-width: 767px) {
+  .site-footer__brand { display: flex; }
+  .site-footer__nav { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 20px; }
+
+  .site-footer__offices { grid-template-columns: 1fr; gap: 18px; }
+  .site-footer__office { padding-inline: 0; }
+  .site-footer__office:not(:last-child) {
+    border-right: none;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border-strong);
+  }
+
+  .site-footer__certifications { flex-direction: column; align-items: flex-start; }
+  .site-footer__certification-logos { justify-content: flex-start; }
+
+  .site-footer__bottom { flex-direction: column; align-items: flex-start; }
+
+  .site-footer__copy,
+  .site-footer__legal-link,
+  .site-footer__office-addr { overflow-wrap: anywhere; }
+}
+
+@media (max-width: 420px) {
+  .site-footer__nav { grid-template-columns: 1fr; }
+  .site-footer__certification-logos img { width: 64px; height: 50px; }
+}

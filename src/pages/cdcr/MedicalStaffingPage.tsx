@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/ui/Typography';
+import { photo } from '../../data/images';
 import { Stethoscope, CheckCircle2, ArrowRight } from 'lucide-react';
 
 const MEDICAL_ROLES = [
@@ -21,7 +22,8 @@ export function MedicalStaffingPage() {
         ]}
       />
 
-      <header className="page-hero">
+      <header className="page-hero page-hero--photo">
+        <div className="page-hero__media"><img src={photo('nurseVitals', 1600)} alt="" /></div>
         <div className="container">
           <div className="page-hero__content">
             <span className="eyebrow" style={{ color: '#A0B8E8' }}>Clinical Excellence</span>
