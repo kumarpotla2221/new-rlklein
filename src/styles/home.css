@@ -62,11 +62,11 @@
 
 .refresh-hero__media video { object-position: center 35%; }
 
-.refresh-hero__still { display: none; }
+.refresh-hero__media .refresh-hero__still { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  .refresh-hero__video { display: none; }
-  .refresh-hero__still { display: block; }
+  .refresh-hero__media .refresh-hero__video { display: none; }
+  .refresh-hero__media .refresh-hero__still { display: block; }
 }
 
 .refresh-hero__media::after {
