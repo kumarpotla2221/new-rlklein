@@ -51,11 +51,22 @@
   z-index: -1;
 }
 
-.refresh-hero__media img {
+.refresh-hero__media img,
+.refresh-hero__media video {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: 62% 28%;
+}
+
+.refresh-hero__media video { object-position: center 35%; }
+
+.refresh-hero__still { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .refresh-hero__video { display: none; }
+  .refresh-hero__still { display: block; }
 }
 
 .refresh-hero__media::after {

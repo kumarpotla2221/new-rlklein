@@ -8,6 +8,7 @@ import { SERVICE_AREAS } from '../../data/services';
 import { photo, SPECIALTY_PHOTOS } from '../../data/images';
 
 import HERO_IMAGE from '../../../RLklein Hero.jpg';
+import HERO_VIDEO from '../../../rlklein bg.mp4';
 
 const TEAM_IMAGE = photo('clinicalTeam', 1200);
 const BASE = import.meta.env.BASE_URL;
@@ -48,7 +49,9 @@ export function HomePageRefresh() {
       {/* HERO */}
       <section className="refresh-hero" aria-label="Healthcare staffing introduction">
         <div className="refresh-hero__media">
-          <img src={HERO_IMAGE} alt="Three healthcare professionals in scrubs walking together" fetchPriority="high" />
+          <video className="refresh-hero__video" src={HERO_VIDEO} autoPlay muted loop playsInline aria-hidden="true" />
+          {/* Still image shown instead of the video when the visitor prefers reduced motion */}
+          <img className="refresh-hero__still" src={HERO_IMAGE} alt="Three healthcare professionals in scrubs walking together" />
         </div>
         <div className="container refresh-hero__inner">
           <div className="refresh-hero__copy">
