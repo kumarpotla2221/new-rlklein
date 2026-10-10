@@ -17,18 +17,17 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [admin, setAdmin] = useState<AdminUser | null>(() => authService.getCurrentAdmin());
   const [isLoading, setIsLoading] = useState(false);
-  // A stored session is confirmed with the server before admin pages render.
-  const [isVerifying, setIsVerifying] = useState(() => authService.getCurrentAdmin() !== null);
   const [error, setError] = useState<string | null>(null);
 
+  // A stored session is confirmed with the server in the background. Admin pages
+  // render straight away from the stored session: the server authorizes every
+  // admin call anyway, and a rejected token signs the UI out below.
   useEffect(() => {
-    if (!isVerifying) return;
+    if (!authService.getCurrentAdmin()) return;
     let cancelled = false;
-    authService.verifySession()
-      .then((verified) => { if (!cancelled) setAdmin(verified); })
-      .finally(() => { if (!cancelled) setIsVerifying(false); });
+    authService.verifySession().then((verified) => { if (!cancelled) setAdmin(verified); });
     return () => { cancelled = true; };
-  }, [isVerifying]);
+  }, []);
 
   // Any admin API call rejected by the server signs the UI out.
   useEffect(() => {
@@ -60,7 +59,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     <AuthContext.Provider value={{
       admin,
       isAuthenticated: !!admin,
-      isLoading: isLoading || isVerifying,
+      isLoading,
       error,
       login,
       logout,

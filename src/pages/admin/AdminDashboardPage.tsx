@@ -37,13 +37,13 @@ export function AdminDashboardPage() {
   const newAppsCount = applications.filter((a) => a.status === 'new').length;
   const shortlistedCount = applications.filter((a) => a.status === 'shortlisted').length;
 
-  if (loading) {
-    return (
-      <div style={{ padding: '40px', textAlign: 'center' }}>
-        <p>Loading administrative dashboard...</p>
-      </div>
-    );
-  }
+  // The page layout renders immediately; only the figures and rows wait on the API.
+  const stat = (value: number) => (loading ? '—' : value);
+  const loadingRow = (
+    <tr>
+      <td colSpan={4} style={{ textAlign: 'center', color: 'var(--color-gray-500)' }}>Loading...</td>
+    </tr>
+  );
 
   return (
     <div className="admin-dashboard">
@@ -72,38 +72,38 @@ export function AdminDashboardPage() {
       <div className="admin-stats-grid">
         <div className="admin-stat-card">
           <span className="admin-stat-label">Total Jobs</span>
-          <span className="admin-stat-val">{jobs.length}</span>
+          <span className="admin-stat-val">{stat(jobs.length)}</span>
           <span style={{ fontSize: '12px', color: 'var(--color-gray-500)' }}>All job records</span>
         </div>
 
         <div className="admin-stat-card">
           <span className="admin-stat-label">Active Jobs</span>
-          <span className="admin-stat-val" style={{ color: 'var(--color-success)' }}>{activeJobsCount}</span>
+          <span className="admin-stat-val" style={{ color: 'var(--color-success)' }}>{stat(activeJobsCount)}</span>
           <span style={{ fontSize: '12px', color: 'var(--color-gray-500)' }}>Published and visible</span>
         </div>
 
         <div className="admin-stat-card">
           <span className="admin-stat-label">Find Your Next Role</span>
-          <span className="admin-stat-val" style={{ color: 'var(--color-violet)' }}>{hotJobsCount}</span>
+          <span className="admin-stat-val" style={{ color: 'var(--color-violet)' }}>{stat(hotJobsCount)}</span>
           <span style={{ fontSize: '12px', color: 'var(--color-gray-500)' }}>Published and featured</span>
         </div>
 
         <div className="admin-stat-card">
           <span className="admin-stat-label">Draft Jobs</span>
-          <span className="admin-stat-val" style={{ color: 'var(--color-gray-700)' }}>{draftJobsCount}</span>
+          <span className="admin-stat-val" style={{ color: 'var(--color-gray-700)' }}>{stat(draftJobsCount)}</span>
           <span style={{ fontSize: '12px', color: 'var(--color-gray-500)' }}>Unpublished</span>
         </div>
 
         <div className="admin-stat-card">
           <span className="admin-stat-label">Closed / Expired</span>
-          <span className="admin-stat-val" style={{ color: 'var(--color-warning)' }}>{closedJobsCount}</span>
+          <span className="admin-stat-val" style={{ color: 'var(--color-warning)' }}>{stat(closedJobsCount)}</span>
           <span style={{ fontSize: '12px', color: 'var(--color-gray-500)' }}>No longer public</span>
         </div>
 
         <div className="admin-stat-card">
           <span className="admin-stat-label">Total Applications</span>
-          <span className="admin-stat-val">{applications.length}</span>
-          <span style={{ fontSize: '12px', color: 'var(--color-gray-500)' }}>{shortlistedCount} Shortlisted candidates</span>
+          <span className="admin-stat-val">{stat(applications.length)}</span>
+          <span style={{ fontSize: '12px', color: 'var(--color-gray-500)' }}>{stat(shortlistedCount)} Shortlisted candidates</span>
         </div>
       </div>
 
@@ -131,6 +131,7 @@ export function AdminDashboardPage() {
                 </tr>
               </thead>
               <tbody>
+                {loading && loadingRow}
                 {jobs.slice(0, 5).map((j) => (
                   <tr key={j.id}>
                     <td>
@@ -173,6 +174,7 @@ export function AdminDashboardPage() {
                 </tr>
               </thead>
               <tbody>
+                {loading && loadingRow}
                 {applications.slice(0, 5).map((app) => (
                   <tr key={app.id}>
                     <td>
