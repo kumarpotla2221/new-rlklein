@@ -5,7 +5,8 @@
    returns to its normal styles (and hover transforms) once done.
    ============================================================ */
 :root {
-  --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
+  /* bc-novatica-cyr is an Adobe Fonts face; Lexend is the free stand-in until the kit is loaded. */
+  --font-display: "bc-novatica-cyr", "Lexend", sans-serif;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -48,9 +49,9 @@
   flex-direction: column;
   font-family: var(--font-display);
   font-size: clamp(38px, 4.4vw, 62px);
-  font-weight: 600;
-  line-height: 1.07;
-  letter-spacing: -0.02em;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
 }
 
 .refresh-hero h1 .hl,
@@ -81,7 +82,7 @@
 .count-up__value { transition: opacity 0.2s ease; }
 
 @media (max-width: 900px) {
-  .refresh-hero h1.refresh-hero__title { font-size: clamp(32px, 8.6vw, 44px); }
+  .refresh-hero h1.refresh-hero__title { font-size: clamp(28px, 7.8vw, 44px); }
 }
 
 /* -----------------------------------
