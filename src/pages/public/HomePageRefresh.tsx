@@ -6,6 +6,8 @@ import type { Job } from '../../types';
 import { JobCard } from '../../components/jobs/JobCard';
 import { SERVICE_AREAS } from '../../data/services';
 import { photo, SPECIALTY_PHOTOS } from '../../data/images';
+import { CountUp } from '../../components/ui/CountUp';
+import { Reveal } from '../../components/ui/Reveal';
 
 import HERO_IMAGE from '../../../RLklein Hero.jpg';
 import HERO_VIDEO from '../../../rlklein bg.mp4';
@@ -36,6 +38,7 @@ const CERTIFICATIONS = [
 export function HomePageRefresh() {
   const [featuredJobs, setFeaturedJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
+  const [openRoles, setOpenRoles] = useState<number | null>(null);
 
   useEffect(() => {
     jobService.getFeaturedJobs(3)
@@ -44,28 +47,46 @@ export function HomePageRefresh() {
       .finally(() => setLoading(false));
   }, []);
 
+  // Shares the cached public jobs request with getFeaturedJobs, so no extra network call.
+  useEffect(() => {
+    jobService.getJobs()
+      .then((jobs) => setOpenRoles(jobs.length))
+      .catch((error) => console.error('Failed to load open roles', error));
+  }, []);
+
   return (
     <div className="home-refresh">
       {/* HERO */}
       <section className="refresh-hero" aria-label="Healthcare staffing introduction">
         <div className="refresh-hero__media">
-          <video className="refresh-hero__video" src={HERO_VIDEO} autoPlay muted loop playsInline aria-hidden="true" />
+          <video className="refresh-hero__video" src={HERO_VIDEO} poster={HERO_IMAGE} autoPlay muted loop playsInline aria-hidden="true" />
           {/* Still image shown instead of the video when the visitor prefers reduced motion */}
           <img className="refresh-hero__still" src={HERO_IMAGE} alt="Three healthcare professionals in scrubs walking together" />
         </div>
         <div className="container refresh-hero__inner">
           <div className="refresh-hero__copy">
             <span className="eyebrow refresh-hero__eyebrow">Healthcare staffing since 1984</span>
-            <h1>Your next healthcare opportunity <span>starts here.</span></h1>
-            <p>R.L. Klein &amp; Associates connects qualified healthcare professionals with dependable opportunities and helps public and correctional facilities build stronger teams.</p>
+            <h1 className="refresh-hero__title">
+              <span className="hl"><span className="hl__text">Your next healthcare</span></span>{' '}
+              <span className="hl"><span className="hl__text">opportunity starts here.</span></span>
+            </h1>
+            <p>Browse open roles across correctional and government healthcare. Our recruiters walk you through credentialing and onboarding, so you can focus on your patients.</p>
             <div className="refresh-hero__actions">
               <Link to="/hot-jobs" className="btn btn--accent btn--lg">Find Your Next Role <ArrowRight size={18} /></Link>
               <Link to="/facilities/staffing-request" className="btn btn--outline-white btn--lg">Request Staffing</Link>
             </div>
+            <div className="refresh-hero__live" aria-live="polite">
+              {openRoles !== null && openRoles > 0 && (
+                <span className="refresh-hero__live-content">
+                  <span className="refresh-hero__live-dot" aria-hidden="true" />
+                  <span><strong><CountUp end={openRoles} duration={1200} delay={150} /></strong> open {openRoles === 1 ? 'role' : 'roles'} right now</span>
+                </span>
+              )}
+            </div>
             <div className="refresh-hero__proof">
-              <span><strong>40+</strong> years of experience</span>
+              <span><strong><CountUp end={40} suffix="+" delay={1150} /></strong> years of experience</span>
+              <span><strong><CountUp end={4} delay={1150} /></strong> business certifications</span>
               <span><strong>Correctional</strong> healthcare expertise</span>
-              <span><strong>100%</strong> compliance focused</span>
             </div>
           </div>
         </div>
@@ -107,7 +128,7 @@ export function HomePageRefresh() {
               {[0, 1, 2].map((i) => <div className="refresh-skeleton" key={i}><span /><span /><span /><span /></div>)}
             </div>
           ) : featuredJobs.length > 0 ? (
-            <div className="jobs-grid">{featuredJobs.map((job) => <JobCard key={job.id} job={job} />)}</div>
+            <div className="jobs-grid jobs-grid--enter">{featuredJobs.map((job) => <JobCard key={job.id} job={job} />)}</div>
           ) : (
             <div className="refresh-empty"><p>New opportunities are being added regularly.</p><Link to="/hot-jobs" className="btn btn--secondary btn--sm">Browse all jobs</Link></div>
           )}
@@ -196,14 +217,14 @@ export function HomePageRefresh() {
               <div><dt>CA &amp; UT</dt><dd>Corporate, operational &amp; payroll offices</dd></div>
             </dl>
           </div>
-          <div className="refresh-trust__certs">
+          <Reveal stagger className="refresh-trust__certs">
             {CERTIFICATIONS.map((cert) => (
               <div className="refresh-cert" key={cert.code}>
                 <span className="refresh-cert__logo"><img src={cert.image} alt={`${cert.code} certification`} loading="lazy" /></span>
                 <span className="refresh-cert__text"><strong>{cert.code}</strong><small>{cert.label}</small></span>
               </div>
             ))}
-          </div>
+          </Reveal>
           <div className="refresh-trust__links">
             <Link to="/about/awards-recognition" className="refresh-trust__link"><BadgeCheck size={17} aria-hidden="true" /> Awards &amp; recognition <ArrowRight size={15} /></Link>
             <Link to="/about/safety-compliance" className="refresh-trust__link"><ShieldCheck size={17} aria-hidden="true" /> Safety &amp; compliance <ArrowRight size={15} /></Link>
