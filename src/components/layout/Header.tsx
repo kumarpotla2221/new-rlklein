@@ -135,8 +135,8 @@ export function Header() {
               <div
                 key={item.label}
                 className={`site-nav__item ${item.children && item.children.length > 5 ? 'site-nav__item--wide' : ''}`}
-                onMouseEnter={() => item.children && setActiveDropdown(item.label)}
-                onMouseLeave={() => setActiveDropdown(null)}
+                onPointerEnter={(e) => e.pointerType === 'mouse' && item.children && setActiveDropdown(item.label)}
+                onPointerLeave={(e) => e.pointerType === 'mouse' && setActiveDropdown(null)}
               >
                 {item.href ? (
                   <Link

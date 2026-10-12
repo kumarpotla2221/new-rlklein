@@ -289,11 +289,6 @@
   transition: box-shadow var(--transition-base), transform var(--transition-base);
 }
 
-.refresh-job:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-3px);
-}
-
 .refresh-job__media {
   display: block;
   aspect-ratio: 16 / 8;
@@ -307,8 +302,6 @@
   object-fit: cover;
   transition: transform var(--transition-slow);
 }
-
-.refresh-job:hover .refresh-job__media img { transform: scale(1.04); }
 
 .refresh-job .job-card {
   flex: 1;
@@ -659,12 +652,6 @@
   transition: box-shadow var(--transition-base), transform var(--transition-base);
 }
 
-.refresh-discipline:hover,
-.refresh-insight:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-3px);
-}
-
 .refresh-discipline__media,
 .refresh-insight__media {
   display: block;
@@ -680,9 +667,6 @@
   object-fit: cover;
   transition: transform var(--transition-slow);
 }
-
-.refresh-discipline:hover .refresh-discipline__media img,
-.refresh-insight:hover .refresh-insight__media img { transform: scale(1.04); }
 
 .refresh-discipline__body,
 .refresh-insight__body {
@@ -726,9 +710,6 @@
 .refresh-discipline__cta svg,
 .refresh-insight__cta svg { transition: transform var(--transition-fast); }
 
-.refresh-discipline:hover .refresh-discipline__cta svg,
-.refresh-insight:hover .refresh-insight__cta svg { transform: translateX(3px); }
-
 .refresh-insight__category {
   align-self: flex-start;
   color: var(--home-red);
@@ -745,8 +726,6 @@
   line-height: 1.35;
   transition: color var(--transition-fast);
 }
-
-.refresh-insight:hover h3 { color: var(--color-blue); }
 
 .refresh-insight p {
   margin-top: 6px;

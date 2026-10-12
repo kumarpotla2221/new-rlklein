@@ -175,7 +175,7 @@
 }
 
 .team-member-tile:hover,
-.team-member-tile:focus-visible { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.team-member-tile:focus-visible { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
 
 .team-member-tile:focus-visible { outline: 3px solid var(--color-violet); outline-offset: 3px; }
 
@@ -1239,7 +1239,7 @@
 
 .service-card:hover {
   border-color: var(--color-navy);
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-md);
 }
 

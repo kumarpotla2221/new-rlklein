@@ -35,7 +35,8 @@
   transition: transform var(--transition-fast);
 }
 
-.btn:hover svg:last-child:not(:first-child) {
+.btn:hover svg:last-child:not(:first-child),
+.btn:focus-visible svg:last-child:not(:first-child) {
   transform: translateX(3px);
 }
 
@@ -221,4 +222,5 @@
   text-decoration: underline;
 }
 
-.text-link:hover svg { transform: translateX(3px); }
+.text-link:hover svg,
+.text-link:focus-visible svg { transform: translateX(3px); }

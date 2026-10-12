@@ -1,13 +1,15 @@
 /* ============================================================
-   MOTION & DISPLAY TYPE
-   Loaded last so it can layer on top of home.css.
-   Every animation uses fill-mode `backwards` so the element
-   returns to its normal styles (and hover transforms) once done.
+   MOTION
+   Loaded last so it can layer on top of home.css and pages.css.
+   One vocabulary site-wide: a short fade-up on entry, a 3px lift
+   on interactive cards. Every animation uses fill-mode `backwards`
+   so the element returns to its normal styles once done.
    ============================================================ */
 :root {
-  /* bc-novatica-cyr is an Adobe Fonts face; Lexend is the free stand-in until the kit is loaded. */
-  --font-display: "bc-novatica-cyr", "Lexend", sans-serif;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-enter: 520ms;
+  --motion-stagger: 70ms;
+  --motion-rise: 14px;
 }
 
 @keyframes motion-fade {
@@ -15,28 +17,16 @@
 }
 
 @keyframes motion-fade-up {
-  from { opacity: 0; transform: translateY(18px); }
+  from { opacity: 0; transform: translateY(var(--motion-rise)); }
 }
 
 @keyframes motion-settle {
-  from { transform: scale(1.06); }
-}
-
-@keyframes motion-rule-draw {
-  from { transform: scaleX(0); }
-}
-
-@keyframes motion-line-rise {
-  from { transform: translateY(110%); }
+  from { transform: scale(1.03); }
 }
 
 @keyframes motion-pulse {
   0% { transform: scale(1); opacity: 0.55; }
   100% { transform: scale(2.8); opacity: 0; }
-}
-
-@keyframes motion-card-in {
-  from { opacity: 0; transform: translateY(16px); }
 }
 
 /* -----------------------------------
@@ -54,20 +44,8 @@
   letter-spacing: -0.02em;
 }
 
-
-/* Each line sits in a mask; the padding/negative margin pair gives
-   ascenders and descenders room without changing the line box. */
-.refresh-hero h1 .hl {
-  display: block;
-  overflow: hidden;
-  padding-block: 0.08em 0.16em;
-  margin-block: -0.08em -0.16em;
-}
-
+.refresh-hero h1 .hl,
 .refresh-hero h1 .hl__text { display: block; }
-
-.count-up { font-variant-numeric: tabular-nums; }
-.count-up__value { transition: opacity 0.2s ease; }
 
 @media (max-width: 900px) {
   .refresh-hero h1.refresh-hero__title { font-size: clamp(28px, 7.8vw, 44px); }
@@ -92,7 +70,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  animation: motion-fade 0.6s var(--ease-out-expo) backwards;
+  animation: motion-fade 0.4s ease-out backwards;
 }
 
 .refresh-hero__live strong { color: var(--color-white); font-weight: var(--fw-semibold); }
@@ -106,6 +84,7 @@
   background: #4ADE80;
 }
 
+/* Two pulses on arrival, then still */
 .refresh-hero__live-dot::after {
   content: '';
   position: absolute;
@@ -117,36 +96,60 @@
 }
 
 /* -----------------------------------
-   HERO ENTRANCE SEQUENCE
+   COUNT-UP
+   The final value sits invisibly in flow and holds the width;
+   the counting value is layered on top of it.
 ----------------------------------- */
-.refresh-hero__media {
-  overflow: hidden;
-  animation: motion-fade 1.2s ease-out backwards;
+.count-up { font-variant-numeric: tabular-nums; }
+
+.count-up__value {
+  position: relative;
+  display: inline-block;
+  transition: opacity 0.2s ease;
 }
 
-.refresh-hero__media video,
-.refresh-hero__media img {
-  animation: motion-settle 2.4s var(--ease-out-expo) backwards;
+.count-up__sizer { visibility: hidden; }
+
+.count-up__live {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
 }
-
-.refresh-hero__eyebrow::before {
-  transform-origin: left center;
-  animation: motion-rule-draw 0.9s var(--ease-out-expo) 0.05s backwards;
-}
-
-.refresh-hero h1 .hl__text { animation: motion-line-rise 1.1s var(--ease-out-expo) 0.15s backwards; }
-.refresh-hero h1 .hl + .hl .hl__text { animation-delay: 0.3s; }
-
-.refresh-hero__copy > p { animation: motion-fade-up 0.9s var(--ease-out-expo) 0.75s backwards; }
-.refresh-hero__actions { animation: motion-fade-up 0.9s var(--ease-out-expo) 0.9s backwards; }
-.refresh-hero__live { animation: motion-fade 0.8s ease-out 1s backwards; }
-.refresh-pathways__card { animation: motion-fade-up 1s var(--ease-out-expo) 1.05s backwards; }
 
 /* -----------------------------------
-   FEATURED JOBS — staggered cards
+   HERO ENTRANCE
+   Copy fades up in order. The photo/video is visible from the
+   first frame and only settles in scale, so it never delays paint.
+----------------------------------- */
+.refresh-hero__media,
+.page-hero__media { overflow: hidden; }
+
+.refresh-hero__media video,
+.refresh-hero__media img,
+.page-hero__media img {
+  animation: motion-settle 0.9s var(--ease-out-expo) backwards;
+}
+
+.refresh-hero__copy > *,
+.page-hero__content > * {
+  animation: motion-fade-up var(--motion-enter) var(--ease-out-expo) calc(var(--i, 0) * var(--motion-stagger)) backwards;
+}
+
+.refresh-hero__copy > :nth-child(2),
+.page-hero__content > :nth-child(2) { --i: 1; }
+.refresh-hero__copy > :nth-child(3),
+.page-hero__content > :nth-child(3) { --i: 2; }
+.refresh-hero__copy > :nth-child(4),
+.page-hero__content > :nth-child(4) { --i: 3; }
+.refresh-hero__copy > :nth-child(n + 5),
+.page-hero__content > :nth-child(n + 5) { --i: 4; }
+
+/* -----------------------------------
+   FEATURED JOBS — cards arrive with the data
 ----------------------------------- */
 .jobs-grid--enter > * {
-  animation: motion-card-in 0.7s var(--ease-out-expo) calc(var(--i, 0) * 90ms) backwards;
+  animation: motion-fade-up var(--motion-enter) var(--ease-out-expo) calc(var(--i, 0) * var(--motion-stagger)) backwards;
 }
 
 .jobs-grid--enter > :nth-child(2) { --i: 1; }
@@ -157,16 +160,18 @@
 
 /* -----------------------------------
    SCROLL REVEAL
+   `is-visible` is set by the Reveal component (Intersection
+   Observer). Without an observer it is set immediately.
 ----------------------------------- */
 .reveal:not(.is-visible),
 .reveal-group:not(.is-visible) > * { opacity: 0; }
 
 .reveal.is-visible {
-  animation: motion-fade-up 0.8s var(--ease-out-expo) var(--reveal-delay, 0ms) backwards;
+  animation: motion-fade-up var(--motion-enter) var(--ease-out-expo) var(--reveal-delay, 0ms) backwards;
 }
 
 .reveal-group.is-visible > * {
-  animation: motion-fade-up 0.7s var(--ease-out-expo) calc(var(--reveal-delay, 0ms) + var(--i, 0) * 90ms) backwards;
+  animation: motion-fade-up var(--motion-enter) var(--ease-out-expo) calc(var(--reveal-delay, 0ms) + var(--i, 0) * var(--motion-stagger)) backwards;
 }
 
 .reveal-group > :nth-child(2) { --i: 1; }
@@ -176,20 +181,56 @@
 .reveal-group > :nth-child(6) { --i: 5; }
 
 /* -----------------------------------
-   REDUCED MOTION
+   CARD HOVER
+   Lift and image zoom only where a pointer can hover, so touch
+   screens never get a stuck state. Keyboard focus gets the same.
+----------------------------------- */
+@media (hover: hover) and (pointer: fine) {
+  .refresh-job:hover,
+  .refresh-discipline:hover,
+  .refresh-insight:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-3px);
+  }
+
+  .refresh-job:hover .refresh-job__media img,
+  .refresh-discipline:hover .refresh-discipline__media img,
+  .refresh-insight:hover .refresh-insight__media img { transform: scale(1.04); }
+
+  .refresh-discipline:hover .refresh-discipline__cta svg,
+  .refresh-insight:hover .refresh-insight__cta svg { transform: translateX(3px); }
+
+  .refresh-insight:hover h3 { color: var(--color-blue); }
+}
+
+.refresh-job:focus-within,
+.refresh-discipline:focus-visible,
+.refresh-insight:focus-visible {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+}
+
+.refresh-job:focus-within .refresh-job__media img,
+.refresh-discipline:focus-visible .refresh-discipline__media img,
+.refresh-insight:focus-visible .refresh-insight__media img { transform: scale(1.04); }
+
+.refresh-discipline:focus-visible .refresh-discipline__cta svg,
+.refresh-insight:focus-visible .refresh-insight__cta svg { transform: translateX(3px); }
+
+.refresh-insight:focus-visible h3 { color: var(--color-blue); }
+
+/* -----------------------------------
+   REDUCED MOTION & PRINT
+   No movement; everything is simply present.
 ----------------------------------- */
 @media (prefers-reduced-motion: reduce) {
-  .refresh-hero__media,
   .refresh-hero__media video,
   .refresh-hero__media img,
-  .refresh-hero__eyebrow::before,
-  .refresh-hero h1 .hl__text,
-  .refresh-hero__copy > p,
-  .refresh-hero__actions,
-  .refresh-hero__live,
+  .page-hero__media img,
+  .refresh-hero__copy > *,
+  .page-hero__content > *,
   .refresh-hero__live-content,
   .refresh-hero__live-dot::after,
-  .refresh-pathways__card,
   .jobs-grid--enter > *,
   .reveal,
   .reveal-group > * {
@@ -203,4 +244,25 @@
   }
 
   .count-up__value { transition: none; }
+
+  .refresh-job,
+  .refresh-discipline,
+  .refresh-insight,
+  .service-card,
+  .team-member-tile,
+  .refresh-job__media img,
+  .refresh-discipline__media img,
+  .refresh-insight__media img,
+  .team-member-tile__image {
+    transform: none !important;
+  }
+}
+
+@media print {
+  .reveal,
+  .reveal-group > *,
+  .count-up__value {
+    opacity: 1 !important;
+    animation: none !important;
+  }
 }

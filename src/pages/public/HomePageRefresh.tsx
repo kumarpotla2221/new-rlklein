@@ -135,10 +135,10 @@ export function HomePageRefresh() {
       {/* FEATURED JOBS */}
       <section className="section refresh-jobs" aria-label="Featured healthcare jobs">
         <div className="container">
-          <div className="refresh-section-heading">
+          <Reveal className="refresh-section-heading">
             <div><span className="eyebrow">Current opportunities</span><h2>Featured opportunities</h2><p>Explore open positions across healthcare settings and specialties.</p></div>
             <Link to="/hot-jobs" className="text-link">View all jobs <ArrowRight size={16} /></Link>
-          </div>
+          </Reveal>
           {loading ? (
             <div className="jobs-grid" aria-busy="true" aria-label="Loading current opportunities">
               {[0, 1, 2].map((i) => <div className="refresh-skeleton" key={i}><span /><span /><span /><span /></div>)}
@@ -161,14 +161,14 @@ export function HomePageRefresh() {
       {/* STORY */}
       <section className="refresh-story" aria-label="About R.L. Klein">
         <div className="container refresh-story__inner">
-          <div className="refresh-story__media">
+          <Reveal className="refresh-story__media">
             <img src={TEAM_IMAGE} alt="Two clinicians reviewing patient imaging together" loading="lazy" />
             <div className="refresh-story__badge">
               <strong>40+</strong>
               <span>years supporting public &amp; correctional healthcare</span>
             </div>
-          </div>
-          <div className="refresh-story__copy">
+          </Reveal>
+          <Reveal delay={100} className="refresh-story__copy">
             <span className="eyebrow">Meet R.L. Klein</span>
             <h2>A workforce partner you can count on.</h2>
             <p>For more than four decades, we have helped government, correctional, and institutional healthcare organizations find dependable professionals while supporting clinicians through each step of the process.</p>
@@ -177,18 +177,18 @@ export function HomePageRefresh() {
               <Link to="/about/who-we-are" className="btn btn--primary btn--md">Who We Are <ArrowRight size={16} /></Link>
               <Link to="/about/team" className="text-link">Meet our team <ArrowRight size={16} /></Link>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* DIFFERENCE / BENEFITS */}
       <section className="section bg-white refresh-difference" aria-label="Why work with R.L. Klein">
         <div className="container">
-          <div className="refresh-section-heading">
+          <Reveal className="refresh-section-heading">
             <div><span className="eyebrow">The RLK difference</span><h2>Built around better healthcare outcomes.</h2><p>Our work is grounded in responsiveness, readiness, and long-term partnerships.</p></div>
             <Link to="/healthcare-professionals/how-it-works" className="text-link">How it works <ArrowRight size={16} /></Link>
-          </div>
-          <div className="refresh-benefits">
+          </Reveal>
+          <Reveal stagger className="refresh-benefits">
             {BENEFITS.map(({ icon: Icon, title, text }) => (
               <article className="refresh-benefit" key={title}>
                 <span className="refresh-benefit__icon"><Icon size={34} strokeWidth={1.6} aria-hidden="true" /></span>
@@ -196,7 +196,7 @@ export function HomePageRefresh() {
                 <p>{text}</p>
               </article>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -221,10 +221,10 @@ export function HomePageRefresh() {
       {/* SPECIALTIES */}
       <section className="section refresh-disciplines" aria-label="Healthcare disciplines">
         <div className="container">
-          <div className="refresh-section-heading">
+          <Reveal className="refresh-section-heading">
             <div><span className="eyebrow">Who we place</span><h2>Professionals we proudly support</h2><p>Specialized workforce solutions for the people and facilities delivering essential care.</p></div>
-          </div>
-          <div className="refresh-discipline-grid">
+          </Reveal>
+          <Reveal stagger className="refresh-discipline-grid">
             {SERVICE_AREAS.slice(0, 6).map((service) => (
               <Link to={service.slug} className="refresh-discipline" key={service.id}>
                 <span className="refresh-discipline__media">
@@ -237,15 +237,15 @@ export function HomePageRefresh() {
                 </span>
               </Link>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* RESOURCES */}
       <section className="section bg-white refresh-resources" aria-label="Resources and insights">
         <div className="container">
-          <div className="refresh-section-heading"><div><span className="eyebrow">Resources</span><h2>Knowledge for the work ahead.</h2><p>Useful guidance for healthcare professionals and the organizations they serve.</p></div><Link to="/healthcare-professionals/faqs" className="text-link">Explore FAQs <ArrowRight size={16} /></Link></div>
-          <div className="refresh-insights">
+          <Reveal className="refresh-section-heading"><div><span className="eyebrow">Resources</span><h2>Knowledge for the work ahead.</h2><p>Useful guidance for healthcare professionals and the organizations they serve.</p></div><Link to="/healthcare-professionals/faqs" className="text-link">Explore FAQs <ArrowRight size={16} /></Link></Reveal>
+          <Reveal stagger className="refresh-insights">
             {INSIGHTS.map(({ title, category, text, href, image }) => (
               <Link to={href} className="refresh-insight" key={title}>
                 <span className="refresh-insight__media"><img src={image} alt="" loading="lazy" /></span>
@@ -257,7 +257,7 @@ export function HomePageRefresh() {
                 </span>
               </Link>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 

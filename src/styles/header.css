@@ -143,12 +143,15 @@
 }
 
 .site-nav__link:hover,
+.site-nav__link:focus-visible,
 .site-nav__item:hover > .site-nav__link,
 .site-nav__link[aria-expanded='true'] {
   color: var(--color-navy);
 }
 
 .site-nav__link:hover::after,
+.site-nav__link:focus-visible::after,
+.site-nav__link[aria-expanded='true']::after,
 .site-nav__item:hover > .site-nav__link::after,
 .site-nav__link--active::after {
   transform: scaleX(1);

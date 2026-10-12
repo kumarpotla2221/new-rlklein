@@ -40,7 +40,11 @@ export function CountUp({ end, duration = 1400, delay = 0, prefix = '', suffix =
 
   return (
     <span ref={ref} className="count-up">
-      <span className="count-up__value" aria-hidden="true" style={{ opacity: inView ? 1 : 0 }}>{prefix}{value}{suffix}</span>
+      <span className="count-up__value" aria-hidden="true" style={{ opacity: inView ? 1 : 0 }}>
+        {/* Invisible final value holds the width so nearby text never shifts while counting */}
+        <span className="count-up__sizer">{prefix}{end}{suffix}</span>
+        <span className="count-up__live">{prefix}{value}{suffix}</span>
+      </span>
       <span className="sr-only">{prefix}{end}{suffix}</span>
     </span>
   );
