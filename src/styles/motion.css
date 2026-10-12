@@ -127,7 +127,8 @@
 
 .refresh-hero__media video,
 .refresh-hero__media img,
-.page-hero__media img {
+.page-hero__media img,
+.ch-hero__media img {
   animation: motion-settle 0.9s var(--ease-out-expo) backwards;
 }
 
@@ -227,6 +228,7 @@
   .refresh-hero__media video,
   .refresh-hero__media img,
   .page-hero__media img,
+  .ch-hero__media img,
   .refresh-hero__copy > *,
   .page-hero__content > *,
   .refresh-hero__live-content,
