@@ -18,6 +18,9 @@ const PHOTO_IDS = {
   facilityLobby: '1519494026892-80bbd2d6fd0d',
   credentialing: '1576091160550-2173dba999ef',
   supportiveCare: '1584515933487-779824d29309',
+  careTeam: '1622253692010-333f2da6031d',
+  clinicalReview: '1576091160399-112ba8d25d1d',
+  patientWard: '1538108149393-fbbd81895907',
 } as const;
 
 export type PhotoKey = keyof typeof PHOTO_IDS;
