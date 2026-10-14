@@ -32,7 +32,7 @@ const WORKFLOW_STEPS = [
 
 export function CorrectionalHealthcarePage() {
   return (
-    <div className="correctional-healthcare-page ch-page">
+    <div className="ch-page">
       <Breadcrumbs
         items={[
           { label: 'Home', href: '/' },
@@ -45,7 +45,7 @@ export function CorrectionalHealthcarePage() {
       <header className="ch-hero">
         <div className="ch-hero__media"><img src={photo('correctionalCare', 1600)} alt="" /></div>
         <div className="container">
-          <div className="ch-hero__copy page-hero__content">
+          <div className="ch-hero__copy">
             <span className="eyebrow">Specialized Healthcare Delivery</span>
             <h1>Correctional Healthcare Staffing Built Around the Needs of <span>California Facilities</span></h1>
             <p className="ch-hero__subtitle">
@@ -55,7 +55,7 @@ export function CorrectionalHealthcarePage() {
               <Link to="/facilities/staffing-request" className="btn btn--accent btn--md">
                 Request Staffing <ArrowRight size={16} />
               </Link>
-              <Link to="/cdcr-healthcare/opportunities" className="btn btn--secondary btn--md">
+              <Link to="/cdcr-healthcare/opportunities" className="btn btn--outline-blue btn--md">
                 View Correctional Jobs
               </Link>
             </div>

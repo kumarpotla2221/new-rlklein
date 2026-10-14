@@ -100,6 +100,19 @@
   color: var(--color-navy);
 }
 
+/* OUTLINE BLUE: secondary action beside an accent button */
+.btn--outline-blue {
+  background-color: var(--color-white);
+  color: var(--color-blue);
+  border-color: var(--color-blue);
+}
+
+.btn--outline-blue:hover {
+  background-color: var(--color-blue-50);
+  border-color: var(--color-blue);
+  color: var(--color-blue-dark);
+}
+
 /* ACCENT: Logo blue — the primary call to action */
 .btn--accent {
   background-color: var(--color-blue);

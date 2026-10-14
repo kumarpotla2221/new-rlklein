@@ -258,17 +258,6 @@
   border-color: var(--color-blue-dark);
 }
 
-.refresh-pathway .btn--secondary {
-  border-color: var(--color-blue);
-  color: var(--color-blue);
-}
-
-.refresh-pathway .btn--secondary:hover {
-  background-color: var(--color-blue-50);
-  border-color: var(--color-blue);
-  color: var(--color-blue-dark);
-}
-
 /* -----------------------------------
    FEATURED JOBS — photo-topped cards
 ----------------------------------- */

@@ -240,6 +240,10 @@
    ============================================================ */
 .ch-page {
   --ch-tint: #EEF4FC;
+  /* Where the hero photo starts; the fade colour is the hero
+     gradient sampled at that point so the seam never shows */
+  --ch-media-start: 40%;
+  --ch-fade: color-mix(in srgb, var(--ch-tint) var(--ch-media-start), var(--color-white));
   background: var(--color-white);
 }
 
@@ -261,7 +265,7 @@
 
 .ch-hero__media {
   position: absolute;
-  inset: 0 0 0 40%;
+  inset: 0 0 0 var(--ch-media-start);
   z-index: -1;
   overflow: hidden;
 }
@@ -277,11 +281,16 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, #F6F9FD 0%, rgba(246, 249, 253, 0.86) 14%, rgba(246, 249, 253, 0.3) 34%, rgba(246, 249, 253, 0) 52%);
+  background: linear-gradient(90deg,
+    var(--ch-fade) 0%,
+    color-mix(in srgb, var(--ch-fade) 86%, transparent) 14%,
+    color-mix(in srgb, var(--ch-fade) 30%, transparent) 34%,
+    transparent 52%);
 }
 
 .ch-hero__copy {
-  gap: 0;
+  display: flex;
+  flex-direction: column;
   max-width: 620px;
 }
 
@@ -327,28 +336,23 @@
 
 .ch-hero__actions .btn { min-width: 190px; }
 
-.ch-page .btn--secondary {
-  border-color: var(--color-blue);
-  color: var(--color-blue);
-}
-
-.ch-page .btn--secondary:hover {
-  background-color: var(--color-blue-50);
-  border-color: var(--color-blue);
-  color: var(--color-blue-dark);
-}
-
+/* Every item carries a divider; the list is pulled left by one
+   divider + padding and clipped, so whichever item starts a row
+   (including after wrapping) sits flush with the copy */
 .ch-hero__points {
+  --ch-point-pad: 26px;
   display: flex;
   flex-wrap: wrap;
   margin-top: 36px;
+  margin-left: calc(-1 * (var(--ch-point-pad) + 1px));
+  overflow: hidden;
 }
 
 .ch-hero__points li {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding-inline: 26px;
+  padding-inline: var(--ch-point-pad);
   border-left: 1px solid var(--border-strong);
   color: var(--color-navy);
   font-size: 14px;
@@ -356,7 +360,6 @@
   line-height: 1.35;
 }
 
-.ch-hero__points li:first-child { padding-left: 0; border-left: none; }
 .ch-hero__points svg { flex-shrink: 0; color: var(--color-blue); }
 .ch-hero__points span { max-width: 96px; }
 
@@ -487,9 +490,23 @@
 .ch-approach .section-heading__subtitle { font-size: 16px; }
 
 .ch-steps {
+  --ch-step-gap: 16px;
+  position: relative;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 16px;
+  gap: var(--ch-step-gap);
+}
+
+/* One continuous line from the centre of step 01 to step 05 */
+.ch-steps::before {
+  content: '';
+  position: absolute;
+  top: 17px;
+  left: calc((100% - 4 * var(--ch-step-gap)) / 10);
+  right: calc((100% - 4 * var(--ch-step-gap)) / 10);
+  height: 1px;
+  background: var(--color-blue);
+  opacity: 0.55;
 }
 
 .ch-step {
@@ -498,18 +515,6 @@
   flex-direction: column;
   align-items: center;
   min-width: 0;
-}
-
-/* The connecting line runs behind each number */
-.ch-step::before {
-  content: '';
-  position: absolute;
-  top: 17px;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: var(--color-blue);
-  opacity: 0.55;
 }
 
 .ch-step__num {
@@ -598,8 +603,20 @@
 /* -----------------------------------
    RESPONSIVE
 ----------------------------------- */
+/* Narrow the copy and push the photo right so the headline
+   never runs onto the uncovered part of the photo */
+@media (max-width: 1200px) {
+  .ch-page { --ch-media-start: 50%; }
+  .ch-hero__copy { max-width: 48%; }
+}
+
+/* Three over two, with the second row centred; the line can't
+   span two rows, so the numbers stand on their own */
 @media (max-width: 1100px) {
-  .ch-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 28px; }
+  .ch-steps { grid-template-columns: repeat(6, minmax(0, 1fr)); row-gap: 28px; }
+  .ch-steps::before { display: none; }
+  .ch-step { grid-column: span 2; }
+  .ch-step:nth-child(4) { grid-column: 2 / span 2; }
 }
 
 @media (max-width: 900px) {
@@ -619,7 +636,7 @@
   }
 
   .ch-hero__media::after {
-    background: linear-gradient(0deg, #F6F9FD 0%, rgba(246, 249, 253, 0) 40%);
+    background: linear-gradient(0deg, var(--ch-fade) 0%, transparent 40%);
   }
 
   .ch-hero__copy { max-width: 640px; }
@@ -633,7 +650,7 @@
   .ch-hero__actions .btn { width: 100%; }
 
   .ch-hero__points { gap: 14px 0; }
-  .ch-hero__points li { padding-inline: 16px; }
+  .ch-hero__points { --ch-point-pad: 16px; }
 
   .ch-why { padding: 24px 20px 12px; }
   .ch-why li { gap: 16px; }
@@ -645,14 +662,15 @@
 
   .ch-steps { grid-template-columns: 1fr; row-gap: 20px; }
   .ch-step { align-items: flex-start; }
-  .ch-step::before { display: none; }
+  .ch-step,
+  .ch-step:nth-child(4) { grid-column: auto; }
   .ch-step__num { margin-left: 13px; }
 
   .ch-cta .btn { justify-self: stretch; white-space: normal; text-align: center; }
 }
 
 @media (max-width: 560px) {
-  .ch-hero__points { flex-direction: column; }
+  .ch-hero__points { flex-direction: column; margin-left: 0; }
   .ch-hero__points li { padding-inline: 0; border-left: none; }
   .ch-hero__points span { max-width: none; }
 }

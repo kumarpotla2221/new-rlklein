@@ -126,7 +126,7 @@ export function HomePageRefresh() {
                 <span className="eyebrow">For facilities</span>
                 <h2>Build a stronger, compliant care team.</h2>
               </div>
-              <Link to="/facilities/staffing-request" className="btn btn--secondary btn--md">Request Staffing <ArrowRight size={16} /></Link>
+              <Link to="/facilities/staffing-request" className="btn btn--outline-blue btn--md">Request Staffing <ArrowRight size={16} /></Link>
             </div>
           </div>
         </div>

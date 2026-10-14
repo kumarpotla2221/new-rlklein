@@ -133,18 +133,23 @@
 }
 
 .refresh-hero__copy > *,
-.page-hero__content > * {
+.page-hero__content > *,
+.ch-hero__copy > * {
   animation: motion-fade-up var(--motion-enter) var(--ease-out-expo) calc(var(--i, 0) * var(--motion-stagger)) backwards;
 }
 
 .refresh-hero__copy > :nth-child(2),
-.page-hero__content > :nth-child(2) { --i: 1; }
+.page-hero__content > :nth-child(2),
+.ch-hero__copy > :nth-child(2) { --i: 1; }
 .refresh-hero__copy > :nth-child(3),
-.page-hero__content > :nth-child(3) { --i: 2; }
+.page-hero__content > :nth-child(3),
+.ch-hero__copy > :nth-child(3) { --i: 2; }
 .refresh-hero__copy > :nth-child(4),
-.page-hero__content > :nth-child(4) { --i: 3; }
+.page-hero__content > :nth-child(4),
+.ch-hero__copy > :nth-child(4) { --i: 3; }
 .refresh-hero__copy > :nth-child(n + 5),
-.page-hero__content > :nth-child(n + 5) { --i: 4; }
+.page-hero__content > :nth-child(n + 5),
+.ch-hero__copy > :nth-child(n + 5) { --i: 4; }
 
 /* -----------------------------------
    FEATURED JOBS — cards arrive with the data
@@ -231,6 +236,7 @@
   .ch-hero__media img,
   .refresh-hero__copy > *,
   .page-hero__content > *,
+  .ch-hero__copy > *,
   .refresh-hero__live-content,
   .refresh-hero__live-dot::after,
   .jobs-grid--enter > *,
