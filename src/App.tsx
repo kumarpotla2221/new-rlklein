@@ -16,6 +16,7 @@ import { WhoWeArePage } from './pages/about/WhoWeArePage';
 import { TeamPage } from './pages/about/TeamPage';
 import { AwardsRecognitionPage } from './pages/about/AwardsRecognitionPage';
 import { SafetyCompliancePage } from './pages/about/SafetyCompliancePage';
+import { JointCommissionPage } from './pages/about/JointCommissionPage';
 import { CDCRMainPage } from './pages/cdcr/CDCRMainPage';
 import { CDCRFacilitiesPage } from './pages/cdcr/CDCRFacilitiesPage';
 import { CDCROpportunitiesPage } from './pages/cdcr/CDCROpportunitiesPage';
@@ -79,8 +80,9 @@ function App() {
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
             <Route path="/terms" element={<TermsOfUsePage />} />
             <Route path="/about/safety-compliance" element={<SafetyCompliancePage />} />
-            <Route path="/joint-commision" element={<SafetyCompliancePage />} />
-            <Route path="/joint-commission" element={<SafetyCompliancePage />} />
+            <Route path="/about/joint-commission" element={<JointCommissionPage />} />
+            <Route path="/joint-commission" element={<Navigate to="/about/joint-commission" replace />} />
+            <Route path="/joint-commision" element={<Navigate to="/about/joint-commission" replace />} />
           </Route>
           <Route path="/admin/login" element={<AdminLoginPage />} />
           <Route path="/admin" element={<Navigate to="/admin/login" replace />} />

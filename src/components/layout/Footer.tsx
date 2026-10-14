@@ -39,6 +39,7 @@ const FOOTER_NAV = [
       { label: 'Our Team', href: '/about/team' },
       { label: 'Awards & Recognition', href: '/about/awards-recognition' },
       { label: 'Safety & Compliance', href: '/about/safety-compliance' },
+      { label: 'Joint Commission', href: '/about/joint-commission' },
       { label: 'Resources', href: '/resources' },
       { label: 'Contact', href: '/contact' },
     ],

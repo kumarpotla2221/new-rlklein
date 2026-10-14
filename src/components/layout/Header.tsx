@@ -49,6 +49,7 @@ const NAV_ITEMS: NavItem[] = [
       { label: 'Our Team', href: '/about/team', description: 'Leadership and key personnel' },
       { label: 'Awards & Recognition', href: '/about/awards-recognition', description: 'Certifications and awards' },
       { label: 'Safety & Compliance', href: '/about/safety-compliance', description: 'Our compliance commitment' },
+      { label: 'Joint Commission', href: '/about/joint-commission', description: 'Gold Seal of Approval certification' },
       { label: 'FAQs', href: '/about/faqs', description: 'Frequently asked questions' },
     ],
   },
