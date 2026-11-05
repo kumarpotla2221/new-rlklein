@@ -68,7 +68,7 @@ export function HomePageRefresh() {
         </div>
         <div className="container refresh-hero__inner">
           <div className="refresh-hero__copy">
-            <span className="eyebrow refresh-hero__eyebrow">Healthcare staffing since 1984</span>
+            <span className="eyebrow refresh-hero__eyebrow">Healthcare solutions since 1984</span>
             <h1 className="refresh-hero__title">
               <span className="hl"><span className="hl__text">Your next healthcare</span></span>{' '}
               <span className="hl"><span className="hl__text">opportunity <span className="hl__accent">starts here.</span></span></span>
