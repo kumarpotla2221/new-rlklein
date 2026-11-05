@@ -10,7 +10,7 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   {
-    label: 'Correctional Healthcare',
+    label: 'Staffing Solutions',
     children: [
       { label: 'Correctional Healthcare', href: '/cdcr-healthcare/correctional-healthcare', description: 'Specialized staffing for correctional facilities' },
       { label: 'Medical Staffing', href: '/cdcr-healthcare/medical-staffing', description: 'Physicians, nurses and medical professionals' },
