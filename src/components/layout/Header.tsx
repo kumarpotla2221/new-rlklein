@@ -51,6 +51,7 @@ const NAV_ITEMS: NavItem[] = [
       { label: 'Safety & Compliance', href: '/about/safety-compliance', description: 'Our compliance commitment' },
       { label: 'Joint Commission', href: '/about/joint-commission', description: 'Gold Seal of Approval certification' },
       { label: 'FAQs', href: '/about/faqs', description: 'Frequently asked questions' },
+      { label: 'Blog & Insights', href: '/blogs', description: 'Perspectives on healthcare staffing and careers' },
     ],
   },
   { label: 'Contact', href: '/contact' },

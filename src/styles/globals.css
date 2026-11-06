@@ -10,7 +10,7 @@
      Body/UI:  Inter   — highly legible at small sizes.
   ----------------------------------- */
   --font-heading: "Poppins", "Inter", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: neuzeit-grotesk, sans-serif;
 
   /* -----------------------------------
      TYPE SCALE
@@ -53,7 +53,7 @@
   /* -----------------------------------
      FONT WEIGHTS
   ----------------------------------- */
-  --fw-light: 300;
+  --fw-light: 400;
   --fw-regular: 400;
   --fw-medium: 500;
   --fw-semibold: 600;

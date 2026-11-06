@@ -22,7 +22,7 @@ export const FAQS: FAQ[] = [
     id: 'faq-003',
     category: 'About R.L. Klein',
     question: 'Where is R.L. Klein & Associates headquartered?',
-    answer: 'Our corporate headquarters is located at 46 E Peninsula Center Drive, #298, Rolling Hills Estates, CA 90274. We also maintain operational offices in Orem, Utah and Provo, Utah.',
+    answer: 'Our corporate headquarters is located at #45, 444 W. Ocean Blvd, Long Beach, CA 90802. We also maintain operational offices in Orem, Utah and Provo, Utah.',
   },
   {
     id: 'faq-004',

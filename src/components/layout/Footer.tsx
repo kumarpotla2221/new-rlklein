@@ -40,7 +40,7 @@ const FOOTER_NAV = [
       { label: 'Awards & Recognition', href: '/about/awards-recognition' },
       { label: 'Safety & Compliance', href: '/about/safety-compliance' },
       { label: 'Joint Commission', href: '/about/joint-commission' },
-      { label: 'Resources', href: '/resources' },
+      { label: 'Blog & Insights', href: '/blogs' },
       { label: 'Contact', href: '/contact' },
     ],
   },
@@ -106,7 +106,7 @@ export function Footer() {
         <div className="site-footer__offices">
           <div className="site-footer__office">
             <div className="site-footer__office-label">Corporate HQ</div>
-            <div className="site-footer__office-addr">46 E Peninsula Center Drive, #298 · Rolling Hills Estates, CA 90274</div>
+            <div className="site-footer__office-addr">#45, 444 W. Ocean Blvd, Long Beach, CA 90802</div>
           </div>
           <div className="site-footer__office">
             <div className="site-footer__office-label">Operational HQ</div>
