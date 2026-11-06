@@ -65,6 +65,8 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const headerRef = useRef<HTMLElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -80,13 +82,48 @@ export function Header() {
   }, []);
 
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => { document.body.style.overflow = ''; };
+    if (!mobileOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    menuRef.current?.querySelector<HTMLElement>('a, button')?.focus();
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMobileOpen(false);
+        return;
+      }
+      if (event.key !== 'Tab') return;
+      const controls = menuRef.current?.querySelectorAll<HTMLElement>('a[href], button:not([disabled])');
+      if (!controls?.length) return;
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', onKeyDown);
+      if (window.matchMedia('(max-width: 1199px)').matches) toggleRef.current?.focus();
+    };
   }, [mobileOpen]);
+
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 1200px)');
+    const onBreakpointChange = () => {
+      setMobileOpen(false);
+      setMobileExpanded(null);
+      setActiveDropdown(null);
+    };
+    desktop.addEventListener('change', onBreakpointChange);
+    return () => desktop.removeEventListener('change', onBreakpointChange);
+  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -229,8 +266,19 @@ export function Header() {
             </div>
           </div>
 
+          <Link
+            to={JOBS_CTA_HREF}
+            className="header-quick-apply site-header__mobile-jobs"
+            aria-label="Find Your Next Role"
+          >
+            <Flame size={17} className="header-fire-icon" aria-hidden="true" />
+            <span className="header-quick-apply__long">Find Your Next Role</span>
+            <span className="header-quick-apply__short">Find Jobs</span>
+          </Link>
+
           {/* Mobile Menu Toggle */}
           <button
+            ref={toggleRef}
             className="site-header__mobile-toggle"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
@@ -244,9 +292,12 @@ export function Header() {
 
       {/* Mobile Navigation Drawer */}
       <div
+        ref={menuRef}
         id="mobile-menu"
         className={`mobile-menu ${mobileOpen ? 'mobile-menu--open' : ''}`}
         aria-hidden={!mobileOpen}
+        aria-modal={mobileOpen ? true : undefined}
+        inert={!mobileOpen}
         role="dialog"
         aria-label="Mobile navigation menu"
       >
