@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown, ArrowRight, Phone, UserRound, Flame } from 'lucide-react';
+import { Menu, X, ChevronDown, ArrowRight, Phone, UserRound, Flame, Mail } from 'lucide-react';
 
 interface NavItem {
   label: string;
@@ -110,88 +110,123 @@ export function Header() {
       >
         <div className="site-header__utility">
           <div className="container site-header__utility-inner">
-            <span className="site-header__tagline">Healthcare staffing for government &amp; correctional facilities since 1984</span>
+            <Link to="/" className="site-header__logo site-header__logo--desktop" aria-label="R.L. Klein & Associates — Home">
+              <RLKLogo />
+            </Link>
             <div className="site-header__utility-links">
-              <a href="tel:5624275577" className="header-action-link header-phone-link">
+              <a href="tel:5624275577" className="header-action-link header-phone-link" aria-label="Call R.L. Klein at 562-427-5577" title="Call us">
                 <Phone size={14} aria-hidden="true" />
-                <span>562-427-5577</span>
+                <span className="header-action-link__label">562-427-5577</span>
               </a>
-              <Link to="/apply" className="header-action-link">Quick Apply</Link>
-              <Link to="/admin" className="header-action-link header-login-link">
-                <UserRound size={14} aria-hidden="true" />
-                <span>Log In</span>
+              <Link to="/apply" className="header-action-link" aria-label="Quick Apply" title="Quick Apply">
+                <ArrowRight size={14} aria-hidden="true" />
+                <span className="header-action-link__label">Quick Apply</span>
               </Link>
+              <Link to="/admin" className="header-action-link header-login-link" aria-label="Admin login" title="Admin login">
+                <UserRound size={14} aria-hidden="true" />
+                <span className="header-action-link__label">Log In</span>
+              </Link>
+              <a href="mailto:info@rlklein.com" className="header-action-link" aria-label="Email R.L. Klein" title="Email us">
+                <Mail size={14} aria-hidden="true" />
+                <span className="header-action-link__label">info@rlklein.com</span>
+              </a>
+            </div>
+            <div className="site-header__affiliations" aria-label="Professional affiliations">
+              <a
+                className="site-header__linkedin"
+                href="https://www.linkedin.com/company/9280685/admin/dashboard/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="R.L. Klein on LinkedIn"
+                title="LinkedIn"
+              >
+                <span className="site-header__linkedin-mark" aria-hidden="true">in</span>
+              </a>
+              <a
+                className="site-header__commission"
+                href="https://www.jointcommission.org/en-us/about-us/recognizing-excellence/find-accredited-organizations/736727"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="View R.L. Klein's Joint Commission accreditation"
+                title="Joint Commission accreditation"
+              >
+                <img
+                  src={`${import.meta.env.BASE_URL}joint-commission.jpg`}
+                  alt="Joint Commission certified"
+                />
+              </a>
             </div>
           </div>
         </div>
 
         <div className="container site-header__inner">
           {/* Logo */}
-          <Link to="/" className="site-header__logo" aria-label="R.L. Klein & Associates — Home">
+          <Link to="/" className="site-header__logo site-header__logo--mobile" aria-label="R.L. Klein & Associates — Home">
             <RLKLogo />
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="site-nav" aria-label="Main navigation" role="navigation">
-            {NAV_ITEMS.filter((item) => item.href !== JOBS_CTA_HREF).map((item) => (
-              <div
-                key={item.label}
-                className={`site-nav__item ${item.children && item.children.length > 5 ? 'site-nav__item--wide' : ''}`}
-                onPointerEnter={(e) => e.pointerType === 'mouse' && item.children && setActiveDropdown(item.label)}
-                onPointerLeave={(e) => e.pointerType === 'mouse' && setActiveDropdown(null)}
-              >
-                {item.href ? (
-                  <Link
-                    to={item.href}
-                    className={`site-nav__link ${isActive(item.href) ? 'site-nav__link--active' : ''}`}
-                  >
-                    {item.label}
-                  </Link>
-                ) : (
-                  <button
-                    className={`site-nav__link site-nav__link--dropdown ${item.children?.some(c => isActive(c.href)) ? 'site-nav__link--active' : ''}`}
-                    aria-expanded={activeDropdown === item.label}
-                    aria-haspopup="true"
-                    onClick={() => setActiveDropdown(activeDropdown === item.label ? null : item.label)}
-                  >
-                    {item.label}
-                    <ChevronDown size={14} className={`site-nav__chevron ${activeDropdown === item.label ? 'rotated' : ''}`} />
-                  </button>
-                )}
+          <div className="site-header__desktop-group">
+            {/* Desktop Navigation */}
+            <nav className="site-nav" aria-label="Main navigation" role="navigation">
+              {NAV_ITEMS.filter((item) => item.href !== JOBS_CTA_HREF).map((item) => (
+                <div
+                  key={item.label}
+                  className={`site-nav__item ${item.children && item.children.length > 5 ? 'site-nav__item--wide' : ''}`}
+                  onPointerEnter={(e) => e.pointerType === 'mouse' && item.children && setActiveDropdown(item.label)}
+                  onPointerLeave={(e) => e.pointerType === 'mouse' && setActiveDropdown(null)}
+                >
+                  {item.href ? (
+                    <Link
+                      to={item.href}
+                      className={`site-nav__link ${isActive(item.href) ? 'site-nav__link--active' : ''}`}
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <button
+                      className={`site-nav__link site-nav__link--dropdown ${item.children?.some(c => isActive(c.href)) ? 'site-nav__link--active' : ''}`}
+                      aria-expanded={activeDropdown === item.label}
+                      aria-haspopup="true"
+                      onClick={() => setActiveDropdown(activeDropdown === item.label ? null : item.label)}
+                    >
+                      {item.label}
+                      <ChevronDown size={14} className={`site-nav__chevron ${activeDropdown === item.label ? 'rotated' : ''}`} />
+                    </button>
+                  )}
 
-                {item.children && (
-                  <div
-                    className={`site-nav__dropdown ${activeDropdown === item.label ? 'site-nav__dropdown--open' : ''}`}
-                    role="menu"
-                  >
-                    <div className="site-nav__dropdown-inner">
-                      {item.children.map(child => (
-                        <Link
-                          key={child.href}
-                          to={child.href}
-                          className={`site-nav__dropdown-item ${isActive(child.href) ? 'site-nav__dropdown-item--active' : ''}`}
-                          role="menuitem"
-                        >
-                          <span className="site-nav__dropdown-label">{child.label}</span>
-                          {child.description && (
-                            <span className="site-nav__dropdown-desc">{child.description}</span>
-                          )}
-                        </Link>
-                      ))}
+                  {item.children && (
+                    <div
+                      className={`site-nav__dropdown ${activeDropdown === item.label ? 'site-nav__dropdown--open' : ''}`}
+                      role="menu"
+                    >
+                      <div className="site-nav__dropdown-inner">
+                        {item.children.map(child => (
+                          <Link
+                            key={child.href}
+                            to={child.href}
+                            className={`site-nav__dropdown-item ${isActive(child.href) ? 'site-nav__dropdown-item--active' : ''}`}
+                            role="menuitem"
+                          >
+                            <span className="site-nav__dropdown-label">{child.label}</span>
+                            {child.description && (
+                              <span className="site-nav__dropdown-desc">{child.description}</span>
+                            )}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
+                  )}
+                </div>
+              ))}
+            </nav>
 
-          {/* Primary job-seeker action — the desktop nav omits its duplicate link */}
-          <div className="site-header__ctas">
-            <Link to={JOBS_CTA_HREF} className="header-quick-apply">
-              <Flame size={17} className="header-fire-icon" aria-hidden="true" />
-              <span className="header-quick-apply__long">Find Your Next Role</span>
-              <span className="header-quick-apply__short">Find Jobs</span>
-            </Link>
+            <div className="site-header__ctas">
+              <Link to={JOBS_CTA_HREF} className="header-quick-apply">
+                <Flame size={17} className="header-fire-icon" aria-hidden="true" />
+                <span className="header-quick-apply__long">Find Your Next Role</span>
+                <span className="header-quick-apply__short">Find Jobs</span>
+              </Link>
+            </div>
           </div>
 
           {/* Mobile Menu Toggle */}
