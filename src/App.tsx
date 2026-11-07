@@ -76,7 +76,9 @@ function App() {
             <Route path="/healthcare-professionals/pay-benefits" element={<PayBenefitsPage />} />
             <Route path="/healthcare-professionals/recruiters" element={<RecruitersPage />} />
             <Route path="/healthcare-professionals/credentialing-onboarding" element={<CredentialingOnboardingPage />} />
-            <Route path="/healthcare-professionals/faq" element={<ProfessionalsFAQPage />} />
+            <Route path="/healthcare-professionals/faqs" element={<ProfessionalsFAQPage />} />
+            <Route path="/healthcare-professionals/faq" element={<Navigate to="/healthcare-professionals/faqs" replace />} />
+            <Route path="/about/faqs" element={<Navigate to="/healthcare-professionals/faqs" replace />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/blogs" element={<BlogPage />} />
             <Route path="/blogs/:slug" element={<BlogPage />} />

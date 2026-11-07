@@ -2876,3 +2876,24 @@
   .admin-login__form-logo { width: 240px; height: 76px; }
   .admin-login__meta-badges { flex-wrap: wrap; justify-content: center; }
 }
+/* FAQ page matched to the supplied travel nursing reference. */
+.professionals-faq-page { --faq-accent: var(--color-blue); background: #fff; }
+.professionals-faq-page .travel-faq-hero { min-height: clamp(560px, 47vw, 900px); padding: clamp(60px, 6.3vw, 120px) 3.2%; background-size: cover; background-position: center; display: flex; align-items: center; }
+.professionals-faq-page .travel-faq-hero > .container { width: 100%; max-width: none; padding: 0; }
+.professionals-faq-page .travel-faq-hero h1 { margin: 0; color: var(--faq-accent); font-family: 'Poppins', sans-serif; font-weight: 400; font-size: clamp(52px, 5.35vw, 104px); line-height: 1.05; letter-spacing: -.045em; text-wrap: initial; }
+.professionals-faq-page .travel-faq-container { width: 87.8%; max-width: 1680px; padding: 0; }
+.professionals-faq-page .faq-list { gap: 15px; }
+.professionals-faq-page .faq-item { border: 0; border-radius: 13px; background: #f7f7f7; overflow: hidden; }
+.professionals-faq-page .faq-trigger { justify-content: flex-start; gap: 24px; min-height: 89px; padding: 16px 26px; color: var(--faq-accent); font-family: 'Poppins', sans-serif; font-size: clamp(20px, 1.78vw, 34px); font-weight: 600; line-height: 1.4; }
+.professionals-faq-page .faq-trigger:hover { background: var(--color-blue-50); color: var(--color-blue-dark); }
+.professionals-faq-page .faq-trigger:focus-visible { outline: 3px solid var(--faq-accent); outline-offset: -4px; }
+.professionals-faq-page .faq-content { padding: 0 32px 28px 105px; font-size: 18px; line-height: 1.8; }
+@media (max-width: 767px) {
+  .professionals-faq-page .travel-faq-hero { min-height: 540px; padding: 48px 6%; }
+  .professionals-faq-page .travel-faq-hero h1 { font-size: clamp(40px, 8vw, 61px); }
+  .professionals-faq-page .travel-faq-container { width: 90%; }
+  .professionals-faq-page .faq-trigger { padding: 16px; gap: 12px; font-size: 18px; }
+  .professionals-faq-page .faq-trigger svg { width: 34px; height: 34px; }
+  .professionals-faq-page .faq-content { padding: 0 20px 24px 62px; font-size: 16px; }
+}
+

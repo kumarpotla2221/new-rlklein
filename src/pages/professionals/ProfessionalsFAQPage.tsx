@@ -1,40 +1,28 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Breadcrumbs } from '../../components/ui/Typography';
+import { photo } from '../../data/images';
 import { FAQS } from '../../data/faqs';
-import { ChevronDown, ArrowRight } from 'lucide-react';
+import { ChevronsRight, ArrowRight } from 'lucide-react';
 
 export function ProfessionalsFAQPage() {
-  const [openIdx, setOpenIdx] = useState<number | null>(0);
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   const candidateFaqs = FAQS.filter(
-    (f) => f.category === 'Healthcare Professionals' || f.category === 'Jobs' || f.category === 'Credentialing'
+    (faq) => faq.id !== 'faq-002' && faq.id !== 'faq-003'
   );
 
   return (
     <div className="professionals-faq-page">
-      <Breadcrumbs
-        items={[
-          { label: 'Home', href: '/' },
-          { label: 'Healthcare Professionals', href: '/healthcare-professionals' },
-          { label: 'FAQs' },
-        ]}
-      />
-
-      <header className="page-hero">
+      <header className="travel-faq-hero" style={{ backgroundImage: `linear-gradient(90deg, #fff 0%, rgba(255,255,255,.9) 26%, transparent 70%), url("${photo('careTeam', 2200)}")` }}>
         <div className="container">
           <div className="page-hero__content">
-            <span className="eyebrow" style={{ color: '#A0B8E8' }}>Help &amp; Information</span>
-            <h1>Healthcare Professionals FAQ</h1>
-            <p className="page-hero__subtitle">
-              Frequently asked questions about applying, licensing, credentialing, payroll, and placement workflows.
-            </p>
+            <h1>Your questions<br />about R.L. Klein,<br />answered.</h1>
           </div>
         </div>
       </header>
 
       <section className="section bg-white">
-        <div className="container" style={{ maxWidth: 860 }}>
+        <div className="container travel-faq-container">
           <div className="faq-list">
             {candidateFaqs.map((faq, idx) => (
               <div key={faq.id} className="faq-item">
@@ -44,15 +32,16 @@ export function ProfessionalsFAQPage() {
                   onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
                   aria-expanded={openIdx === idx}
                 >
-                  <span>{faq.question}</span>
-                  <ChevronDown
-                    size={18}
+                  <ChevronsRight
+                    aria-hidden="true"
+                    size={55}
                     style={{
-                      transform: openIdx === idx ? 'rotate(180deg)' : 'none',
+                      transform: openIdx === idx ? 'rotate(90deg)' : 'none',
                       transition: 'transform 200ms ease',
                       flexShrink: 0,
                     }}
                   />
+                  <span>{faq.question}</span>
                 </button>
                 {openIdx === idx && (
                   <div className="faq-content">
@@ -68,7 +57,7 @@ export function ProfessionalsFAQPage() {
               Have a Specific Question?
             </h3>
             <p style={{ fontSize: 15, color: 'var(--color-gray-600)', marginBottom: 20 }}>
-              Our recruitment team is available Monday–Saturday from 9 AM–6 PM PST.
+              Contact our team for help with job opportunities, applications, credentialing, or facility staffing needs.
             </p>
             <Link to="/contact" className="btn btn--primary btn--md">
               <span>Contact Us Directly</span>
