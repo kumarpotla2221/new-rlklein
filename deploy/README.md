@@ -54,7 +54,9 @@ cPanel → **Files** → **FTP Accounts** → **Add FTP Account**:
 ⚠️ Check the **Directory** field carefully before clicking **Create FTP Account**. cPanel fills it
 in automatically from the login name. It must be exactly as above, and must **not** be `public_html`.
 
-The full login names become `deploysite@rlklein.com` and `deployapp@rlklein.com`.
+The full login names include the domain chosen in the **Domain** dropdown, e.g.
+`deploysite@new.rlklein.com` and `deployapp@new.rlklein.com`. The FTP Accounts list shows the exact name.
+Don't let the browser auto-fill these fields with the database username or password.
 
 ### Step 4: Add the logins to GitHub (encrypted; nobody can read them back)
 GitHub → `new-rlklein` → **Settings** → **Secrets and variables** → **Actions** → **New repository secret**.
@@ -63,9 +65,9 @@ Add these five, one at a time:
 | Name | Value |
 | --- | --- |
 | `FTP_SERVER` | `cpanel199.turbify.biz` (not ftp.rlklein.com, which points to the wrong server) |
-| `FTP_SITE_USERNAME` | `deploysite@rlklein.com` |
+| `FTP_SITE_USERNAME` | full login of account 1, e.g. `deploysite@new.rlklein.com` |
 | `FTP_SITE_PASSWORD` | password of account 1 |
-| `FTP_APP_USERNAME` | `deployapp@rlklein.com` |
+| `FTP_APP_USERNAME` | full login of account 2, e.g. `deployapp@new.rlklein.com` |
 | `FTP_APP_PASSWORD` | password of account 2 |
 
 ### Step 5: First deployment
