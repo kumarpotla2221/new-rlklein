@@ -65,7 +65,7 @@ jobs:
       # ---- Backend ----
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.4' # same version as Turbify
+          php-version: '8.3' # same version as new.rlklein.com on Turbify
           extensions: pdo_mysql, mbstring
           coverage: none
       - name: PHP syntax check

@@ -6,6 +6,15 @@
 # That version has no "hide from Google" rule and uses the main domain.
 # ============================================================
 
+# PHP version for this site only (WordPress keeps its own). The backend needs PHP 8.1+;
+# Turbify's newest is 8.3. Same block cPanel → MultiPHP Manager writes, kept here so
+# uploads never switch the site back to the server default (PHP 8.0).
+# php -- BEGIN cPanel-generated handler, do not edit
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php83 .php .php8 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
+
 Options -Indexes
 DirectoryIndex index.html
 

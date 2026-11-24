@@ -4,7 +4,7 @@
 Edit in VS Code → Commit → Push ("Sync Changes")
         ↓
 GitHub Actions (.github/workflows/deploy.yml)
-  1. Checks: type check, lint, build, PHP syntax, 78 backend tests on MariaDB 10.11 + PHP 8.4
+  1. Checks: type check, lint, build, PHP syntax, 78 backend tests on MariaDB 10.11 + PHP 8.3
   2. Only if ALL pass → uploads to Turbify over encrypted FTP (FTPS)
         ↓
 https://new.rlklein.com is updated (about 3–5 minutes after pushing)

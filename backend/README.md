@@ -1,7 +1,7 @@
 # Backend — PHP API
 
 Plain PHP 8.1+ with PDO and MySQL/MariaDB, with no framework and no Composer packages, so it runs on
-any cPanel shared hosting. Built for Turbify (PHP 8.4, MariaDB 10.11); tested locally on PHP 8.2,
+any cPanel shared hosting. Built for Turbify (PHP 8.3 on new.rlklein.com, set in deploy/new-subdomain/.htaccess; MariaDB 10.11); tested locally on PHP 8.2,
 MariaDB 10.4 and Apache.
 
 ## Folder layout
