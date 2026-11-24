@@ -1,5 +1,9 @@
 # RLKlein Job Portal — Backend Setup (Google Apps Script)
 
+> **Note:** This is the **current** backend. It is being replaced by the PHP + MySQL backend
+> described in [SYSTEM_DESIGN.md](SYSTEM_DESIGN.md). The website now lives in `frontend/`, so run
+> the `npm` commands below from inside that folder, and `.env.local` goes in `frontend/`.
+
 This guide connects the website to a **private Google Sheet** and a **private Google Drive folder**
 through Google Apps Script. No prior backend experience needed. Allow about 30 minutes.
 
