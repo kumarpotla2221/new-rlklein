@@ -1,12 +1,13 @@
 // ============================================================
-// API CLIENT — the only place that talks to the Google Apps Script Web App.
+// API CLIENT: the only place that talks to the PHP backend (backend/).
 //
-// VITE_API_URL is the public Web App URL (it ends in /exec). Vite puts every
+// VITE_API_URL is the full API address, set per mode in .env.development /
+// .env.production (e.g. https://new.rlklein.com/api/index.php). Vite puts every
 // VITE_* variable into the public JavaScript bundle, so it must never hold a
-// password, token, or Google credential — the URL alone grants no admin access.
+// password or token. The URL alone grants no admin access.
 //
-// Requests are CORS "simple requests" (GET, or POST with a text/plain body)
-// because Apps Script cannot answer CORS preflight requests.
+// Requests are CORS "simple requests" (GET, or POST with a text/plain body),
+// so the local dev server can call the API without a preflight request.
 // ============================================================
 
 import type { AdminUser } from '../types';

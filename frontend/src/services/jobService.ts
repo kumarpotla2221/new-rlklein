@@ -1,5 +1,5 @@
 // ============================================================
-// JOB SERVICE — jobs come from the Google Apps Script API (Jobs sheet).
+// JOB SERVICE: jobs come from the PHP API (MySQL jobs table).
 // Public reads only ever receive Active, unexpired jobs; the server enforces that.
 // Admin calls are authorized by the server on every request.
 // ============================================================

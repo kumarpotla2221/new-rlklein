@@ -1,8 +1,7 @@
 // ============================================================
-// APPLICATION SERVICE — submissions go to Google Apps Script, which validates
-// them, stores the resume in the private Drive folder and records the row in
-// the Applications sheet. Everything except submitApplication is admin-only
-// and authorized by the server.
+// APPLICATION SERVICE: submissions go to the PHP API, which validates them,
+// stores the resume in its private folder and records the application in MySQL.
+// Everything except submitApplication is admin-only and authorized by the server.
 // ============================================================
 
 import { adminPost, apiPost, ApiError } from './apiClient';
@@ -15,7 +14,7 @@ export type ApplicationSubmission = Omit<
   'id' | 'referenceNumber' | 'appliedDate' | 'status' | 'adminNotes' | 'resumeFileName' | 'resumeUrl'
 >;
 
-// Keep in sync with RESUME_MAX_BYTES in apps-script/Config.gs and the "Max 10 MB" form text.
+// Keep in sync with uploads.resume_max_bytes in backend/rlk_app/config.php and the "Max 10 MB" form text.
 export const RESUME_MAX_BYTES = 10 * 1024 * 1024;
 export const RESUME_EXTENSIONS = /\.(pdf|doc|docx)$/i;
 
@@ -40,7 +39,15 @@ function readFileAsBase64(file: File): Promise<string> {
 }
 
 export const applicationService = {
-  async submitApplication(data: ApplicationSubmission, resumeFile: File): Promise<Application> {
+  /**
+   * `consent`: the applicant ticked the consent box (the server records when).
+   * `website`: hidden honeypot field; people leave it empty, bots fill it in.
+   */
+  async submitApplication(
+    data: ApplicationSubmission,
+    resumeFile: File,
+    extras: { consent?: boolean; website?: string } = {}
+  ): Promise<Application> {
     if (!RESUME_EXTENSIONS.test(resumeFile.name)) {
       throw new ApiError('VALIDATION', 'Please upload a PDF, DOC, or DOCX file.');
     }
@@ -55,7 +62,7 @@ export const applicationService = {
     };
     const created = await apiPost<{ id: string; referenceNumber: string; appliedDate: string; status: string }>(
       'createApplication',
-      { ...data, resume }
+      { ...data, consent: extras.consent === true, website: extras.website ?? '', resume }
     );
 
     return {

@@ -2,6 +2,10 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CheckCircle2 } from 'lucide-react';
 import { PROFESSIONS, SPECIALTIES } from '../../data/jobs';
+import { formsService } from '../../services/formsService';
+import { errorMessage } from '../../services/apiClient';
+import { FormAlert } from '../../components/ui/FormAlert';
+import { HoneypotField } from '../../components/ui/HoneypotField';
 
 const EXPERIENCE_OPTIONS = ['01-03 Years', '04-06 Years', '07-09 Years', '10+ Years'];
 const START_OPTIONS = ['Immediately', '3 months', '6 months', 'Year or longer'];
@@ -11,6 +15,8 @@ const HERO_IMAGE = 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d
 export function ContactPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [honeypot, setHoneypot] = useState('');
 
   const [form, setForm] = useState({
     firstName: '',
@@ -21,7 +27,7 @@ export function ContactPage() {
     specialty: '',
     experience: '',
     startTime: '',
-    emailConsent: true,
+    emailConsent: false, // opt-in: visitors must tick it themselves
     smsConsent: false,
     message: '',
   });
@@ -60,11 +66,17 @@ export function ContactPage() {
     }
 
     setSubmitting(true);
-    // Simulate submission to recruiter intake pipeline
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    setSubmitting(false);
-    setSubmitted(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setSubmitError(null);
+    try {
+      await formsService.submitContact(form, honeypot);
+      setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (err) {
+      console.error('Contact form submission failed', err);
+      setSubmitError(errorMessage(err, 'Your message could not be sent. Please try again, or call us at 562-427-5577.'));
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -100,6 +112,7 @@ export function ContactPage() {
               </p>
 
               <form onSubmit={handleSubmit} className="contact-form" noValidate>
+                <HoneypotField value={honeypot} onChange={setHoneypot} />
                 <div className="contact-form__grid">
                   <div className="form-group">
                     <label htmlFor="firstName" className="form-label form-label--required">First Name</label>
@@ -166,8 +179,10 @@ export function ContactPage() {
 
                 <div className="form-group">
                   <label htmlFor="message" className="form-label">Message</label>
-                  <textarea id="message" name="message" rows={5} className="form-textarea" value={form.message} onChange={handleChange} />
+                  <textarea id="message" name="message" rows={5} maxLength={5000} className="form-textarea" value={form.message} onChange={handleChange} />
                 </div>
+
+                <FormAlert message={submitError} />
 
                 <div className="contact-form__submit">
                   <button type="submit" disabled={submitting} className="btn btn--accent btn--lg">

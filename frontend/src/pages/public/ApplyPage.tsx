@@ -5,6 +5,7 @@ import { applicationService, RESUME_MAX_BYTES } from '../../services/application
 import { errorMessage } from '../../services/apiClient';
 import type { Job, Application } from '../../types';
 import { Breadcrumbs } from '../../components/ui/Typography';
+import { HoneypotField } from '../../components/ui/HoneypotField';
 import { PROFESSIONS, STATES } from '../../data/jobs';
 import { CheckCircle, UploadCloud, FileText, ShieldCheck } from 'lucide-react';
 
@@ -15,6 +16,7 @@ export function ApplyPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submittedApplication, setSubmittedApplication] = useState<Application | null>(null);
   const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [honeypot, setHoneypot] = useState('');
 
   // Form states
   const [formData, setFormData] = useState({
@@ -141,7 +143,7 @@ export function ApplyPage() {
         preferredShift: formData.preferredShift,
         availableStartDate: formData.availableStartDate,
         message: formData.message,
-      }, selectedResume!);
+      }, selectedResume!, { consent: formData.consent, website: honeypot });
 
       setSubmittedApplication(created);
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -235,6 +237,7 @@ export function ApplyPage() {
             </div>
 
             <form onSubmit={handleSubmit} className="admin-card public-application-form" style={{ padding: '40px' }} noValidate>
+              <HoneypotField value={honeypot} onChange={setHoneypot} />
               {errors.form && (
                 <div style={{ backgroundColor: 'var(--color-error-light)', color: 'var(--color-error)', padding: '12px 16px', borderRadius: 4, marginBottom: 24, fontSize: '14px' }}>
                   {errors.form}

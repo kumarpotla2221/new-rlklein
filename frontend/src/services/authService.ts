@@ -1,8 +1,8 @@
 // ============================================================
 // AUTH SERVICE — Admin Authentication
-// Credentials are checked by Google Apps Script against the private Admins
-// sheet. The browser only ever holds a revocable session token issued by the
-// server; every admin API call is re-authorized server-side.
+// Credentials are checked by the PHP API against the admins table. The browser
+// only ever holds a revocable session token issued by the server; every admin
+// API call is re-authorized server-side.
 // ============================================================
 
 import { apiPost, adminPost, readSession, saveSession, clearSession, ApiError } from './apiClient';

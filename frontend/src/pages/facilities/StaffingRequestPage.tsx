@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/ui/Typography';
 import { PROFESSIONS, STATES } from '../../data/jobs';
 import { CheckCircle2 } from 'lucide-react';
+import { formsService } from '../../services/formsService';
+import { errorMessage } from '../../services/apiClient';
+import { FormAlert } from '../../components/ui/FormAlert';
+import { HoneypotField } from '../../components/ui/HoneypotField';
 
 const FACILITY_TYPES = [
   'State Correctional Facility',
@@ -18,6 +22,8 @@ const FACILITY_TYPES = [
 export function StaffingRequestPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [honeypot, setHoneypot] = useState('');
 
   const [form, setForm] = useState({
     firstName: '',
@@ -77,11 +83,17 @@ export function StaffingRequestPage() {
     }
 
     setSubmitting(true);
-    // Simulate submission to facility intake pipeline
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    setSubmitting(false);
-    setSubmitted(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setSubmitError(null);
+    try {
+      await formsService.submitStaffingRequest(form, honeypot);
+      setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (err) {
+      console.error('Staffing request submission failed', err);
+      setSubmitError(errorMessage(err, 'Your request could not be sent. Please try again, or call us at 562-427-5577.'));
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -134,6 +146,7 @@ export function StaffingRequestPage() {
       <section className="section bg-off-white">
         <div className="container" style={{ maxWidth: 860 }}>
           <form onSubmit={handleSubmit} className="admin-card staffing-request-form" style={{ padding: 40 }} noValidate>
+            <HoneypotField value={honeypot} onChange={setHoneypot} />
             {/* 1. CONTACT & ORGANIZATION */}
             <div style={{ marginBottom: 32 }}>
               <h3 style={{ fontSize: '20px', color: 'var(--color-navy)', paddingBottom: 8, borderBottom: '1px solid var(--color-gray-200)', marginBottom: 20 }}>
@@ -394,6 +407,8 @@ export function StaffingRequestPage() {
                 />
               </div>
             </div>
+
+            <FormAlert message={submitError} />
 
             <button
               type="submit"

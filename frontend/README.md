@@ -56,14 +56,30 @@ frontend/
 | Change job form dropdown options | `src/data/jobs.ts` |
 | Point the site at a different API | `.env` → `VITE_API_URL` |
 
-## Settings (`.env`)
+## Settings: which API the website talks to
 
-| Variable | Meaning |
-| --- | --- |
-| `VITE_API_URL` | Full URL of the backend API. Must start with `https://`. |
+| File | Used by | `VITE_API_URL` |
+| --- | --- | --- |
+| `.env.development` | `npm run dev` | `http://127.0.0.1:8080/api/index.php` (PHP backend on this computer) |
+| `.env.production` | `npm run build` | `https://new.rlklein.com/api/index.php` (live site) |
 
-Everything in `VITE_*` variables ends up in the public website code — never put passwords there.
-`.env` is not committed to Git.
+To run the backend locally for `npm run dev`, see [backend/README.md](../backend/README.md#testing-locally-xampp).
+These two files hold only public addresses and are committed to Git. Everything in `VITE_*`
+variables ends up in the public website code, so never put passwords there.
+
+The old `.env` (Google Apps Script address) is no longer used. The two files above take priority
+over it, and it can be deleted.
+
+## Forms
+
+| Page | Sends to API action | Saved in table |
+| --- | --- | --- |
+| Apply (`/apply`, `/apply/:jobId`) | `createApplication` | `applications` |
+| Contact (`/contact`) | `submitContact` | `contact_submissions` |
+| Staffing Request (`/facilities/staffing-request`) | `submitStaffingRequest` | `staffing_requests` |
+
+All three include a hidden spam-trap field (`HoneypotField`) and show the server's error message
+in a red box (`FormAlert`) if sending fails. Each submission also emails the team.
 
 ## Performance notes
 
