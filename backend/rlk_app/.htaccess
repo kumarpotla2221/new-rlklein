@@ -1,0 +1,2 @@
+# Safety net: this folder must never be web-accessible (it belongs outside public_html).
+Require all denied

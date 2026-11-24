@@ -1,0 +1,8 @@
+# Only the API entry point and the one-time setup page can be opened from the web.
+Options -Indexes
+DirectoryIndex index.php
+
+Require all denied
+<FilesMatch "^(index|setup)\.php$">
+    Require all granted
+</FilesMatch>

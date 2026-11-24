@@ -23,3 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Backend: server secrets and uploaded files must never be committed
+backend/rlk_app/config.php
+backend/rlk_app/storage/
+backend/rlk_app/logs/
