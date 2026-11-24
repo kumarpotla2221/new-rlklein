@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/ui/Typography';
-import { Users2, CalendarCheck2, Clock, PhoneCall, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Users2, CalendarCheck2, PhoneCall } from 'lucide-react';
 
 export function WorkforceContinuityPage() {
   return (

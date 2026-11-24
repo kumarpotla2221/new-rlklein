@@ -6,7 +6,7 @@ import { errorMessage } from '../../services/apiClient';
 import type { Job, Application } from '../../types';
 import { Breadcrumbs } from '../../components/ui/Typography';
 import { PROFESSIONS, STATES } from '../../data/jobs';
-import { CheckCircle, UploadCloud, FileText, ArrowRight, ShieldCheck } from 'lucide-react';
+import { CheckCircle, UploadCloud, FileText, ShieldCheck } from 'lucide-react';
 
 export function ApplyPage() {
   const { jobId } = useParams<{ jobId?: string }>();

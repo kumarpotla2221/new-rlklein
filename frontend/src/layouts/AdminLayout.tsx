@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { PageLoader } from '../components/ui/PageLoader';
 import { 
   LayoutDashboard, 
   Briefcase, 
@@ -143,7 +144,9 @@ export function AdminLayout() {
         </header>
 
         <main className="admin-body">
-          <Outlet />
+          <Suspense fallback={<PageLoader />}>
+            <Outlet />
+          </Suspense>
         </main>
       </div>
     </div>

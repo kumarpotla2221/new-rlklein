@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { applicationService } from '../../services/applicationService';
-import type { Application, ApplicationStatus } from '../../types';
+import type { Application } from '../../types';
 import { StatusBadge } from '../../components/ui/StatusBadge';
-import { Search, Eye, Users, FileText } from 'lucide-react';
+import { Search, Eye, Users } from 'lucide-react';
 
 const STATUS_TABS: Array<{ label: string; value: string }> = [
   { label: 'All', value: 'all' },

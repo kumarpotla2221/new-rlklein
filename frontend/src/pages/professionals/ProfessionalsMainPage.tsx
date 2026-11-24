@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/ui/Typography';
 import HERO_IMAGE from '../../../RLklein Hero.jpg';
-import { Stethoscope, DollarSign, Users, ShieldCheck, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 
 export function ProfessionalsMainPage() {
   return (

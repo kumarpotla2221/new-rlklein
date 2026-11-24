@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/ui/Typography';
-import { ArrowRight, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const DETAILED_STAGES = [
   {

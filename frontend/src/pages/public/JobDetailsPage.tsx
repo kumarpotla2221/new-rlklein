@@ -4,16 +4,15 @@ import { jobService } from '../../services/jobService';
 import type { Job } from '../../types';
 import { Breadcrumbs } from '../../components/ui/Typography';
 import { StatusBadge } from '../../components/ui/StatusBadge';
-import { 
-  MapPin, 
-  Briefcase, 
-  Clock, 
-  Calendar, 
-  ShieldCheck, 
-  CheckCircle2, 
-  ArrowLeft, 
-  DollarSign, 
-  Building2 
+import {
+  MapPin,
+  Briefcase,
+  Clock,
+  Calendar,
+  ShieldCheck,
+  CheckCircle2,
+  ArrowLeft,
+  Building2,
 } from 'lucide-react';
 
 export function JobDetailsPage() {

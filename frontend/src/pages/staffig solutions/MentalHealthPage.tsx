@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/ui/Typography';
 import { photo } from '../../data/images';
-import { HeartPulse, CheckCircle2, ArrowRight } from 'lucide-react';
+import { HeartPulse } from 'lucide-react';
 
 const BEHAVIORAL_ROLES = [
   { role: 'Psychiatrists (MD / DO)', desc: 'Board-certified psychiatrists diagnosing complex disorders, managing psychotropic medications, and conducting psychiatric crisis evaluations.' },

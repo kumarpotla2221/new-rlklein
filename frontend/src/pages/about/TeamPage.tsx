@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/ui/Typography';
-import { Mail, Phone, X, ArrowRight } from 'lucide-react';
+import { X, ArrowRight } from 'lucide-react';
 
 interface ExecutiveMember {
   id: string;

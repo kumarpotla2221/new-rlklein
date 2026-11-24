@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/ui/Typography';
-import { ShieldCheck, CheckCircle2, ArrowRight, FileCheck, Award, Lock, FileSearch } from 'lucide-react';
+import { ArrowRight, FileCheck, Award, Lock, FileSearch } from 'lucide-react';
 
 const CREDENTIALING_PROCESS = [
   { step: '01', title: 'APPLICATION', desc: 'Direct candidate submission without account friction or candidate login.' },

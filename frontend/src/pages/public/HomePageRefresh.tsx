@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Usa from '@react-map/usa';
 import { ArrowRight, BadgeCheck, Building2, CalendarDays, Clock3, HeartHandshake, MapPin, ShieldCheck, Stethoscope } from 'lucide-react';
 import { jobService } from '../../services/jobService';
 import type { Job } from '../../types';
@@ -12,6 +11,10 @@ import { Reveal } from '../../components/ui/Reveal';
 
 import HERO_IMAGE from '../../../RLklein Hero.jpg';
 import HERO_VIDEO from '../../../rlklein bg.mp4';
+
+// The decorative US map is large (~150 KB) and sits far below the fold,
+// so it downloads after the rest of the home page instead of delaying it.
+const Usa = lazy(() => import('@react-map/usa'));
 
 const TEAM_IMAGE = photo('clinicalTeam', 1200);
 // Decorative banners for the featured job cards
@@ -213,7 +216,9 @@ export function HomePageRefresh() {
             </div>
           </div>
           <div className="refresh-final-cta__map" aria-hidden="true">
-            <Usa type="select-single" size={520} mapColor="#FFFFFF" strokeColor="#D8232A" strokeWidth={1} disableClick disableHover />
+            <Suspense fallback={null}>
+              <Usa type="select-single" size={520} mapColor="#FFFFFF" strokeColor="#D8232A" strokeWidth={1} disableClick disableHover />
+            </Suspense>
           </div>
         </div>
       </section>

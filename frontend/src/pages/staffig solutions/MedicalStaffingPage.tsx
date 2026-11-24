@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/ui/Typography';
 import { photo } from '../../data/images';
-import { Stethoscope, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Stethoscope, ArrowRight } from 'lucide-react';
 
 const MEDICAL_ROLES = [
   { role: 'Physicians (MD / DO)', desc: 'Board-certified or board-eligible practitioners in Internal Medicine, Family Medicine, and Emergency Medicine providing primary and urgent patient care.' },

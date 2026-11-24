@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/ui/Typography';
-import { DollarSign, ShieldCheck, CreditCard, Clock, ChevronDown, CheckCircle2 } from 'lucide-react';
+import { DollarSign, ShieldCheck, CreditCard, Clock, ChevronDown } from 'lucide-react';
 
 interface BenefitItem {
   title: string;

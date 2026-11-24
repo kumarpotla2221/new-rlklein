@@ -4,7 +4,7 @@ import { jobService } from '../../services/jobService';
 import { applicationService } from '../../services/applicationService';
 import type { Job, Application } from '../../types';
 import { StatusBadge } from '../../components/ui/StatusBadge';
-import { Briefcase, Users, PlusCircle, ArrowRight, Eye } from 'lucide-react';
+import { PlusCircle, ArrowRight, Eye } from 'lucide-react';
 
 export function AdminDashboardPage() {
   const [jobs, setJobs] = useState<Job[]>([]);

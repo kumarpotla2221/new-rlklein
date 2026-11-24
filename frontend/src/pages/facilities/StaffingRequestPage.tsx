@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/ui/Typography';
 import { PROFESSIONS, STATES } from '../../data/jobs';
-import { CheckCircle2, Building2, PhoneCall, ArrowRight, ShieldCheck } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 
 const FACILITY_TYPES = [
   'State Correctional Facility',

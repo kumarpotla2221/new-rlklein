@@ -3,7 +3,7 @@ import { useNavigate, useParams, Link } from 'react-router-dom';
 import { jobService } from '../../services/jobService';
 import { errorMessage as apiErrorMessage } from '../../services/apiClient';
 import type { Job, JobStatus, JobVisibility, EmploymentType, ShiftType, CompensationType } from '../../types';
-import { PROFESSIONS, STATES, WORK_SETTINGS, SPECIALTIES, SHIFT_PATTERNS, CONTRACT_TYPES, PAY_FREQUENCIES, STATE_ABBREVIATIONS } from '../../data/jobs';
+import { PROFESSIONS, STATES, WORK_SETTINGS, SHIFT_PATTERNS, CONTRACT_TYPES, PAY_FREQUENCIES, STATE_ABBREVIATIONS } from '../../data/jobs';
 import { ArrowLeft, Save, Send, Eye } from 'lucide-react';
 import { JobDetailsModal } from '../../components/jobs/JobDetailsModal';
 

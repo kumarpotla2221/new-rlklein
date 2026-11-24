@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/ui/Typography';
-import { Award, ShieldCheck, CheckCircle2, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const VERIFIED_CERTIFICATIONS = [
   {

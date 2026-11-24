@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Usa from '@react-map/usa';
 import { STATE_DATA } from '../../data/services';
-import { MapPin, Info, ArrowRight } from 'lucide-react';
+import { MapPin, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 // Grid-aligned and geographic SVG layout for the 50 US states

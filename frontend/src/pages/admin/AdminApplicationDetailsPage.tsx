@@ -4,16 +4,12 @@ import { applicationService } from '../../services/applicationService';
 import { errorMessage } from '../../services/apiClient';
 import type { Application, ApplicationStatus } from '../../types';
 import { StatusBadge } from '../../components/ui/StatusBadge';
-import { 
-  ArrowLeft, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  FileText, 
-  Download, 
-  ShieldCheck, 
-  Save, 
-  Clock 
+import {
+  ArrowLeft,
+  FileText,
+  Download,
+  ShieldCheck,
+  Save,
 } from 'lucide-react';
 
 const ALL_STATUSES: ApplicationStatus[] = [

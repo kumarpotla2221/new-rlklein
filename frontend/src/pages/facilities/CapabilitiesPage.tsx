@@ -1,14 +1,9 @@
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/ui/Typography';
-import { 
-  Building2, 
-  ShieldCheck, 
-  FileText, 
-  Users, 
-  CheckCircle2, 
-  ArrowRight, 
-  Award, 
-  Download 
+import {
+  ArrowRight,
+  Award,
+  Download,
 } from 'lucide-react';
 
 const CAPABILITY_AREAS = [

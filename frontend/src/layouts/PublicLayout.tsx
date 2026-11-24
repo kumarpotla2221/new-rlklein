@@ -1,7 +1,9 @@
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Header } from '../components/layout/Header';
 import { Footer } from '../components/layout/Footer';
 import { ScrollToTop } from '../components/ui/ScrollToTop';
+import { PageLoader } from '../components/ui/PageLoader';
 
 export function PublicLayout() {
   return (
@@ -9,7 +11,9 @@ export function PublicLayout() {
       <ScrollToTop />
       <Header />
       <main style={{ flex: '1 0 auto' }}>
-        <Outlet />
+        <Suspense fallback={<PageLoader />}>
+          <Outlet />
+        </Suspense>
       </main>
       <Footer />
     </div>

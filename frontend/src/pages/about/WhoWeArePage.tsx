@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/ui/Typography';
 import { photo } from '../../data/images';
-import { Award, ShieldCheck, History, HeartHandshake, CheckCircle2, ArrowRight } from 'lucide-react';
+import { ShieldCheck, History, HeartHandshake, ArrowRight } from 'lucide-react';
 
 export function WhoWeArePage() {
   return (

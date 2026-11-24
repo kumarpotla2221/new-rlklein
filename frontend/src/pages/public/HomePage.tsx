@@ -5,17 +5,16 @@ import type { Job } from '../../types';
 import { JobCard } from '../../components/jobs/JobCard';
 import { InteractiveUSMap } from '../../components/map/InteractiveUSMap';
 import { SERVICE_AREAS } from '../../data/services';
-import { 
-  ShieldCheck, 
-  Clock, 
-  Award, 
-  ArrowRight, 
-  Users, 
-  Building2, 
-  FileCheck2, 
-  HeartHandshake, 
+import {
+  ShieldCheck,
+  Clock,
+  Award,
+  ArrowRight,
+  Building2,
+  FileCheck2,
+  HeartHandshake,
   Stethoscope,
-  BookOpen
+  BookOpen,
 } from 'lucide-react';
 
 export function HomePage() {

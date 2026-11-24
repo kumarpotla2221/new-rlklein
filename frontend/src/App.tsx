@@ -1,52 +1,65 @@
+import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
-import { AdminLayout } from './layouts/AdminLayout';
 import { PublicLayout } from './layouts/PublicLayout';
 import { ProtectedRoute } from './components/ui/ProtectedRoute';
-import { HomePage } from './pages/public/HomePage';
+import { PageLoader } from './components/ui/PageLoader';
+// The home page is the most visited entry point, so it ships in the main bundle.
 import { HomePageRefresh } from './pages/public/HomePageRefresh';
-import { HotJobsPage } from './pages/public/HotJobsPage';
-import { JobDetailsPage } from './pages/public/JobDetailsPage';
-import { ApplyPage } from './pages/public/ApplyPage';
-import { ConsentAgreementPage } from './pages/public/ConsentAgreementPage';
-import { PrivacyPolicyPage } from './pages/public/PrivacyPolicyPage';
-import { TermsOfUsePage } from './pages/public/TermsOfUsePage';
-import { ContactPage } from './pages/public/ContactPage';
-import { BlogPage } from './pages/public/BlogPage';
-import { WhoWeArePage } from './pages/about/WhoWeArePage';
-import { TeamPage } from './pages/about/TeamPage';
-import { AwardsRecognitionPage } from './pages/about/AwardsRecognitionPage';
-import { SafetyCompliancePage } from './pages/about/SafetyCompliancePage';
-import { JointCommissionPage } from './pages/about/JointCommissionPage';
-import { CDCRMainPage } from './pages/staffig solutions/CDCRMainPage';
-import { CDCRFacilitiesPage } from './pages/staffig solutions/CDCRFacilitiesPage';
-import { CDCROpportunitiesPage } from './pages/staffig solutions/CDCROpportunitiesPage';
-import { AlliedHealthPage } from './pages/staffig solutions/AlliedHealthPage';
-import { ComplianceCredentialingPage } from './pages/staffig solutions/ComplianceCredentialingPage';
-import { CorrectionalHealthcarePage } from './pages/staffig solutions/CorrectionalHealthcarePage';
-import { DentalHealthcarePage } from './pages/staffig solutions/DentalHealthcarePage';
-import { MedicalStaffingPage } from './pages/staffig solutions/MedicalStaffingPage';
-import { MentalHealthPage } from './pages/staffig solutions/MentalHealthPage';
-import { WorkforceContinuityPage } from './pages/staffig solutions/WorkforceContinuityPage';
-import { CapabilitiesPage } from './pages/facilities/CapabilitiesPage';
-import { StaffingRequestPage } from './pages/facilities/StaffingRequestPage';
-import { ProfessionalsMainPage } from './pages/professionals/ProfessionalsMainPage';
-import { HowItWorksPage } from './pages/professionals/HowItWorksPage';
-import { PayBenefitsPage } from './pages/professionals/PayBenefitsPage';
-import { RecruitersPage } from './pages/professionals/RecruitersPage';
-import { CredentialingOnboardingPage } from './pages/professionals/CredentialingOnboardingPage';
-import { ProfessionalsFAQPage } from './pages/professionals/ProfessionalsFAQPage';
-import { AdminLoginPage } from './pages/admin/AdminLoginPage';
-import { AdminDashboardPage } from './pages/admin/AdminDashboardPage';
-import { AdminJobsPage } from './pages/admin/AdminJobsPage';
-import { AdminJobEditorPage } from './pages/admin/AdminJobEditorPage';
-import { AdminApplicationsPage } from './pages/admin/AdminApplicationsPage';
-import { AdminApplicationDetailsPage } from './pages/admin/AdminApplicationDetailsPage';
 import './App.css';
+
+// Every other page is downloaded only when a visitor opens it (code splitting).
+// Admin pages never reach public visitors' browsers unless they go to /admin.
+const HotJobsPage = lazy(() => import('./pages/public/HotJobsPage').then((m) => ({ default: m.HotJobsPage })));
+const JobDetailsPage = lazy(() => import('./pages/public/JobDetailsPage').then((m) => ({ default: m.JobDetailsPage })));
+const ApplyPage = lazy(() => import('./pages/public/ApplyPage').then((m) => ({ default: m.ApplyPage })));
+const ConsentAgreementPage = lazy(() => import('./pages/public/ConsentAgreementPage').then((m) => ({ default: m.ConsentAgreementPage })));
+const PrivacyPolicyPage = lazy(() => import('./pages/public/PrivacyPolicyPage').then((m) => ({ default: m.PrivacyPolicyPage })));
+const TermsOfUsePage = lazy(() => import('./pages/public/TermsOfUsePage').then((m) => ({ default: m.TermsOfUsePage })));
+const ContactPage = lazy(() => import('./pages/public/ContactPage').then((m) => ({ default: m.ContactPage })));
+const BlogPage = lazy(() => import('./pages/public/BlogPage').then((m) => ({ default: m.BlogPage })));
+const NotFoundPage = lazy(() => import('./pages/public/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
+
+const WhoWeArePage = lazy(() => import('./pages/about/WhoWeArePage').then((m) => ({ default: m.WhoWeArePage })));
+const TeamPage = lazy(() => import('./pages/about/TeamPage').then((m) => ({ default: m.TeamPage })));
+const AwardsRecognitionPage = lazy(() => import('./pages/about/AwardsRecognitionPage').then((m) => ({ default: m.AwardsRecognitionPage })));
+const SafetyCompliancePage = lazy(() => import('./pages/about/SafetyCompliancePage').then((m) => ({ default: m.SafetyCompliancePage })));
+const JointCommissionPage = lazy(() => import('./pages/about/JointCommissionPage').then((m) => ({ default: m.JointCommissionPage })));
+
+const CDCRMainPage = lazy(() => import('./pages/staffig solutions/CDCRMainPage').then((m) => ({ default: m.CDCRMainPage })));
+const CDCRFacilitiesPage = lazy(() => import('./pages/staffig solutions/CDCRFacilitiesPage').then((m) => ({ default: m.CDCRFacilitiesPage })));
+const CDCROpportunitiesPage = lazy(() => import('./pages/staffig solutions/CDCROpportunitiesPage').then((m) => ({ default: m.CDCROpportunitiesPage })));
+const AlliedHealthPage = lazy(() => import('./pages/staffig solutions/AlliedHealthPage').then((m) => ({ default: m.AlliedHealthPage })));
+const ComplianceCredentialingPage = lazy(() => import('./pages/staffig solutions/ComplianceCredentialingPage').then((m) => ({ default: m.ComplianceCredentialingPage })));
+const CorrectionalHealthcarePage = lazy(() => import('./pages/staffig solutions/CorrectionalHealthcarePage').then((m) => ({ default: m.CorrectionalHealthcarePage })));
+const DentalHealthcarePage = lazy(() => import('./pages/staffig solutions/DentalHealthcarePage').then((m) => ({ default: m.DentalHealthcarePage })));
+const MedicalStaffingPage = lazy(() => import('./pages/staffig solutions/MedicalStaffingPage').then((m) => ({ default: m.MedicalStaffingPage })));
+const MentalHealthPage = lazy(() => import('./pages/staffig solutions/MentalHealthPage').then((m) => ({ default: m.MentalHealthPage })));
+const WorkforceContinuityPage = lazy(() => import('./pages/staffig solutions/WorkforceContinuityPage').then((m) => ({ default: m.WorkforceContinuityPage })));
+
+const CapabilitiesPage = lazy(() => import('./pages/facilities/CapabilitiesPage').then((m) => ({ default: m.CapabilitiesPage })));
+const StaffingRequestPage = lazy(() => import('./pages/facilities/StaffingRequestPage').then((m) => ({ default: m.StaffingRequestPage })));
+
+const ProfessionalsMainPage = lazy(() => import('./pages/professionals/ProfessionalsMainPage').then((m) => ({ default: m.ProfessionalsMainPage })));
+const HowItWorksPage = lazy(() => import('./pages/professionals/HowItWorksPage').then((m) => ({ default: m.HowItWorksPage })));
+const PayBenefitsPage = lazy(() => import('./pages/professionals/PayBenefitsPage').then((m) => ({ default: m.PayBenefitsPage })));
+const RecruitersPage = lazy(() => import('./pages/professionals/RecruitersPage').then((m) => ({ default: m.RecruitersPage })));
+const CredentialingOnboardingPage = lazy(() => import('./pages/professionals/CredentialingOnboardingPage').then((m) => ({ default: m.CredentialingOnboardingPage })));
+const ProfessionalsFAQPage = lazy(() => import('./pages/professionals/ProfessionalsFAQPage').then((m) => ({ default: m.ProfessionalsFAQPage })));
+
+const AdminLayout = lazy(() => import('./layouts/AdminLayout').then((m) => ({ default: m.AdminLayout })));
+const AdminLoginPage = lazy(() => import('./pages/admin/AdminLoginPage').then((m) => ({ default: m.AdminLoginPage })));
+const AdminDashboardPage = lazy(() => import('./pages/admin/AdminDashboardPage').then((m) => ({ default: m.AdminDashboardPage })));
+const AdminJobsPage = lazy(() => import('./pages/admin/AdminJobsPage').then((m) => ({ default: m.AdminJobsPage })));
+const AdminJobEditorPage = lazy(() => import('./pages/admin/AdminJobEditorPage').then((m) => ({ default: m.AdminJobEditorPage })));
+const AdminApplicationsPage = lazy(() => import('./pages/admin/AdminApplicationsPage').then((m) => ({ default: m.AdminApplicationsPage })));
+const AdminApplicationDetailsPage = lazy(() => import('./pages/admin/AdminApplicationDetailsPage').then((m) => ({ default: m.AdminApplicationDetailsPage })));
 
 function App() {
   return (
       <AuthProvider>
+        {/* Covers routes outside the layouts (admin login, admin shell). */}
+        <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route element={<PublicLayout />}>
             <Route path="/" element={<HomePageRefresh />} />
@@ -89,6 +102,8 @@ function App() {
             <Route path="/about/joint-commission" element={<JointCommissionPage />} />
             <Route path="/joint-commission" element={<Navigate to="/about/joint-commission" replace />} />
             <Route path="/joint-commision" element={<Navigate to="/about/joint-commission" replace />} />
+            {/* Unknown URLs show a real "Page Not Found" instead of silently redirecting home. */}
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
           <Route path="/admin/login" element={<AdminLoginPage />} />
           <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
@@ -100,8 +115,8 @@ function App() {
             <Route path="/admin/applications" element={<AdminApplicationsPage />} />
             <Route path="/admin/applications/:applicationId" element={<AdminApplicationDetailsPage />} />
           </Route>
-          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
+        </Suspense>
       </AuthProvider>
   );
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/ui/Typography';
-import { Building2, MapPin, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Building2, MapPin, ArrowRight } from 'lucide-react';
 
 interface CaliforniaRegion {
   name: string;
