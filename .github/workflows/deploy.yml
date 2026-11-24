@@ -1,0 +1,161 @@
+# ============================================================
+# Test, then deploy to new.rlklein.com (Turbify) on every push to main.
+#
+# Nothing is uploaded unless every check passes. Upload logins live in
+# GitHub → Settings → Secrets and variables → Actions (never in this file):
+#   FTP_SERVER          e.g. ftp.rlklein.com
+#   FTP_SITE_USERNAME   FTP account limited to public_html/new.rlklein.com
+#   FTP_SITE_PASSWORD
+#   FTP_APP_USERNAME    FTP account limited to rlk_app (outside public_html)
+#   FTP_APP_PASSWORD
+# See deploy/README.md.
+# ============================================================
+name: Test and deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # "Run workflow" button on the Actions tab
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false # never stop an upload halfway
+
+jobs:
+  # ---------------------------------------------------------------
+  test:
+    name: Check website + backend
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11 # same version as Turbify
+        env:
+          MARIADB_ROOT_PASSWORD: ci-root-password
+          MARIADB_DATABASE: rlk_test
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # ---- Website ----
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install website packages
+        working-directory: frontend
+        run: npm ci
+      - name: Type check
+        working-directory: frontend
+        run: npx tsc -b
+      - name: Lint
+        working-directory: frontend
+        run: npx oxlint
+      - name: Build website
+        working-directory: frontend
+        run: npx vite build
+
+      # ---- Backend ----
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4' # same version as Turbify
+          extensions: pdo_mysql, mbstring
+          coverage: none
+      - name: PHP syntax check
+        run: find backend -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Create test database tables
+        run: mysql -h 127.0.0.1 -P 3306 -u root -pci-root-password rlk_test < database/schema.sql
+      - name: Write test config.php
+        run: |
+          cat > backend/rlk_app/config.php <<'PHP'
+          <?php
+          return [
+              'db' => ['host' => '127.0.0.1', 'port' => 3306, 'name' => 'rlk_test', 'user' => 'root', 'pass' => 'ci-root-password'],
+              'app' => ['url' => 'http://localhost:5173'],
+              'cors_origins' => ['http://localhost:5173'],
+              'session_hours' => 6,
+              'login' => ['max_failures' => 5, 'lock_minutes' => 15],
+              'rate_limits' => [
+                  'login' => [20, 900], 'createApplication' => [100, 3600], 'submitContact' => [3, 3600],
+                  'submitStaffingRequest' => [5, 3600], 'setup' => [10, 3600],
+              ],
+              'uploads' => ['resume_max_bytes' => 10 * 1024 * 1024],
+              'mail' => ['enabled' => false],
+              'setup_key' => '',
+          ];
+          PHP
+      - name: Run backend API tests (78 checks)
+        run: |
+          php backend/rlk_app/bin/create-admin.php --email=admin@test.local --name="CI Admin" --password='ci-Admin-Password-1'
+          php backend/rlk_app/bin/create-admin.php --email=lock@test.local --name="CI Lock" --role=recruiter --password='ci-Lock-Password-1'
+          php -S 127.0.0.1:8080 -t backend/public_html > /tmp/php-server.log 2>&1 &
+          for i in $(seq 1 20); do curl -sf http://127.0.0.1:8080/api/index.php >/dev/null && break; sleep 0.5; done
+          php backend/tests/api_smoke_test.php --url=http://127.0.0.1:8080/api/index.php \
+            --email=admin@test.local --password='ci-Admin-Password-1' \
+            --lock-email=lock@test.local --lock-password='ci-Lock-Password-1'
+
+  # ---------------------------------------------------------------
+  deploy:
+    name: Upload to new.rlklein.com
+    needs: test
+    runs-on: ubuntu-latest
+    environment:
+      name: preview
+      url: https://new.rlklein.com
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Build website (uses frontend/.env.production)
+        working-directory: frontend
+        run: |
+          npm ci
+          npx vite build
+
+      - name: Put together the public site folder
+        run: |
+          mkdir -p upload/site
+          cp -R frontend/dist/. upload/site/
+          cp -R backend/public_html/api upload/site/api
+          cp deploy/new-subdomain/.htaccess upload/site/.htaccess
+          cp deploy/new-subdomain/robots.txt upload/site/robots.txt
+          echo "Files to upload:" && find upload/site -type f | sort
+
+      # 1) Website + API → public_html/new.rlklein.com (this FTP account can't see WordPress)
+      - name: Upload website
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_SITE_USERNAME }}
+          password: ${{ secrets.FTP_SITE_PASSWORD }}
+          protocol: ftps
+          local-dir: ./upload/site/
+          server-dir: ./
+
+      # 2) Private backend code → rlk_app. config.php, resumes and logs on the server are never touched.
+      - name: Upload backend
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_APP_USERNAME }}
+          password: ${{ secrets.FTP_APP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./backend/rlk_app/
+          server-dir: ./
+          exclude: |
+            **/.git*
+            **/.git*/**
+            config.php
+            storage/**
+            logs/**

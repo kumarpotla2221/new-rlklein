@@ -110,6 +110,23 @@ Key indexes: `jobs (status, visibility, expiration_date)`, `jobs.slug` unique,
 
 If a host can't do #1 or #3, use GoDaddy cPanel Linux hosting. The code is identical on both.
 
+## Launch plan: preview → rlklein.com
+
+1. **Preview:** the site runs at `new.rlklein.com` (hidden from Google) while WordPress keeps serving
+   `rlklein.com`. Every push to `main` deploys automatically ([deploy/README.md](../deploy/README.md)).
+2. **Client review:** changes requested by the client are made and pushed the same way.
+3. **Swap (after approval):** both domains are on the same Turbify server, so there are no DNS or
+   database changes.
+   - Full cPanel backup of WordPress (files + `_wp_myk96` database).
+   - Map old WordPress URLs → new pages as 301 redirects (keeps Google rankings and old links).
+   - Delete test jobs/applications in the admin panel.
+   - Move WordPress files out of `public_html` into a backup folder (not deleted).
+   - Point the deployment at `public_html` with a main-domain `.htaccess` (no noindex), set
+     `VITE_API_URL=https://rlklein.com/api/index.php` and `app.url` in `config.php`.
+   - Redirect `new.rlklein.com` → `rlklein.com`; submit the sitemap to Google Search Console.
+   - Switch off the Vercel project and the Google Apps Script deployment.
+   - **Rollback:** move the WordPress files back; its database was never changed.
+
 ## Fresh start (no data migration)
 
 The new system starts with an empty database. Nothing is copied from the Google Sheet or

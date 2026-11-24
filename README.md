@@ -60,7 +60,7 @@ Other commands (run inside `frontend/`):
 | 3 | PHP backend API (replaces Google Apps Script), 78 automated tests | ✅ Done |
 | 4 | Connect website to the PHP API; make Contact & Staffing forms actually send | ✅ Done |
 | 5 | SEO: page titles, pre-rendering, job listings in Google for Jobs, sitemap | ⏳ Next |
-| 6 | Deployment to cPanel (.htaccess, caching, HTTPS) | ⏳ Planned |
+| 6 | Automatic deployment: push to GitHub → tests → new.rlklein.com ([deploy/README.md](deploy/README.md)) | 🔧 Set up; waiting for one-time steps |
 
 > The website now talks to the PHP backend (`backend/` + MySQL). The old Google Apps Script
 > setup ([docs/BACKEND_SETUP.md](docs/BACKEND_SETUP.md)) stays live until the new site is deployed
